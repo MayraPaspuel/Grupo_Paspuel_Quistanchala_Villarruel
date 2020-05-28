@@ -14,10 +14,26 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText num1;
+    private EditText num2;
+    private Button sumar;
+    private TextView resultado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        num1 = (EditText)findViewById(R.id.txtNum1);
+        num2 = (EditText)findViewById(R.id.txtNum2);
+        sumar = (Button)findViewById(R.id.btnSumar);
+        resultado = (TextView)findViewById(R.id.txtResultado);
+
+        sumar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 
 }
