@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Suma</string>
+    <string name="stringPrimerValor">Primer Valor</string>
+    <string name="stringSegundoValor">Segundo Valor</string>
+    <string name="stringSumar">Sumar</string>
+    <string name="stringResultado">Resultado</string>
+</resources>

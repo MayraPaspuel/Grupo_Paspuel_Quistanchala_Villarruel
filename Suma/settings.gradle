@@ -1,0 +1,2 @@
+rootProject.name='Suma'
+include ':app'
