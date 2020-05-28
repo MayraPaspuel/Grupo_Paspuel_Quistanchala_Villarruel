@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             DecimalFormat dformat = new DecimalFormat("#.##");
             resultado.setText("Resultado: " + dformat.format(result));
         }catch (Exception ex){
-            Toast.makeText(this,"Error en el ingreso de datos",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Error en el ingreso de datos",Toast.LENGTH_SHORT).show();
         }
     }
 
