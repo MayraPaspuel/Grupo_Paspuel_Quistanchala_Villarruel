@@ -31,9 +31,21 @@ public class MainActivity extends AppCompatActivity {
         sumar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                suma();
             }
         });
+    }
+
+    public void suma(){
+        try {
+            double n1 = Double.parseDouble(num1.getText().toString());
+            double n2 = Double.parseDouble(num2.getText().toString());
+            double result = n1 + n2;
+            DecimalFormat dformat = new DecimalFormat("#.##");
+            resultado.setText("Resultado: " + dformat.format(result));
+        }catch (Exception ex){
+            Toast.makeText(this,"Error en el ingreso de datos",Toast.LENGTH_SHORT);
+        }
     }
 
 }
