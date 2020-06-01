@@ -41,6 +41,20 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             }
         });
 
+        resta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                presentador.resta(num1.getText().toString(),num2.getText().toString());
+            }
+        });
+
+        division.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                presentador.division(num1.getText().toString(),num2.getText().toString());
+            }
+        });
+
     }
 
 

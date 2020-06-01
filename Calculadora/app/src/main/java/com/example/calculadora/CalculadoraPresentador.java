@@ -31,14 +31,18 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
 
     @Override
     public void resta(String num1, String num2) {
-
+        try {
+            mostrarResultado(modelo.resta(Double.parseDouble(num1), Double.parseDouble(num2)));
+        }catch (Exception ex) {
+            vista.mostrarError("Error en el ingreso de datos");
+        }
     }
 
     @Override
     public void division(String num1, String num2) {
         try {
             if(Double.parseDouble(num2)!=0){
-                mostrarResultado(modelo.multiplicacion(Double.parseDouble(num1), Double.parseDouble(num2)));
+                mostrarResultado(modelo.division(Double.parseDouble(num1), Double.parseDouble(num2)));
             }else{
                 vista.mostrarError("Error de division para 0");
             }

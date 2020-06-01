@@ -15,12 +15,12 @@ public class CalculadoraModelo implements Calculadora.Modelo{
 
     @Override
     public double resta(double num1, double num2) {
-        return 0;
+        return num1-num2;
     }
 
     @Override
     public double division(double num1, double num2) {
-        return 0;
+        return num1/num2;
     }
 
     @Override
