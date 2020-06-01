@@ -37,7 +37,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
         suma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presentador.division(num1.getText().toString(), num2.getText().toString());
+                presentador.suma(num1.getText().toString(), num2.getText().toString());
             }
         });
 
