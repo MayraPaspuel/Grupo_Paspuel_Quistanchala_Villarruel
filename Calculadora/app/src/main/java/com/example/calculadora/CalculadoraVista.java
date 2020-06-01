@@ -1,3 +1,13 @@
+/*
+ *ESPE - DCC - APLICACIONES DISTRIBUIDAS
+ *Sistema: Calculadora
+ *Creado 30/05/2020
+ *
+ * Los contenidos de este archivo son propiedad privada y estan protegidos por
+ * la licencia BSD
+ *
+ * Se puede utilizar, reproducir o copiar el contenido de este archivo.
+ */
 package com.example.calculadora;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
-
+/**
+ *Clase que implementa la vista de la calculadora
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class CalculadoraVista extends AppCompatActivity implements Calculadora.Vista{
 
     EditText num1,num2;
@@ -18,6 +34,10 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     TextView resultado;
     Calculadora.Presentador presentador;
 
+    /**
+     *Función que hace
+     * @param savedInstanceState es el código ...
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +77,19 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
 
     }
 
-
+    /**
+     *Función que muestra el error que presenta el programa
+     * @param mensaje es el mensaje de error
+     */
     @Override
     public void mostrarError(String mensaje) {
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     *Función que muestra el error que presenta el programa
+     * @param resultado es el resultado de las operaciones
+     */
     @Override
     public void mostrarResultado(double resultado) {
         DecimalFormat miFormato = new DecimalFormat("#.##");
