@@ -32,6 +32,7 @@ public interface Calculadora {
          * @param resultado es el resultado de la operación realiza por el programa
          */
         void mostrarResultado(double resultado);
+        void limpiarCampos();
     }
 
     /**
@@ -42,6 +43,7 @@ public interface Calculadora {
         double resta(double num1, double num2);
         double division(double num1, double num2);
         double multiplicacion(double num1, double num2);
+        void mMas(double dato);
     }
 
     /**
@@ -54,5 +56,7 @@ public interface Calculadora {
         void resta(String num1, String num2);
         void division(String num1, String num2);
         void multiplicacion(String num1, String num2);
+        void mMas(String dato);
+        void limpiarCampos();
     }
 }

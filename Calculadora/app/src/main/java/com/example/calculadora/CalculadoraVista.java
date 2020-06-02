@@ -30,13 +30,13 @@ import java.text.DecimalFormat;
 public class CalculadoraVista extends AppCompatActivity implements Calculadora.Vista{
 
     EditText num1,num2;
-    Button suma,resta,multiplicacion,division;
+    Button suma,resta,multiplicacion,division,mMas;
     TextView resultado;
     Calculadora.Presentador presentador;
 
     /**
-     *Función que hace
-     * @param savedInstanceState es el código ...
+     *Función que crea la actividad
+     * @param savedInstanceState es un objeto Bundle que contiene el estado ya guardado de la actividad
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
         resta = (Button)findViewById(R.id.btnResta);
         division = (Button)findViewById(R.id.btnDivision);
         multiplicacion = (Button)findViewById(R.id.btnMultiplicacion);
+        mMas = (Button)findViewById(R.id.btnMMas);
 
         presentador = new CalculadoraPresentador(this);
 
@@ -75,6 +76,20 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             }
         });
 
+        multiplicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                presentador.multiplicacion(num1.getText().toString(),num2.getText().toString());
+            }
+        });
+
+        mMas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presentador.mMas(resultado.getText().toString());
+            }
+        });
+
     }
 
     /**
@@ -94,5 +109,12 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     public void mostrarResultado(double resultado) {
         DecimalFormat miFormato = new DecimalFormat("#.##");
         this.resultado.setText(miFormato.format(resultado));
+    }
+
+    @Override
+    public void limpiarCampos() {
+        num1.setText("");
+        num2.setText("");
+        resultado.setText("00.00");
     }
 }

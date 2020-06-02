@@ -19,6 +19,7 @@ package com.example.calculadora;
 public class CalculadoraModelo implements Calculadora.Modelo{
 
     Calculadora.Presentador presentador;
+    static double valorMMas=0;
 
     /**
      *Función que ...
@@ -66,5 +67,16 @@ public class CalculadoraModelo implements Calculadora.Modelo{
     @Override
     public double multiplicacion(double num1, double num2) {
         return num1*num2;
+    }
+
+    @Override
+    public void mMas(double dato) {
+        if(valorMMas==0){
+            valorMMas = dato;
+        }else{
+            valorMMas = valorMMas + dato;
+        }
+        presentador.mostrarError(""+valorMMas);
+        presentador.limpiarCampos();
     }
 }

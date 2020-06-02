@@ -107,4 +107,18 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
             vista.mostrarError("Error en el ingreso de datos");
         }
     }
+
+    @Override
+    public void mMas(String dato) {
+        try {
+            modelo.mMas(Double.parseDouble(dato));
+        }catch (Exception ex){
+            vista.mostrarError("Error en el ingreso de datos");
+        }
+    }
+
+    @Override
+    public void limpiarCampos() {
+        vista.limpiarCampos();
+    }
 }
