@@ -44,6 +44,7 @@ public interface Calculadora {
         double division(double num1, double num2);
         double multiplicacion(double num1, double num2);
         void mMas(double dato);
+        void mMenos(double dato);
     }
 
     /**
@@ -57,6 +58,7 @@ public interface Calculadora {
         void division(String num1, String num2);
         void multiplicacion(String num1, String num2);
         void mMas(String dato);
+        void mMenos(String dato);
         void limpiarCampos();
     }
 }

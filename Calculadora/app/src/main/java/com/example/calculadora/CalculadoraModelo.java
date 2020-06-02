@@ -19,8 +19,7 @@ package com.example.calculadora;
 public class CalculadoraModelo implements Calculadora.Modelo{
 
     Calculadora.Presentador presentador;
-    static double valorMMas=0;
-
+    static double valorM=0;
     /**
      *Función que ...
      * @param presentador es el ...
@@ -71,12 +70,23 @@ public class CalculadoraModelo implements Calculadora.Modelo{
 
     @Override
     public void mMas(double dato) {
-        if(valorMMas==0){
-            valorMMas = dato;
+        if(valorM ==0){
+            valorM = dato;
         }else{
-            valorMMas = valorMMas + dato;
+            valorM = valorM + dato;
         }
-        presentador.mostrarError(""+valorMMas);
+        presentador.mostrarError(""+ valorM);
+        presentador.limpiarCampos();
+    }
+
+    @Override
+    public void mMenos(double dato) {
+        if(valorM ==0){
+            valorM = dato;
+        }else{
+            valorM = valorM - dato;
+        }
+        presentador.mostrarError(""+ valorM);
         presentador.limpiarCampos();
     }
 }
