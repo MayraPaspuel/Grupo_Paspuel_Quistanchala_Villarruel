@@ -130,4 +130,9 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     public void limpiarCampos() {
         vista.limpiarCampos();
     }
+
+    @Override
+    public double mR() {
+        return modelo.mR();
+    }
 }

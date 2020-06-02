@@ -30,7 +30,7 @@ import java.text.DecimalFormat;
 public class CalculadoraVista extends AppCompatActivity implements Calculadora.Vista{
 
     EditText num1,num2;
-    Button suma,resta,multiplicacion,division,mMas,mMenos;
+    Button suma,resta,multiplicacion,division,mMas,mMenos, mR;
     TextView resultado;
     Calculadora.Presentador presentador;
 
@@ -53,6 +53,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
         multiplicacion = (Button)findViewById(R.id.btnMultiplicacion);
         mMas = (Button)findViewById(R.id.btnMMas);
         mMenos=(Button)findViewById(R.id.btnMMenos);
+        mR = (Button)findViewById(R.id.btnMR);
 
         presentador = new CalculadoraPresentador(this);
 
@@ -95,6 +96,13 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             @Override
             public void onClick(View v) {
                 presentador.mMenos(resultado.getText().toString());
+            }
+        });
+
+        mR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarResultado(presentador.mR());
             }
         });
 

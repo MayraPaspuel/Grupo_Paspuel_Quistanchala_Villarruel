@@ -45,6 +45,7 @@ public interface Calculadora {
         double multiplicacion(double num1, double num2);
         void mMas(double dato);
         void mMenos(double dato);
+        double mR();
     }
 
     /**
@@ -60,5 +61,6 @@ public interface Calculadora {
         void mMas(String dato);
         void mMenos(String dato);
         void limpiarCampos();
+        double mR();
     }
 }

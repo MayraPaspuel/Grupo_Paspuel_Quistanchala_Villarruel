@@ -70,23 +70,18 @@ public class CalculadoraModelo implements Calculadora.Modelo{
 
     @Override
     public void mMas(double dato) {
-        if(valorM ==0){
-            valorM = dato;
-        }else{
-            valorM = valorM + dato;
-        }
-        presentador.mostrarError(""+ valorM);
+        valorM = valorM + dato;
         presentador.limpiarCampos();
     }
 
     @Override
     public void mMenos(double dato) {
-        if(valorM ==0){
-            valorM = dato;
-        }else{
-            valorM = valorM - dato;
-        }
-        presentador.mostrarError(""+ valorM);
+        valorM = valorM - dato;
         presentador.limpiarCampos();
+    }
+
+    @Override
+    public double mR() {
+        return valorM;
     }
 }
