@@ -87,7 +87,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     }
 
     /**
-     *Función que muestra el error que presenta el programa
+     *Función que muestra el resultado que presenta el programa
      * @param resultado es el resultado de las operaciones
      */
     @Override

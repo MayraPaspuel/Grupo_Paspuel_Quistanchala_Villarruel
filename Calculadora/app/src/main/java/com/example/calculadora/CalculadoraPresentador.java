@@ -10,7 +10,7 @@
  */
 package com.example.calculadora;
 /**
- *Clase que implementa el modelo de la calculadora
+ *Clase que implementa el presentador de la calculadora
  *
  * @author Paspuel Mayra
  * @author Quistanchala Karla
