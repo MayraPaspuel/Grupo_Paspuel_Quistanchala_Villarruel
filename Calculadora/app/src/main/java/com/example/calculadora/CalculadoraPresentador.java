@@ -32,7 +32,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
 
     /**
      * Metodo mostrarError el cual envia el error a la vista
-     * @param mensaje es el ...
+     * @param mensaje es el error
      */
     @Override
     public void mostrarError(String mensaje) {
@@ -41,7 +41,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
 
     /**
      * Metodo mostrarResultado el cual envia el resultado a la vista
-     * @param resultado es el ...
+     * @param resultado es el dato resultante de la operación
      */
     @Override
     public void mostrarResultado(double resultado) {
