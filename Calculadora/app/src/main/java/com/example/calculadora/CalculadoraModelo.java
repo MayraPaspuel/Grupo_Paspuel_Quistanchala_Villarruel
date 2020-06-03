@@ -27,6 +27,12 @@ public class CalculadoraModelo implements Calculadora.Modelo{
     public CalculadoraModelo(Calculadora.Presentador presentador){
         this.presentador = presentador;
     }
+    /**
+     * Constructor vacio
+     */
+    public CalculadoraModelo(){
+        this.presentador = presentador;
+    }
 
     /**
      * Metodo suma en la cual se suma dos números

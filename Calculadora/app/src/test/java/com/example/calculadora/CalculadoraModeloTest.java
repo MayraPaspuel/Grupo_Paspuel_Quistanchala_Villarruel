@@ -1,0 +1,53 @@
+package com.example.calculadora;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class CalculadoraModeloTest {
+
+    private CalculadoraModelo nCalculadoraModelo;
+
+    @Before
+    public void setUp(){
+        nCalculadoraModelo=new CalculadoraModelo();
+    }
+
+    @Test
+    public void operacionNotNull(){
+        assertNotNull(nCalculadoraModelo);
+    }
+
+    @Test
+    public void suma() {
+        assertEquals(10,nCalculadoraModelo.suma(5,5));
+    }
+
+    @Test
+    public void resta() {
+        assertEquals(4,nCalculadoraModelo.resta(23,19));
+    }
+
+    @Test
+    public void division() {
+        assertEquals(6,nCalculadoraModelo.division(36,6));
+    }
+
+    @Test
+    public void multiplicacion() {
+        assertEquals(24,nCalculadoraModelo.multiplicacion(12,2));
+    }
+
+    @Test
+    public void mMas() {
+    }
+
+    @Test
+    public void mMenos() {
+    }
+
+    @Test
+    public void mR() {
+    }
+}
