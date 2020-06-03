@@ -40,14 +40,9 @@ public class CalculadoraModeloTest {
     }
 
     @Test
-    public void mMas() {
-    }
-
-    @Test
-    public void mMenos() {
-    }
-
-    @Test
     public void mR() {
+        nCalculadoraModelo.mMas(5);
+        nCalculadoraModelo.mMenos(2.1);
+        assertEquals(2.9,nCalculadoraModelo.mR(),0.0);
     }
 }

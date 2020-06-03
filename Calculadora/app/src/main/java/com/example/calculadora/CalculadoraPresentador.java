@@ -58,7 +58,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         try {
             mostrarResultado(modelo.suma(Double.parseDouble(num1), Double.parseDouble(num2)));
         }catch (Exception ex) {
-            vista.mostrarError("Error en el ingreso de datos");
+            mostrarError("Error en el ingreso de datos");
         }
     }
     /**
@@ -71,7 +71,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         try {
             mostrarResultado(modelo.resta(Double.parseDouble(num1), Double.parseDouble(num2)));
         }catch (Exception ex) {
-            vista.mostrarError("Error en el ingreso de datos");
+            mostrarError("Error en el ingreso de datos");
         }
     }
 
@@ -86,10 +86,10 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
             if(Double.parseDouble(num2)!=0){
                 mostrarResultado(modelo.division(Double.parseDouble(num1), Double.parseDouble(num2)));
             }else{
-                vista.mostrarError("Error de division para 0");
+                mostrarError("Error de division para 0");
             }
         }catch (Exception ex) {
-            vista.mostrarError("Error en el ingreso de datos");
+            mostrarError("Error en el ingreso de datos");
         }
 
     }
@@ -104,7 +104,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         try {
             mostrarResultado(modelo.multiplicacion(Double.parseDouble(num1), Double.parseDouble(num2)));
         }catch (Exception ex) {
-            vista.mostrarError("Error en el ingreso de datos");
+            mostrarError("Error en el ingreso de datos");
         }
     }
 
@@ -116,8 +116,9 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     public void mMas(String dato) {
         try {
             modelo.mMas(Double.parseDouble(dato));
+            limpiarCampos();
         }catch (Exception ex){
-            vista.mostrarError("Error en el ingreso de datos");
+            mostrarError("Error en el ingreso de datos");
         }
     }
 
@@ -129,8 +130,9 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     public void mMenos(String dato) {
         try{
             modelo.mMenos(Double.parseDouble(dato));
+            limpiarCampos();
         }catch (Exception ex){
-            vista.mostrarError("Error en el ingreso de datos");
+            mostrarError("Error en el ingreso de datos");
         }
     }
 

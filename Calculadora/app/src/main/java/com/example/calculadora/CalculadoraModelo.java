@@ -85,7 +85,6 @@ public class CalculadoraModelo implements Calculadora.Modelo{
     @Override
     public void mMas(double dato) {
         valorM = valorM + dato;
-        presentador.limpiarCampos();
     }
 
     /**
@@ -95,7 +94,6 @@ public class CalculadoraModelo implements Calculadora.Modelo{
     @Override
     public void mMenos(double dato) {
         valorM = valorM - dato;
-        presentador.limpiarCampos();
     }
 
     /**
