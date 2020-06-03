@@ -1,7 +1,7 @@
 /*
- *ESPE - DCC - APLICACIONES DISTRIBUIDAS
- *Sistema: Calculadora
- *Creado 30/05/2020
+ * ESPE - DCC - PROGRAMACIÓN MÓVIL
+ * Sistema: Calculadora
+ * Creado 30/05/2020
  *
  * Los contenidos de este archivo son propiedad privada y estan protegidos por
  * la licencia BSD
@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 /**
- *Clase que implementa la vista de la calculadora
+ * Clase que implementa la vista de la calculadora
  *
  * @author Paspuel Mayra
  * @author Quistanchala Karla
@@ -35,7 +35,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     Calculadora.Presentador presentador;
 
     /**
-     *Función que crea la actividad
+     * Metodo onCrate que crea la actividad
      * @param savedInstanceState es un objeto Bundle que contiene el estado ya guardado de la actividad
      */
     @Override
@@ -109,7 +109,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     }
 
     /**
-     *Función que muestra el error que presenta el programa
+     * Metodo mostrarError que visualiza el error que presenta el programa
      * @param mensaje es el mensaje de error
      */
     @Override
@@ -118,7 +118,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     }
 
     /**
-     *Función que muestra el resultado que presenta el programa
+     * Metodo mostrarResultado que visualiza el resultado que presenta el programa
      * @param resultado es el resultado de las operaciones
      */
     @Override
@@ -126,7 +126,9 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
         DecimalFormat miFormato = new DecimalFormat("#.##");
         this.resultado.setText(miFormato.format(resultado));
     }
-
+    /**
+     * Metodo limpiarCampos es la cual se vacia los campos
+     */
     @Override
     public void limpiarCampos() {
         num1.setText("");

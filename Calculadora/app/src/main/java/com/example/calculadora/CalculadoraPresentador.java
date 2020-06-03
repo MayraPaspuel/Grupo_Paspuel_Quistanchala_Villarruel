@@ -1,7 +1,7 @@
 /*
- *ESPE - DCC - APLICACIONES DISTRIBUIDAS
- *Sistema: Calculadora
- *Creado 30/05/2020
+ * ESPE - DCC - PROGRAMACIÓN MÓVIL
+ * Sistema: Calculadora
+ * Creado 30/05/2020
  *
  * Los contenidos de este archivo son propiedad privada y estan protegidos por
  * la licencia BSD
@@ -10,7 +10,7 @@
  */
 package com.example.calculadora;
 /**
- *Clase que implementa el presentador de la calculadora
+ * Clase que implementa el presentador de la calculadora
  *
  * @author Paspuel Mayra
  * @author Quistanchala Karla
@@ -22,8 +22,8 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     Calculadora.Vista vista;
 
     /**
-     *Función que ...
-     * @param vista es el ...
+     * Constructor
+     * @param vista es la vista actual
      */
     public CalculadoraPresentador(CalculadoraVista vista){
         this.vista = vista;
@@ -31,7 +31,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     }
 
     /**
-     *Función que ...
+     * Metodo mostrarError el cual envia el error a la vista
      * @param mensaje es el ...
      */
     @Override
@@ -40,7 +40,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     }
 
     /**
-     *Función que ...
+     * Metodo mostrarResultado el cual envia el resultado a la vista
      * @param resultado es el ...
      */
     @Override
@@ -49,7 +49,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     }
 
     /**
-     *Función que muestra el resultado de la suma
+     * Metodo suma muestra el resultado de la suma
      * @param num1 es el primer número de la operación
      * @param num2 es el primer número de la operación
      */
@@ -62,7 +62,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
     /**
-     *Función que muestra el resultado de la resta
+     * Metodo resta muestra el resultado de la resta
      * @param num1 es el primer número de la operación
      * @param num2 es el primer número de la operación
      */
@@ -76,7 +76,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     }
 
     /**
-     *Función que muestra el resultado de la división
+     * Metodo division muestra el resultado de la división
      * @param num1 es el primer número de la operación
      * @param num2 es el primer número de la operación
      */
@@ -95,7 +95,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     }
 
     /**
-     *Función que muestra el resultado de la multiplicación
+     * Metodo multiplicacion muestra el resultado de la multiplicación
      * @param num1 es el primer número de la operación
      * @param num2 es el primer número de la operación
      */
@@ -108,6 +108,10 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    /**
+     * Metodo mMas muestra el dato que aumenta en memoria
+     * @param dato es el número para guardar en memoria
+     */
     @Override
     public void mMas(String dato) {
         try {
@@ -117,6 +121,10 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    /**
+     * Metodo mMenos muestra el dato a retirar de memoria
+     * @param dato es el número para restar en memoria
+     */
     @Override
     public void mMenos(String dato) {
         try{
@@ -126,11 +134,18 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    /**
+     * Metodo limpiarCampos el cual vacia los datos de la vista
+     */
     @Override
     public void limpiarCampos() {
         vista.limpiarCampos();
     }
 
+    /**
+     * Metodo mR el cual muestra el resultado de memoria
+     * @return dato que esta en memoria
+     */
     @Override
     public double mR() {
         return modelo.mR();
