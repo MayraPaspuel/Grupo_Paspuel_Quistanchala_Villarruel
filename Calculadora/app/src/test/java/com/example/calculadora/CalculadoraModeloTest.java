@@ -21,22 +21,22 @@ public class CalculadoraModeloTest {
 
     @Test
     public void suma() {
-        assertEquals(10,nCalculadoraModelo.suma(5,5));
+        assertEquals(10,nCalculadoraModelo.suma(5,5),0.0);
     }
 
     @Test
     public void resta() {
-        assertEquals(4,nCalculadoraModelo.resta(23,19));
+        assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
     }
 
     @Test
     public void division() {
-        assertEquals(6,nCalculadoraModelo.division(36,6));
+        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
     }
 
     @Test
     public void multiplicacion() {
-        assertEquals(24,nCalculadoraModelo.multiplicacion(12,2));
+        assertEquals(24,nCalculadoraModelo.multiplicacion(12,2),0.0);
     }
 
     @Test
