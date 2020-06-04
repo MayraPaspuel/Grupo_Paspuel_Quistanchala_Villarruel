@@ -43,12 +43,30 @@ public class CalculadoraModeloTest {
     @Test
     public void suma() {
         assertEquals(10,nCalculadoraModelo.suma(5,5),0.0);
+        assertEquals(19.9,nCalculadoraModelo.suma(8.9,11),0.0);
+        assertEquals(-4,nCalculadoraModelo.suma(-10,6),0.0);
+        assertEquals(23,nCalculadoraModelo.suma(15,8),0.0);
+        assertEquals(34.5,nCalculadoraModelo.suma(20.3,14.2),0.0);
+        assertEquals(999999,nCalculadoraModelo.suma(888888,111111),0.0);
+        assertEquals(0,nCalculadoraModelo.suma(5,-5),0.0);
+        assertEquals(0.0001,nCalculadoraModelo.suma(0,0.0001),0.0);
+        assertEquals(10009.8,nCalculadoraModelo.suma(9.4,10000.4),0.0);
+        assertEquals(9.8,nCalculadoraModelo.suma(10,-0.2),0.0);
     }
     /**
      * Metodo resta para testear la función resta
      */
     @Test
     public void resta() {
+        assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
+        assertEquals(-35,nCalculadoraModelo.resta(20,-15),0.0);
+        assertEquals(20,nCalculadoraModelo.resta(-40,-60),0.0);
+        assertEquals(888888,nCalculadoraModelo.resta(999999,111111),0.0);
+        assertEquals(44,nCalculadoraModelo.resta(22,-22),0.0);
+        assertEquals(65,nCalculadoraModelo.resta(73,8),0.0);
+        assertEquals(22,nCalculadoraModelo.resta(100,88),0.0);
+        assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
+        assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
         assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
     }
     /**
