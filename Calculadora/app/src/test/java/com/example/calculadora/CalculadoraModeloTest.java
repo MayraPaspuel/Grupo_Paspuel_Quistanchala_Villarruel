@@ -37,61 +37,133 @@ public class CalculadoraModeloTest {
     public void operacionNotNull(){
         assertNotNull(nCalculadoraModelo);
     }
+
     /**
-     * Metodo suma para testear la función suma
+     * Metodo sumaEnteros para testear la función suma para números enteros
      */
     @Test
-    public void suma() {
+    public void sumaEnteros() {
         assertEquals(10,nCalculadoraModelo.suma(5,5),0.0);
-        assertEquals(19.9,nCalculadoraModelo.suma(8.9,11),0.0);
-        assertEquals(-4,nCalculadoraModelo.suma(-10,6),0.0);
-        assertEquals(23,nCalculadoraModelo.suma(15,8),0.0);
-        assertEquals(34.5,nCalculadoraModelo.suma(20.3,14.2),0.0);
-        assertEquals(999999,nCalculadoraModelo.suma(888888,111111),0.0);
-        assertEquals(0,nCalculadoraModelo.suma(5,-5),0.0);
-        assertEquals(0.0001,nCalculadoraModelo.suma(0,0.0001),0.0);
-        assertEquals(10009.8,nCalculadoraModelo.suma(9.4,10000.4),0.0);
-        assertEquals(9.8,nCalculadoraModelo.suma(10,-0.2),0.0);
     }
+
     /**
-     * Metodo resta para testear la función resta
+     * Metodo sumaDecimales para testear la función suma para números decimales
      */
     @Test
-    public void resta() {
+    public void sumaDecimales() {
+        assertEquals(8.4,nCalculadoraModelo.suma(5.2,3.2),0.0);
+    }
+
+    /**
+     * Metodo sumaEnterosNegativos para testear la función suma para números enteros negativos
+     */
+    @Test
+    public void sumaEnterosNegativos() {
+        assertEquals(-13,nCalculadoraModelo.suma(-8,-5),0.0);
+    }
+
+    /**
+     * Metodo sumaDecimalesNegativos para testear la función suma para números decimales negativos
+     */
+    @Test
+    public void sumaDecimalesNegativos() {
+        assertEquals(-10.1,nCalculadoraModelo.suma(-6.2,-3.9),0.0);
+    }
+
+    /**
+     * Metodo restaEnteros para testear la función resta para números enteros
+     */
+    @Test
+    public void restaEnteros() {
         assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
-        assertEquals(35,nCalculadoraModelo.resta(20,-15),0.0);
-        assertEquals(20,nCalculadoraModelo.resta(-40,-60),0.0);
-        assertEquals(888888,nCalculadoraModelo.resta(999999,111111),0.0);
-        assertEquals(44,nCalculadoraModelo.resta(22,-22),0.0);
-        assertEquals(65,nCalculadoraModelo.resta(73,8),0.0);
-        assertEquals(12,nCalculadoraModelo.resta(100,88),0.0);
-        assertEquals(-30.96,nCalculadoraModelo.resta(-50.96,-20),0.0);
-        assertEquals(11.5,nCalculadoraModelo.resta(20,8.5),0.0);
-        assertEquals(-61,nCalculadoraModelo.resta(-42,19),0.0);
     }
+
     /**
-     * Metodo division para testear la función division
+     * Metodo restaDecimales para testear la función resta para números enteros
      */
     @Test
-    public void division() {
-        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
-        assertEquals(9,nCalculadoraModelo.division(45,5),0.0);
-        assertEquals(0.5,nCalculadoraModelo.division(1,2),0.0);
-        assertEquals(12,nCalculadoraModelo.division(24,2),0.0);
-        assertEquals(6,nCalculadoraModelo.division(-24,6),0.0);
-        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
-        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
-        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
-        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
+    public void restaDecimales() {
+        assertEquals(22.1,nCalculadoraModelo.resta(23.3,1.2),0.0);
+    }
+
+    /**
+     * Metodo restaEnterosNegativos para testear la función resta para números enteros negativos
+     */
+    @Test
+    public void restaEnterosNegativos() {
+        assertEquals(-4,nCalculadoraModelo.resta(-23,-19),0.0);
+    }
+
+    /**
+     * Metodo restaDecimalesNegativos para testear la función resta para números enteros negativos
+     */
+    @Test
+    public void restaDecimalesNegativos() {
+        assertEquals(-22.1,nCalculadoraModelo.resta(-23.3,-1.2),0.0);
+    }
+
+    /**
+     * Metodo divisionEnteros para testear la función división para números enteros
+     */
+    @Test
+    public void divisionEnteros() {
         assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
     }
 
     /**
-     * Metodo multiplicacion para testear la función multiplicacion
+     * Metodo divisionDecimales para testear la función división para números decimales
      */
     @Test
-    public void multiplicacion() {
+    public void divisionDecimales() {
+        assertEquals(10,nCalculadoraModelo.division(18,1.8),0.0);
+    }
+
+    /**
+     * Metodo divisionEnterosNegativos para testear la función división para números enteros negativos
+     */
+    @Test
+    public void divisionEnterosNegativos() {
+        assertEquals(6,nCalculadoraModelo.division(-30,-5),0.0);
+    }
+
+    /**
+     * Metodo divisionDecimalesNegativos para testear la función división para números decimales
+     */
+    @Test
+    public void divisionDecimalesNegativos() {
+        assertEquals(10,nCalculadoraModelo.division(-17,-1.7),0.0);
+    }
+
+    /**
+     * Metodo multiplicacionEnteros para testear la función multiplicación para números enteros
+     */
+    @Test
+    public void multiplicacionEnteros() {
         assertEquals(24,nCalculadoraModelo.multiplicacion(12,2),0.0);
+    }
+
+    /**
+     * Metodo multiplicacionDecimales para testear la función multiplicación para números decimales
+     */
+    @Test
+    public void multiplicacionDecimales() {
+        assertEquals(9,nCalculadoraModelo.multiplicacion(6,1.5),0.0);
+    }
+
+    /**
+     * Metodo multiplicacionEnterosNegativos para testear la función multiplicación para números enteros negativos
+     */
+    @Test
+    public void multiplicacionEnterosNegativos() {
+        assertEquals(20,nCalculadoraModelo.multiplicacion(-10,-2),0.0);
+    }
+
+    /**
+     * Metodo multiplicacionDecimalesNegativos para testear la función multiplicación para números decimales negativos
+     */
+    @Test
+    public void multiplicacionDecimalesNegativos() {
+        assertEquals(12,nCalculadoraModelo.multiplicacion(-8,-1.5),0.0);
     }
 
     /**
