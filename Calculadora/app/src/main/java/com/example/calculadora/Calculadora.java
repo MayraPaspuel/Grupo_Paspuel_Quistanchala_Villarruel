@@ -22,13 +22,13 @@ public interface Calculadora {
      */
     interface Vista{
         /**
-         * Método que permite mostrar un mensaje de error en el programa
+         * Metodo que permite mostrar un mensaje de error en el programa
          * @param mensaje es el mensaje de error
          */
         void mostrarError(String mensaje);
 
         /**
-         * Método que permite mostrar un mensaje de error en el programa
+         * Metodo que permite mostrar un mensaje de error en el programa
          * @param resultado es el resultado de la operación realiza por el programa
          */
         void mostrarResultado(double resultado);
