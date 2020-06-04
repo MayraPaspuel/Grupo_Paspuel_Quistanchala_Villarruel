@@ -59,21 +59,30 @@ public class CalculadoraModeloTest {
     @Test
     public void resta() {
         assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
-        assertEquals(-35,nCalculadoraModelo.resta(20,-15),0.0);
+        assertEquals(35,nCalculadoraModelo.resta(20,-15),0.0);
         assertEquals(20,nCalculadoraModelo.resta(-40,-60),0.0);
         assertEquals(888888,nCalculadoraModelo.resta(999999,111111),0.0);
         assertEquals(44,nCalculadoraModelo.resta(22,-22),0.0);
         assertEquals(65,nCalculadoraModelo.resta(73,8),0.0);
-        assertEquals(22,nCalculadoraModelo.resta(100,88),0.0);
-        assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
-        assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
-        assertEquals(4,nCalculadoraModelo.resta(23,19),0.0);
+        assertEquals(12,nCalculadoraModelo.resta(100,88),0.0);
+        assertEquals(-30.96,nCalculadoraModelo.resta(-50.96,-20),0.0);
+        assertEquals(11.5,nCalculadoraModelo.resta(20,8.5),0.0);
+        assertEquals(-61,nCalculadoraModelo.resta(-42,19),0.0);
     }
     /**
      * Metodo division para testear la función division
      */
     @Test
     public void division() {
+        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
+        assertEquals(9,nCalculadoraModelo.division(45,5),0.0);
+        assertEquals(0.5,nCalculadoraModelo.division(1,2),0.0);
+        assertEquals(12,nCalculadoraModelo.division(24,2),0.0);
+        assertEquals(6,nCalculadoraModelo.division(-24,6),0.0);
+        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
+        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
+        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
+        assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
         assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
     }
 
