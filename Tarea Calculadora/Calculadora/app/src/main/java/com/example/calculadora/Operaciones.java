@@ -108,7 +108,7 @@ public class Operaciones {
         }else if(num1 > 0 && num2 < 0){
             return -(-num2-(num1%(-num2)));
         }else{
-            return 0;
+            return num1;
         }
     }
 
