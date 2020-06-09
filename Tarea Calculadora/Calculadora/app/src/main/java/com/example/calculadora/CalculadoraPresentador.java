@@ -18,7 +18,7 @@ package com.example.calculadora;
  */
 public class CalculadoraPresentador implements Calculadora.Presentador {
 
-    Calculadora.Modelo modelo;
+    CalculadoraModelo modelo;
     Calculadora.Vista vista;
 
     /**
@@ -29,6 +29,7 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         this.vista = vista;
         this.modelo = new CalculadoraModelo(this);
     }
+
 
     /**
      * Metodo mostrarError el cual envia el error a la vista
@@ -49,66 +50,6 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     }
 
     /**
-     * Metodo suma muestra el resultado de la suma
-     * @param num1 es el primer número de la operación
-     * @param num2 es el primer número de la operación
-     */
-    @Override
-    public void suma(String num1, String num2) {
-        try {
-            mostrarResultado(modelo.suma(Double.parseDouble(num1), Double.parseDouble(num2)));
-        }catch (Exception ex) {
-            mostrarError("Error en el ingreso de datos");
-        }
-    }
-    /**
-     * Metodo resta muestra el resultado de la resta
-     * @param num1 es el primer número de la operación
-     * @param num2 es el primer número de la operación
-     */
-    @Override
-    public void resta(String num1, String num2) {
-        try {
-            mostrarResultado(modelo.resta(Double.parseDouble(num1), Double.parseDouble(num2)));
-        }catch (Exception ex) {
-            mostrarError("Error en el ingreso de datos");
-        }
-    }
-
-    /**
-     * Metodo division muestra el resultado de la división
-     * @param num1 es el primer número de la operación
-     * @param num2 es el primer número de la operación
-     */
-    @Override
-    public void division(String num1, String num2) {
-        try {
-            if(Double.parseDouble(num2)!=0){
-                mostrarResultado(modelo.division(Double.parseDouble(num1), Double.parseDouble(num2)));
-            }else{
-                mostrarError("Error de division para 0");
-            }
-        }catch (Exception ex) {
-            mostrarError("Error en el ingreso de datos");
-        }
-
-    }
-
-    /**
-     * Metodo multiplicacion muestra el resultado de la multiplicación
-     * @param num1 es el primer número de la operación
-     * @param num2 es el primer número de la operación
-     */
-    @Override
-    public void multiplicacion(String num1, String num2) {
-        try {
-            mostrarResultado(modelo.multiplicacion(Double.parseDouble(num1), Double.parseDouble(num2)));
-        }catch (Exception ex) {
-            mostrarError("Error en el ingreso de datos");
-        }
-    }
-
-    /**
      * Metodo mMas muestra el dato que aumenta en memoria
      * @param dato es el número para guardar en memoria
      */
@@ -116,7 +57,6 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     public void mMas(String dato) {
         try {
             modelo.mMas(Double.parseDouble(dato));
-            limpiarCampos();
         }catch (Exception ex){
             mostrarError("Error en el ingreso de datos");
         }
@@ -130,18 +70,9 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     public void mMenos(String dato) {
         try{
             modelo.mMenos(Double.parseDouble(dato));
-            limpiarCampos();
         }catch (Exception ex){
             mostrarError("Error en el ingreso de datos");
         }
-    }
-
-    /**
-     * Metodo limpiarCampos el cual vacia los datos de la vista
-     */
-    @Override
-    public void limpiarCampos() {
-        vista.limpiarCampos();
     }
 
     /**
@@ -151,5 +82,14 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
     @Override
     public double mR() {
         return modelo.mR();
+    }
+
+    @Override
+    public void calcular(Cadena cadena) {
+        try {
+            vista.mostrarResultado(modelo.calcular(cadena));
+        }catch (Exception ex){
+            vista.mostrarError(ex.getMessage());
+        }
     }
 }

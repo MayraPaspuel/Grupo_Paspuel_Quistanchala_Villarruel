@@ -15,11 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+
 /**
  * Clase que implementa la vista de la calculadora
  *
@@ -27,12 +27,18 @@ import java.text.DecimalFormat;
  * @author Quistanchala Karla
  * @author Villarruel Michael
  */
-public class CalculadoraVista extends AppCompatActivity implements Calculadora.Vista{
+public class CalculadoraVista extends AppCompatActivity implements Calculadora.Vista, View.OnClickListener{
 
-    EditText num1,num2;
-    Button suma,resta,multiplicacion,division,mMas,mMenos, mR;
-    TextView resultado;
-    Calculadora.Presentador presentador;
+    TextView resultado, operacion;
+
+    int[] misBotones = {R.id.btnSuma, R.id.btnResta, R.id.btnMultiplicacion, R.id.btnDivision,
+            R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn0,
+            R.id.btnMMas, R.id.btnMMenos, R.id.btnMR,
+            R.id.btnPunto, R.id.btnIgual, R.id.btnParenIz, R.id.btnParenDer, R.id.btnBorrar,
+            R.id.btnExponente, R.id.btnFactorial};
+
+    Button miBoton;
+    CalculadoraPresentador presentador;
 
     /**
      * Metodo onCrate que crea la actividad
@@ -42,70 +48,15 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        num1 = (EditText)findViewById(R.id.txtNum1);
-        num2 = (EditText)findViewById(R.id.txtNum2);
-
-        resultado = (TextView)findViewById(R.id.txtResultado);
-
-        suma = (Button)findViewById(R.id.btnSuma);
-        resta = (Button)findViewById(R.id.btnResta);
-        division = (Button)findViewById(R.id.btnDivision);
-        multiplicacion = (Button)findViewById(R.id.btnMultiplicacion);
-        mMas = (Button)findViewById(R.id.btnMMas);
-        mMenos=(Button)findViewById(R.id.btnMMenos);
-        mR = (Button)findViewById(R.id.btnMR);
 
         presentador = new CalculadoraPresentador(this);
 
-        suma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presentador.suma(num1.getText().toString(), num2.getText().toString());
-            }
-        });
+        operacion = (TextView)findViewById(R.id.txtOperacion);
+        resultado = (TextView)findViewById(R.id.txtResultado);
 
-        resta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                presentador.resta(num1.getText().toString(),num2.getText().toString());
-            }
-        });
-
-        division.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                presentador.division(num1.getText().toString(),num2.getText().toString());
-            }
-        });
-
-        multiplicacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                presentador.multiplicacion(num1.getText().toString(),num2.getText().toString());
-            }
-        });
-
-        mMas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presentador.mMas(resultado.getText().toString());
-            }
-        });
-
-        mMenos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presentador.mMenos(resultado.getText().toString());
-            }
-        });
-
-        mR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mostrarResultado(presentador.mR());
-            }
-        });
-
+        for(int idBoton : misBotones){
+            findViewById(idBoton).setOnClickListener(this);
+        }
     }
 
     /**
@@ -126,13 +77,33 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
         DecimalFormat miFormato = new DecimalFormat("#.##");
         this.resultado.setText(miFormato.format(resultado));
     }
-    /**
-     * Metodo limpiarCampos es la cual se vacia los campos
-     */
+
     @Override
-    public void limpiarCampos() {
-        num1.setText("");
-        num2.setText("");
-        resultado.setText("00.00");
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnMMas:
+                presentador.mMas(resultado.getText().toString());
+                break;
+            case R.id.btnMMenos:
+                presentador.mMenos(resultado.getText().toString());
+                break;
+            case R.id.btnMR:
+                mostrarResultado(presentador.mR());
+                break;
+            case R.id.btnIgual:
+                Cadena cadena = new Cadena(operacion.getText().toString());
+                presentador.calcular(cadena);
+                break;
+            case R.id.btnBorrar:
+                if(!operacion.getText().toString().equals("")) {
+                    int index = operacion.getText().toString().length() - 1;
+                    operacion.setText(operacion.getText().toString().substring(0, index));
+                }
+                break;
+            default:
+                miBoton = (Button) findViewById(v.getId());
+                operacion.setText(operacion.getText().toString() + miBoton.getText().toString());
+                break;
+        }
     }
 }

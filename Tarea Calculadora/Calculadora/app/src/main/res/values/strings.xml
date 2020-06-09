@@ -9,4 +9,20 @@
     <string name="stringMMenos">M-</string>
     <string name="stringValor"></string>
     <string name="stringMR">MR</string>
+    <string name="string4">4</string>
+    <string name="string2">2</string>
+    <string name="string3">3</string>
+    <string name="stringPunto">.</string>
+    <string name="string0">0</string>
+    <string name="string1">1</string>
+    <string name="string5">5</string>
+    <string name="string6">6</string>
+    <string name="string7">7</string>
+    <string name="string8">8</string>
+    <string name="string9">9</string>
+    <string name="stringFactorial">!</string>
+    <string name="stringPotencia">^</string>
+    <string name="stringIgual">=</string>
+    <string name="stringParentesisIzquierdo">(</string>
+    <string name="stringParentesisDerecho">)</string>
 </resources>
