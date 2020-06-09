@@ -172,7 +172,7 @@ public class CalculadoraModeloTest {
      */
     @Test
     public void potenciaExponenteCero() {
-        assertEquals(12,nCalculadoraModelo.potencia(6,0),0.0);
+        assertEquals(1,nCalculadoraModelo.potencia(6,0),0.0);
     }
 
     /**
@@ -180,7 +180,7 @@ public class CalculadoraModeloTest {
      */
     @Test
     public void potenciaExponenteEnteroNegativo() {
-        assertEquals(12,nCalculadoraModelo.potencia(6,-8),0.0);
+        assertEquals(0.25,nCalculadoraModelo.potencia(4,-1),0.0);
     }
 
     /**
@@ -188,15 +188,7 @@ public class CalculadoraModeloTest {
      */
     @Test
     public void potenciaExponenteEnteroPositivo() {
-        assertEquals(12,nCalculadoraModelo.potencia(2,5),0.0);
-    }
-
-    /**
-     * Metodo factorialNegativo para testear la función factorial con ingreso de entero negativo
-     */
-    @Test
-    public void factorialNegativo() throws Exception {
-        assertEquals(12,nCalculadoraModelo.factorial(-3));
+        assertEquals(32,nCalculadoraModelo.potencia(2,5),0.0);
     }
 
     /**
@@ -204,7 +196,7 @@ public class CalculadoraModeloTest {
      */
     @Test
     public void factorialEnteroPositivo() throws Exception {
-        assertEquals(12,nCalculadoraModelo.factorial(3));
+        assertEquals(6,nCalculadoraModelo.factorial(3),0);
     }
 
     /**
