@@ -115,15 +115,17 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         Stack pilaPrincipal = new Stack<Object>();
 
         String cadenaOperacion = cadena.getDato();
-        cadenaOperacion = cadenaOperacion.replaceAll(" ", "");
+        //cadenaOperacion = cadenaOperacion.replaceAll(" ", "");
 
         StringTokenizer strTok = new StringTokenizer(cadenaOperacion, tokensValidos, true);
         String tok="";
 
         while (strTok.hasMoreTokens()) {
+            String tokAnterior="";
 
-
-            String tokAnterior = tok;
+            if(!tok.equals(" ")) {
+                tokAnterior = tok;
+            }
             tok = strTok.nextToken();
 
             if(tok.equals(" ")){continue;}

@@ -102,12 +102,15 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             case R.id.btnBorrar:
                 if(!operacion.getText().toString().equals("")) {
                     int index = operacion.getText().toString().length() - 1;
+                    if (operacion.getText().toString().charAt(index) == ' ') {
+                        index = index - 4;
+                    }
                     operacion.setText(operacion.getText().toString().substring(0, index));
                 }
                 break;
             case R.id.btnMod:
                 miBoton = (Button) findViewById(v.getId());
-                operacion.setText(operacion.getText().toString() +" "+ miBoton.getText().toString());
+                operacion.setText(operacion.getText().toString() +" "+ miBoton.getText().toString() + " ");
                 break;
             default:
                 miBoton = (Button) findViewById(v.getId());
