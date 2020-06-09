@@ -41,13 +41,13 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         this.operacion = new Operaciones();
     }
 
-    private static String tokensValidos = "+-*/^!()";
+    private static String tokensValidos = "+-*/^!() ";
 
     /**
      * Operadores que pueden ser utilizados en la calculadora
      */
     private static enum Operador {
-        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido
+        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido, oMod
     };
 
     /**
@@ -68,14 +68,16 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                 return 2;
             case oResta:
                 return 2;
+            case oMod:
+                return 3;
             case oMultiplicacion:
-                return 3;
-            case oDivision:
-                return 3;
-            case oPotencia:
                 return 4;
-            case oFactorial:
+            case oDivision:
+                return 4;
+            case oPotencia:
                 return 5;
+            case oFactorial:
+                return 6;
             default:
                 return 0;
         }
@@ -88,6 +90,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
      */
     private Asociatividad asociatividad(Operador op) {
         switch (op) {
+            case oMod:
             case oPotencia:
             case oFactorial:
                 return Asociatividad.asoDerecha;
@@ -119,8 +122,11 @@ public class CalculadoraModelo implements Calculadora.Modelo{
 
         while (strTok.hasMoreTokens()) {
 
+
             String tokAnterior = tok;
             tok = strTok.nextToken();
+
+            if(tok.equals(" ")){continue;}
 
             try {
                 pilaPrincipal.push(Double.parseDouble(tok));
@@ -224,6 +230,8 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                     return operacion.potencia(b,a);
                 case oFactorial:
                     return operacion.factorial(a);
+                case oMod:
+                    return operacion.mod(b,a);
                 default:
                     throw new Exception("Operador Invalido");
             }
@@ -254,6 +262,9 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         }
         if (tok.contentEquals("!")) {
             return Operador.oFactorial;
+        }
+        if (tok.contentEquals("mod")) {
+            return Operador.oMod;
         }
         if (tok.contentEquals("(")) {
             return Operador.oParenIz;

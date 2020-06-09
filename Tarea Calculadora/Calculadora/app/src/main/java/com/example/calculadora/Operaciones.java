@@ -98,6 +98,11 @@ public class Operaciones {
         }
     }
 
+    public double mod(double num1, double num2){
+        return num1%num2;
+    }
+
+
     /**
      * Metodo mMas que suma en memoria
      * @param dato es el numero para guardar en memoria

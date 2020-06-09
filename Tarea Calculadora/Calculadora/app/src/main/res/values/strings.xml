@@ -25,4 +25,6 @@
     <string name="stringIgual">=</string>
     <string name="stringParentesisIzquierdo">(</string>
     <string name="stringParentesisDerecho">)</string>
+    <string name="mod">mod</string>
+    <string name="stringBorrar">c</string>
 </resources>
