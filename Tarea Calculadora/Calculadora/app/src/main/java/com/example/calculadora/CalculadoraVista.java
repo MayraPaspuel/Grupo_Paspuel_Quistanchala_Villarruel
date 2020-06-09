@@ -2,6 +2,7 @@
  * ESPE - DCC - PROGRAMACIÓN MÓVIL
  * Sistema: Calculadora
  * Creado 30/05/2020
+ * Modificado 08/06/2020
  *
  * Los contenidos de este archivo son propiedad privada y estan protegidos por
  * la licencia BSD
@@ -78,6 +79,10 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
         this.resultado.setText(miFormato.format(resultado));
     }
 
+    /**
+     * Metodo onClick en el cual se implementa los metodos de cada boton
+     * @param v  es la vista de la aplicación
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

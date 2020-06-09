@@ -2,6 +2,7 @@
  * ESPE - DCC - PROGRAMACIÓN MÓVIL
  * Sistema: Calculadora
  * Creado 30/05/2020
+ * Modificado 08/06/2020
  *
  * Los contenidos de este archivo son propiedad privada y estan protegidos por
  * la licencia BSD
@@ -84,6 +85,10 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         return modelo.mR();
     }
 
+    /**
+     * Metodo calcular en el cual se evalua la operación
+     * @param cadena que es la operación que se va a calcular
+     */
     @Override
     public void calcular(Cadena cadena) {
         try {

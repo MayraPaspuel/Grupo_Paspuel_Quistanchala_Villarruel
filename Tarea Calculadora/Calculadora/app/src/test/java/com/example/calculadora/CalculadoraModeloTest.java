@@ -2,6 +2,7 @@
  * ESPE - DCC - PROGRAMACIÓN MÓVIL
  * Sistema: Calculadora
  * Creado 30/05/2020
+ * Modificado 08/06/2020
  *
  * Los contenidos de este archivo son propiedad privada y estan protegidos por
  * la licencia BSD
@@ -22,13 +23,13 @@ import static org.junit.Assert.*;
  */
 public class CalculadoraModeloTest {
 
-    private CalculadoraModelo nCalculadoraModelo;
+    private Operaciones nCalculadoraModelo;
     /**
      * Metodo setUp para inicializar el test
      */
     @Before
     public void setUp(){
-        nCalculadoraModelo=new CalculadoraModelo();
+        nCalculadoraModelo=new Operaciones();
     }
     /**
      * Metodo operacionNotNull para controlar las operaciones
@@ -106,7 +107,7 @@ public class CalculadoraModeloTest {
      * Metodo divisionEnteros para testear la función división para números enteros
      */
     @Test
-    public void divisionEnteros() {
+    public void divisionEnteros() throws Exception {
         assertEquals(6,nCalculadoraModelo.division(36,6),0.0);
     }
 
@@ -114,7 +115,7 @@ public class CalculadoraModeloTest {
      * Metodo divisionDecimales para testear la función división para números decimales
      */
     @Test
-    public void divisionDecimales() {
+    public void divisionDecimales() throws Exception {
         assertEquals(10,nCalculadoraModelo.division(18,1.8),0.0);
     }
 
@@ -122,7 +123,7 @@ public class CalculadoraModeloTest {
      * Metodo divisionEnterosNegativos para testear la función división para números enteros negativos
      */
     @Test
-    public void divisionEnterosNegativos() {
+    public void divisionEnterosNegativos() throws Exception {
         assertEquals(6,nCalculadoraModelo.division(-30,-5),0.0);
     }
 
@@ -130,7 +131,7 @@ public class CalculadoraModeloTest {
      * Metodo divisionDecimalesNegativos para testear la función división para números decimales
      */
     @Test
-    public void divisionDecimalesNegativos() {
+    public void divisionDecimalesNegativos() throws Exception {
         assertEquals(10,nCalculadoraModelo.division(-17,-1.7),0.0);
     }
 
@@ -164,6 +165,46 @@ public class CalculadoraModeloTest {
     @Test
     public void multiplicacionDecimalesNegativos() {
         assertEquals(12,nCalculadoraModelo.multiplicacion(-8,-1.5),0.0);
+    }
+
+    /**
+     * Metodo potenciaExponenteCero para testear la función potencia para exponente 0
+     */
+    @Test
+    public void potenciaExponenteCero() {
+        assertEquals(12,nCalculadoraModelo.potencia(6,0),0.0);
+    }
+
+    /**
+     * Metodo potenciaExponenteEnteroNegativo para testear la función potencia para exponente negativo
+     */
+    @Test
+    public void potenciaExponenteEnteroNegativo() {
+        assertEquals(12,nCalculadoraModelo.potencia(6,-8),0.0);
+    }
+
+    /**
+     * Metodo potenciaExponenteEnteroPositivo para testear la función potencia para exponente positivo
+     */
+    @Test
+    public void potenciaExponenteEnteroPositivo() {
+        assertEquals(12,nCalculadoraModelo.potencia(2,5),0.0);
+    }
+
+    /**
+     * Metodo factorialNegativo para testear la función factorial con ingreso de entero negativo
+     */
+    @Test
+    public void factorialNegativo() throws Exception {
+        assertEquals(12,nCalculadoraModelo.factorial(-3));
+    }
+
+    /**
+     * Metodo factorialEnteroPositivo para testear la función factorial con ingreso de entero positivo
+     */
+    @Test
+    public void factorialEnteroPositivo() throws Exception {
+        assertEquals(12,nCalculadoraModelo.factorial(3));
     }
 
     /**
