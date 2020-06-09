@@ -41,20 +41,20 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         this.operacion = new Operaciones();
     }
 
-    private static String validOpTokens = "+-*/^!()";
+    private static String tokensValidos = "+-*/^!()";
 
     /**
      * Operadores que pueden ser utilizados en la calculadora
      */
-    private static enum Operator {
-        Add, Subtract, Multiply, Divide, Exponentiate, Factorial, LeftParen, RightParen, InvalidOp
+    private static enum Operador {
+        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido
     };
 
     /**
      * Propiedad que define como se agrupan los operadores dependiendo su prioridad
      */
-    private static enum Assoc {
-        LeftAssoc, RightAssoc
+    private static enum Asociatividad {
+        asoIzquierda, asoDerecha
     }
 
     /**
@@ -62,19 +62,19 @@ public class CalculadoraModelo implements Calculadora.Modelo{
      * @param op es el operador encontrado
      * @return orden para desarrollar las operaciones
      */
-    private int precedence(Operator op) {
+    private int precedence(Operador op) {
         switch (op) {
-            case Add:
+            case oSuma:
                 return 2;
-            case Subtract:
+            case oResta:
                 return 2;
-            case Multiply:
+            case oMultiplicacion:
                 return 3;
-            case Divide:
+            case oDivision:
                 return 3;
-            case Exponentiate:
+            case oPotencia:
                 return 4;
-            case Factorial:
+            case oFactorial:
                 return 5;
             default:
                 return 0;
@@ -86,18 +86,18 @@ public class CalculadoraModelo implements Calculadora.Modelo{
      * @param op es el operador encontrado
      * @return enumeracion para realizar las operaciones
      */
-    private Assoc associatity(Operator op) {
+    private Asociatividad asociatividad(Operador op) {
         switch (op) {
-            case Exponentiate:
-            case Factorial:
-                return Assoc.RightAssoc;
-            case Add:
-            case Subtract:
-            case Multiply:
-            case Divide:
-                return Assoc.LeftAssoc;
+            case oPotencia:
+            case oFactorial:
+                return Asociatividad.asoDerecha;
+            case oSuma:
+            case oResta:
+            case oMultiplicacion:
+            case oDivision:
+                return Asociatividad.asoIzquierda;
             default:
-                return Assoc.LeftAssoc;
+                return Asociatividad.asoIzquierda;
         }
     }
 
@@ -108,161 +108,160 @@ public class CalculadoraModelo implements Calculadora.Modelo{
      */
     @Override
     public double calcular(Cadena cadena) throws Exception {
-        Stack operatorStack = new Stack<Operator>();
-        Stack RPNStack = new Stack<Object>();
+        Stack pilaOperadores = new Stack<Operador>();
+        Stack pilaPrincipal = new Stack<Object>();
 
-        String calcString = cadena.getDato();
-        calcString = calcString.replaceAll(" ", "");
-        System.out.println("Tokenizing: " + calcString);
-        StringTokenizer strtok = new StringTokenizer(calcString, validOpTokens, true);
+        String cadenaOperacion = cadena.getDato();
+        cadenaOperacion = cadenaOperacion.replaceAll(" ", "");
+
+        StringTokenizer strTok = new StringTokenizer(cadenaOperacion, tokensValidos, true);
         String tok="";
-        while (strtok.hasMoreTokens()) {
-            String miToken = tok;
-            tok = strtok.nextToken();
-            System.out.println(RPNStack);
-            System.out.println(operatorStack);
-            System.out.println("Parsing token: " + tok);
+
+        while (strTok.hasMoreTokens()) {
+
+            String tokAnterior = tok;
+            tok = strTok.nextToken();
+
             try {
-                RPNStack.push(Double.parseDouble(tok));
+                pilaPrincipal.push(Double.parseDouble(tok));
                 continue;
             } catch (NumberFormatException nfe) {
             }
-            Operator op = tokToOp(tok);
-            if((operatorStack.isEmpty() && RPNStack.isEmpty())|| miToken.equals("(") ){
-                if(op == Operator.Subtract){
-                    RPNStack.push(Double.parseDouble("0"));
+            Operador op = tokenOperador(tok);
+            if((pilaOperadores.isEmpty() && pilaPrincipal.isEmpty())|| tokAnterior.equals("(") ){
+                if(op == Operador.oResta){
+                    pilaPrincipal.push(Double.parseDouble("0"));
                 }
             }
-            if (op == Operator.InvalidOp) {
-                System.out.println("Invalid operator " + tok + " found. Aborting.");
-                return 0.0;
+            if (op == Operador.oInvalido) {
+                throw new Exception("Operador invalido " + tok );
             }
-            if (op == Operator.LeftParen) {
-                if((tokToOp(miToken)==Operator.InvalidOp || tokToOp(miToken)==Operator.Factorial) && !miToken.equals("")){
+            if (op == Operador.oParenIz) {
+                if((tokenOperador(tokAnterior)== Operador.oInvalido || tokenOperador(tokAnterior)== Operador.oFactorial) && !tokAnterior.equals("")){
                     throw new Exception("Ingreso de datos invalido, un signo valido debe colocarse previo a los parentesis.");
                 }
-                operatorStack.push(op);
+                pilaOperadores.push(op);
                 continue;
             }
-            if (op == Operator.RightParen) {
+            if (op == Operador.oParentDer) {
                 boolean escapeLoop = false;
-                while (!operatorStack.isEmpty()) {
-                    Operator op1 = (Operator) operatorStack.pop();
-                    if (op1 == Operator.LeftParen) {
+                while (!pilaOperadores.isEmpty()) {
+                    Operador op1 = (Operador) pilaOperadores.pop();
+                    if (op1 == Operador.oParenIz) {
                         escapeLoop = true;
                         break;
                     }
-                    RPNStack.push(op1);
-                    if (operatorStack.isEmpty()) {
-                        throw new Exception("Mismatched parentheses. Aborting.");
+                    pilaPrincipal.push(op1);
+                    if (pilaOperadores.isEmpty()) {
+                        throw new Exception("Inconsistencia en parentesis");
                     }
                 }
                 if (escapeLoop = true) {
                     continue;
                 }
             }
-            if (associatity(op) == Assoc.LeftAssoc) {
-                while (!operatorStack.isEmpty() && precedence(op) <= precedence((Operator) operatorStack.peek())) {
-                    RPNStack.push(operatorStack.pop());
+            if (asociatividad(op) == Asociatividad.asoIzquierda) {
+                while (!pilaOperadores.isEmpty() && precedence(op) <= precedence((Operador) pilaOperadores.peek())) {
+                    pilaPrincipal.push(pilaOperadores.pop());
                 }
-            } else if (associatity(op) == Assoc.RightAssoc) {
-                while (!operatorStack.isEmpty() && precedence(op) < precedence((Operator) operatorStack.peek())) {
-                    RPNStack.push(operatorStack.pop());
+            } else if (asociatividad(op) == Asociatividad.asoDerecha) {
+                while (!pilaOperadores.isEmpty() && precedence(op) < precedence((Operador) pilaOperadores.peek())) {
+                    pilaPrincipal.push(pilaOperadores.pop());
                 }
             }
-            operatorStack.push(op);
+            pilaOperadores.push(op);
         }
-        while (!operatorStack.isEmpty()) {
-            Operator op1 = (Operator) operatorStack.pop();
-            if (op1 == Operator.LeftParen || op1 == Operator.RightParen) {
-                throw new Exception("Mismatched parentheses. Aborting.");
+        while (!pilaOperadores.isEmpty()) {
+            Operador op1 = (Operador) pilaOperadores.pop();
+            if (op1 == Operador.oParenIz || op1 == Operador.oParentDer) {
+                throw new Exception("Inconsistencia en parentesis");
             }
-            RPNStack.push(op1);
+            pilaPrincipal.push(op1);
         }
-        System.out.println(RPNStack);
-        if (RPNStack.isEmpty()) {
+        System.out.println(pilaPrincipal);
+        if (pilaPrincipal.isEmpty()) {
             return 0.0;
         }
-        return evaluarCadena(RPNStack);
+        return evaluarCadena(pilaPrincipal);
     }
 
     /**
      * Metodo evaluarCadena es el que realiza las operaciones en orden
-     * @param RPNStack
+     * @param pilaPrincipal
      * @return resultado de las operaciones
      */
-    private double evaluarCadena(Stack<Object> RPNStack) throws Exception {
-        Object obj = RPNStack.pop();
+    private double evaluarCadena(Stack<Object> pilaPrincipal) throws Exception {
+        Object obj = pilaPrincipal.pop();
 
         if (obj.getClass() == Double.class) {
             return ((Double) obj).doubleValue();
         }
 
-        if (obj.getClass() == Operator.class) {
-            Operator op = (Operator) obj;
+        if (obj.getClass() == Operador.class) {
+            Operador op = (Operador) obj;
 
             double a=0,b=0;
             try {
-                a = evaluarCadena(RPNStack);
+                a = evaluarCadena(pilaPrincipal);
                 b = 0;
-                if (op != Operator.Factorial) {
-                    b = evaluarCadena(RPNStack);
+                if (op != Operador.oFactorial) {
+                    b = evaluarCadena(pilaPrincipal);
                 }
             }catch(Exception ex){
                 throw new Exception("Error en el ingreso de datos, revise los signos ingresados");
             }
 
             switch (op) {
-                case Add:
+                case oSuma:
                     return operacion.suma(a,b);
-                case Subtract:
+                case oResta:
                     return operacion.resta(b,a);
-                case Multiply:
+                case oMultiplicacion:
                     return operacion.multiplicacion(a,b);
-                case Divide:
+                case oDivision:
                     return operacion.division(b,a);
-                case Exponentiate:
+                case oPotencia:
                     return operacion.potencia(b,a);
-                case Factorial:
+                case oFactorial:
                     return operacion.factorial(a);
                 default:
-                    throw new Exception("INVALID OPERATOR IN EVAL.");
+                    throw new Exception("Operador Invalido");
             }
         }
-        throw new Exception("INVALID OBJECT IN RPNSTACK.");
+        throw new Exception("Entrada no valida");
     }
 
     /**
-     * Metodo tolToOp el cual identifica la operacion segun el signo
+     * Metodo tokenOperador el cual identifica la operacion segun el signo
      * @param tok contiene el signo encontrado en la cadena
      * @return  enumeracion de la operacion que se debe realizar
      */
-    private Operator tokToOp(String tok) {
+    private Operador tokenOperador(String tok) {
         if (tok.contentEquals("+")) {
-            return Operator.Add;
+            return Operador.oSuma;
         }
         if (tok.contentEquals("-")) {
-            return Operator.Subtract;
+            return Operador.oResta;
         }
         if (tok.contentEquals("*")) {
-            return Operator.Multiply;
+            return Operador.oMultiplicacion;
         }
         if (tok.contentEquals("/")) {
-            return Operator.Divide;
+            return Operador.oDivision;
         }
         if (tok.contentEquals("^")) {
-            return Operator.Exponentiate;
+            return Operador.oPotencia;
         }
         if (tok.contentEquals("!")) {
-            return Operator.Factorial;
+            return Operador.oFactorial;
         }
         if (tok.contentEquals("(")) {
-            return Operator.LeftParen;
+            return Operador.oParenIz;
         }
         if (tok.contentEquals(")")) {
-            return Operator.RightParen;
+            return Operador.oParentDer;
         }
-        return Operator.InvalidOp;
+        return Operador.oInvalido;
     }
 
     /**
