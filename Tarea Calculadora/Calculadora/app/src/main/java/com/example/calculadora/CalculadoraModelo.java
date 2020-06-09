@@ -43,10 +43,16 @@ public class CalculadoraModelo implements Calculadora.Modelo{
 
     private static String validOpTokens = "+-*/^!()";
 
+    /**
+     * Operadores que pueden ser utilizados en la calculadora
+     */
     private static enum Operator {
         Add, Subtract, Multiply, Divide, Exponentiate, Factorial, LeftParen, RightParen, InvalidOp
     };
 
+    /**
+     * Propiedad que define como se agrupan los operadores dependiendo su prioridad
+     */
     private static enum Assoc {
         LeftAssoc, RightAssoc
     }
