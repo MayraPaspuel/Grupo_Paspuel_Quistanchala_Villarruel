@@ -119,33 +119,44 @@ public class CalculadoraModelo implements Calculadora.Modelo{
 
         StringTokenizer strTok = new StringTokenizer(cadenaOperacion, tokensValidos, true);
         String tok="";
-
+        int miBandera=1;
         while (strTok.hasMoreTokens()) {
             String tokAnterior="";
 
             if(!tok.equals(" ")) {
                 tokAnterior = tok;
             }
+
             tok = strTok.nextToken();
 
             if(tok.equals(" ")){continue;}
 
             try {
-                pilaPrincipal.push(Double.parseDouble(tok));
+                pilaPrincipal.push(miBandera*Double.parseDouble(tok));
                 continue;
             } catch (NumberFormatException nfe) {
             }
             Operador op = tokenOperador(tok);
-            if((pilaOperadores.isEmpty() && pilaPrincipal.isEmpty())|| tokAnterior.equals("(") ){
+
+            /*if((pilaOperadores.isEmpty() && pilaPrincipal.isEmpty())|| tokAnterior.equals("(") ){
                 if(op == Operador.oResta){
                     pilaPrincipal.push(Double.parseDouble("0"));
                 }
+            }*/
+
+            miBandera=1;
+            if( (tokenOperador(tokAnterior) != Operador.oInvalido && tokenOperador(tokAnterior) != Operador.oFactorial) || tokAnterior.equals("")){
+                if(op==Operador.oResta){
+                    miBandera=-1;
+                    continue;
+                }
             }
+
             if (op == Operador.oInvalido) {
                 throw new Exception("Operador invalido " + tok );
             }
             if (op == Operador.oParenIz) {
-                if((tokenOperador(tokAnterior)== Operador.oInvalido || tokenOperador(tokAnterior)== Operador.oFactorial) && !tokAnterior.equals("")){
+                if((tokenOperador(tokAnterior) == Operador.oInvalido || tokenOperador(tokAnterior)== Operador.oFactorial) && !tokAnterior.equals("")){
                     throw new Exception("Ingreso de datos invalido, un signo valido debe colocarse previo a los parentesis.");
                 }
                 pilaOperadores.push(op);

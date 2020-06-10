@@ -33,10 +33,10 @@
             android:id="@+id/btnMod"
             android:layout_width="90dp"
             android:layout_height="50dp"
-            android:text="@string/mod"
+            android:text="@string/stringMod"
             android:textSize="18sp"
             app:layout_column="0"
-            app:layout_row="6" />
+            app:layout_row="1" />
 
         <Button
             android:id="@+id/btnMMenos"
@@ -45,7 +45,7 @@
             android:text="@string/stringMMenos"
             android:textSize="18sp"
             app:layout_column="0"
-            app:layout_row="1" />
+            app:layout_row="6" />
 
         <Button
             android:id="@+id/btnMR"
@@ -54,7 +54,7 @@
             android:text="@string/stringMR"
             android:textSize="18sp"
             app:layout_column="2"
-            app:layout_row="1" />
+            app:layout_row="6" />
 
         <Button
             android:id="@+id/btnMMas"
@@ -63,7 +63,7 @@
             android:text="@string/stringMMas"
             android:textSize="18sp"
             app:layout_column="1"
-            app:layout_row="1" />
+            app:layout_row="6" />
 
         <Button
             android:id="@+id/btnSuma"
@@ -179,8 +179,8 @@
             android:layout_height="50dp"
             android:text="@string/stringBorrar"
             android:textSize="18sp"
-            app:layout_column="3"
-            app:layout_row="5" />
+            app:layout_column="2"
+            app:layout_row="1" />
 
         <Button
             android:id="@+id/btn7"
@@ -252,6 +252,15 @@
             android:text="@string/stringPotencia"
             android:textSize="18sp"
             app:layout_column="3"
+            app:layout_row="1" />
+
+        <Button
+            android:id="@+id/btnBorrarTodo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stringBorrarTodo"
+            android:textSize="18sp"
+            app:layout_column="1"
             app:layout_row="1" />
     </androidx.gridlayout.widget.GridLayout>
 

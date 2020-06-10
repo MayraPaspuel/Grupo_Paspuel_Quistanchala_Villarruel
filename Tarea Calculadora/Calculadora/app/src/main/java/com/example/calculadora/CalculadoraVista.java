@@ -35,7 +35,8 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     int[] misBotones = {R.id.btnSuma, R.id.btnResta, R.id.btnMultiplicacion, R.id.btnDivision,
             R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn0,
             R.id.btnMMas, R.id.btnMMenos, R.id.btnMR,
-            R.id.btnPunto, R.id.btnIgual, R.id.btnParenIz, R.id.btnParenDer, R.id.btnBorrar,
+            R.id.btnPunto, R.id.btnIgual, R.id.btnParenIz, R.id.btnParenDer,
+            R.id.btnBorrar, R.id.btnBorrarTodo,
             R.id.btnExponente, R.id.btnFactorial, R.id.btnMod};
 
     Button miBoton;
@@ -107,6 +108,10 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
                     }
                     operacion.setText(operacion.getText().toString().substring(0, index));
                 }
+                break;
+            case R.id.btnBorrarTodo:
+                operacion.setText("");
+                resultado.setText("00.00");
                 break;
             case R.id.btnMod:
                 miBoton = (Button) findViewById(v.getId());
