@@ -180,7 +180,7 @@ public class CalculadoraModeloTest {
      */
     @Test
     public void potenciaExponenteEnteroNegativo() {
-        assertEquals(0.25,nCalculadoraModelo.potencia(4,-1),0.0);
+        assertEquals(0.25,nCalculadoraModelo.potencia(0.5,2),0.0);
     }
 
     /**
@@ -197,6 +197,16 @@ public class CalculadoraModeloTest {
     @Test
     public void factorialEnteroPositivo() throws Exception {
         assertEquals(6,nCalculadoraModelo.factorial(3),0);
+    }
+
+    @Test
+    public void raizNumeroEntero() throws Exception {
+        assertEquals(4,nCalculadoraModelo.raiz(16),0.0);
+    }
+
+    @Test
+    public void raizNumeroDecimal() throws Exception {
+        assertEquals(0.5,nCalculadoraModelo.raiz(0.25),0.0);
     }
 
     /**

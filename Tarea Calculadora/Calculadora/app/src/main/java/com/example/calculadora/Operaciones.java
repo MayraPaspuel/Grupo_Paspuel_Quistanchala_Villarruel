@@ -71,7 +71,15 @@ public class Operaciones {
      * @return resultado de la potencia
      */
     public double potencia(double num1, double num2){
-        return Math.pow(num1,num2);
+        double resultado=1;
+        if(num2<0){
+            num1=1/num1;
+            num2=-num2;
+        }
+        for(int i=1;i<=num2;i++){
+            resultado=resultado*num1;
+        }
+        return resultado;
     }
 
     /**
@@ -99,7 +107,6 @@ public class Operaciones {
     }
 
     public double mod(double num1, double num2){
-
         if(num1%num2==0){
             return 0;
         }else if(num1 > 0 && num2 > 0){
@@ -113,6 +120,26 @@ public class Operaciones {
         }else{
             return num1;
         }
+    }
+
+    public double raiz(double num1) throws Exception {
+        double i=0;
+        double x1,x2=0;
+        if(num1<0){
+            throw new Exception("No existe raiz cuadrada de número negativos");
+        }
+        while( (i*i) <= num1 )
+            i+=0.1;
+        x1=i;
+        for(int j=0;j<10;j++)
+        {
+            x2=num1;
+            x2/=x1;
+            x2+=x1;
+            x2/=2;
+            x1=x2;
+        }
+        return x2;
     }
 
 
