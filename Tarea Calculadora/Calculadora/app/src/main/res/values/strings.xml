@@ -28,4 +28,6 @@
     <string name="stringMod">mod</string>
     <string name="stringBorrar">DEL</string>
     <string name="stringBorrarTodo">C</string>
+    <string name="log">log</string>
+    <string name="raiz">sqrt</string>
 </resources>

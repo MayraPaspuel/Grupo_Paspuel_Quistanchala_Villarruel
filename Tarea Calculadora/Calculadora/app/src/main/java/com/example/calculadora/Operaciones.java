@@ -71,6 +71,10 @@ public class Operaciones {
      * @return resultado de la potencia
      */
     public double potencia(double num1, double num2){
+
+        if(num2!=(int)num2){
+            return Math.pow(num1,num2);
+        }
         double resultado=1;
         if(num2<0){
             num1=1/num1;
@@ -105,6 +109,43 @@ public class Operaciones {
                 }
         }
     }
+
+    public double logaritmo(double num1) throws Exception{
+
+        if(num1<=0){
+            throw new Exception("Entrada invalida");
+        }
+        double a=0, caracteristica=0, resultado;
+        int cmantisa=0;
+        String mantisa="0.";
+
+        //Caracteristica
+        a=num1;
+        while(a>=10){
+            a=a/10;
+            caracteristica++;
+        }
+
+        //elevar el ultimo resultado a la decima potencia
+        for(int i=0;i<5;i++){
+            a= Math.pow(a, 10); //base del sistema numerico, no base del logaritmo
+            if(a<10){
+                mantisa=mantisa+"0";
+            }else if(a>10){
+                cmantisa=0;
+                while(a>=10){
+                    a=a/10;
+                    cmantisa++;
+                }
+                mantisa = mantisa+cmantisa;
+                //basea=a;
+            }
+        }
+
+        resultado=caracteristica+Double.parseDouble(mantisa);
+        return resultado;
+    }
+
 
     public double mod(double num1, double num2){
         if(num1%num2==0){

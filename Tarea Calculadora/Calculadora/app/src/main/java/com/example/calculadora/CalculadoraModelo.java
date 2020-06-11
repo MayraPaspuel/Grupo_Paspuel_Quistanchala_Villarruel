@@ -47,7 +47,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
      * Operadores que pueden ser utilizados en la calculadora
      */
     private static enum Operador {
-        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido, oMod
+        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido, oMod, oLog, oRaiz
     };
 
     /**
@@ -78,6 +78,10 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                 return 5;
             case oFactorial:
                 return 6;
+            case oRaiz:
+                return 6;
+            case oLog:
+                return 6;
             default:
                 return 0;
         }
@@ -91,6 +95,8 @@ public class CalculadoraModelo implements Calculadora.Modelo{
     private Asociatividad asociatividad(Operador op) {
         switch (op) {
             case oMod:
+            case oRaiz:
+            case oLog:
             case oPotencia:
             case oFactorial:
                 return Asociatividad.asoDerecha;
@@ -223,7 +229,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
             try {
                 a = evaluarCadena(pilaPrincipal);
                 b = 0;
-                if (op != Operador.oFactorial) {
+                if (op != Operador.oFactorial||op != Operador.oLog||op != Operador.oRaiz) {
                     b = evaluarCadena(pilaPrincipal);
                 }
             }catch(Exception ex){
@@ -245,6 +251,10 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                     return operacion.factorial(a);
                 case oMod:
                     return operacion.mod(b,a);
+                case oLog:
+                    return operacion.logaritmo(a);
+                case oRaiz:
+                    return operacion.raiz(a);
                 default:
                     throw new Exception("Operador Invalido");
             }
@@ -278,6 +288,12 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         }
         if (tok.contentEquals("mod")) {
             return Operador.oMod;
+        }
+        if (tok.contentEquals("log")) {
+            return Operador.oLog;
+        }
+        if (tok.contentEquals("sqrt")) {
+            return Operador.oRaiz;
         }
         if (tok.contentEquals("(")) {
             return Operador.oParenIz;

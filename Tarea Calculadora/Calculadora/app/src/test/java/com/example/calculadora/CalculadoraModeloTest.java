@@ -192,6 +192,14 @@ public class CalculadoraModeloTest {
     }
 
     /**
+     * Metodo potenciaExponenteDecimal para testear la función potencia para decimales
+     */
+    @Test
+    public void potenciaExponenteDecimal() {
+        assertEquals(2,nCalculadoraModelo.potencia(4,0.5),0.0);
+    }
+
+    /**
      * Metodo factorialEnteroPositivo para testear la función factorial con ingreso de entero positivo
      */
     @Test
@@ -207,6 +215,22 @@ public class CalculadoraModeloTest {
     @Test
     public void raizNumeroDecimal() throws Exception {
         assertEquals(0.5,nCalculadoraModelo.raiz(0.25),0.0);
+    }
+
+    /**
+     * Metodo logaritmoDecimal para testear la función logaritmo con ingreso de decimales
+     */
+    @Test
+    public void logaritmoDecimal() throws Exception {
+        assertEquals(2.09829,nCalculadoraModelo.logaritmo(125.4),0);
+    }
+
+    /**
+     * Metodo logaritmoEntero para testear la función logaritmo con ingreso de enteros
+     */
+    @Test
+    public void logaritmoEntero() throws Exception {
+        assertEquals(1.69897,nCalculadoraModelo.logaritmo(50),0);
     }
 
     /**
