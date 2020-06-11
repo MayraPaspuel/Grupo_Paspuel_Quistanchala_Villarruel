@@ -126,8 +126,9 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         StringTokenizer strTok = new StringTokenizer(cadenaOperacion, tokensValidos, true);
         String tok="";
         int miBandera=1;
+        String tokAnterior="";
         while (strTok.hasMoreTokens()) {
-            String tokAnterior="";
+
 
             if(!tok.equals(" ")) {
                 tokAnterior = tok;
@@ -185,6 +186,14 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                     continue;
                 }
             }
+
+            if(op== Operador.oRaiz || op== Operador.oLog){
+                System.out.printf(tokAnterior);
+                if((tokenOperador(tokAnterior) == Operador.oInvalido || tokenOperador(tokAnterior)== Operador.oFactorial || tokenOperador(tokAnterior)== Operador.oRaiz || tokenOperador(tokAnterior)== Operador.oLog) && !tokAnterior.equals("")){
+                    throw new Exception("Entrada Invalida, revise los datos ingresados");
+                }
+            }
+
             if (asociatividad(op) == Asociatividad.asoIzquierda) {
                 while (!pilaOperadores.isEmpty() && precedence(op) <= precedence((Operador) pilaOperadores.peek())) {
                     pilaPrincipal.push(pilaOperadores.pop());
@@ -207,6 +216,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         if (pilaPrincipal.isEmpty()) {
             return 0.0;
         }
+        System.out.println(pilaPrincipal);
         return evaluarCadena(pilaPrincipal);
     }
 
@@ -232,6 +242,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                 if (op != Operador.oFactorial && op != Operador.oLog && op != Operador.oRaiz) {
                     b = evaluarCadena(pilaPrincipal);
                 }
+                System.out.println(a+" "+b);
             }catch(Exception ex){
                 throw new Exception("Error en el ingreso de datos, revise los signos ingresados");
             }
