@@ -183,6 +183,21 @@ public class Operaciones {
         return x2;
     }
 
+
+    public double seno(double num1){
+        double resultado=0;
+        num1 = num1*Math.PI/180;
+        try{
+            for (int k=0; k<=30; k++) {
+                resultado = resultado + (Math.pow(-1,k)*Math.pow(num1,((2*k)+1))) / (factorial((2*k)+1));
+            }
+        }catch (Exception ex){
+
+        }
+        return resultado;
+    }
+
+
     public double coseno(double num1){
         double resultado=0;
         num1 = num1*Math.PI/180;

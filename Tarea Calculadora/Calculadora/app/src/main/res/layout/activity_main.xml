@@ -287,6 +287,14 @@
             android:layout_height="wrap_content"
             android:text="@string/stringCoseno"
             android:textSize="18sp"
+            app:layout_column="1"
+            app:layout_row="7" />
+
+        <Button
+            android:id="@+id/btnSen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sen"
             app:layout_column="0"
             app:layout_row="7" />
     </androidx.gridlayout.widget.GridLayout>

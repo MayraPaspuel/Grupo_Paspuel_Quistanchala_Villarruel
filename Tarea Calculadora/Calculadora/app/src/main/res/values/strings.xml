@@ -31,4 +31,5 @@
     <string name="log">log</string>
     <string name="raiz">sqrt</string>
     <string name="stringCoseno">cos</string>
+    <string name="sen">sen</string>
 </resources>

@@ -47,7 +47,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
      * Operadores que pueden ser utilizados en la calculadora
      */
     private static enum Operador {
-        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido, oMod, oLog, oRaiz, oCoseno
+        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido, oMod, oLog, oRaiz, oCoseno, oSeno
     };
 
     /**
@@ -84,6 +84,8 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                 return 6;
             case oCoseno:
                 return 6;
+            case oSeno:
+                return 6;
             default:
                 return 0;
         }
@@ -99,6 +101,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
             case oMod:
             case oRaiz:
             case oLog:
+            case oSeno:
             case oCoseno:
             case oPotencia:
             case oFactorial:
@@ -190,7 +193,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                 }
             }
 
-            if(op== Operador.oRaiz || op== Operador.oLog || op == Operador.oCoseno){
+            if(op== Operador.oRaiz || op== Operador.oLog || op == Operador.oCoseno|| op == Operador.oSeno){
                 System.out.printf(tokAnterior);
                 if((tokenOperador(tokAnterior) == Operador.oInvalido || tokenOperador(tokAnterior)== Operador.oFactorial) && !tokAnterior.equals("")){
                     throw new Exception("Entrada Invalida, revise los datos ingresados");
@@ -242,7 +245,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
             try {
                 a = evaluarCadena(pilaPrincipal);
                 b = 0;
-                if (op != Operador.oFactorial && op != Operador.oLog && op != Operador.oRaiz && op != Operador.oCoseno) {
+                if (op != Operador.oFactorial && op != Operador.oLog && op != Operador.oRaiz && op != Operador.oCoseno&& op != Operador.oSeno) {
                     b = evaluarCadena(pilaPrincipal);
                 }
                 System.out.println(a+" "+b);
@@ -271,6 +274,8 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                     return operacion.raiz(a);
                 case oCoseno:
                     return operacion.coseno(a);
+                case oSeno:
+                    return operacion.seno(a);
                 default:
                     throw new Exception("Operador Invalido");
             }
@@ -313,6 +318,9 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         }
         if (tok.contentEquals("cos")) {
             return Operador.oCoseno;
+        }
+        if (tok.contentEquals("sen")) {
+            return Operador.oSeno;
         }
         if (tok.contentEquals("(")) {
             return Operador.oParenIz;

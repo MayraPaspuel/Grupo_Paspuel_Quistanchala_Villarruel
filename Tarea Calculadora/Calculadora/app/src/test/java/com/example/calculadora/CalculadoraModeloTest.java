@@ -233,6 +233,26 @@ public class CalculadoraModeloTest {
         assertEquals(1.69897,nCalculadoraModelo.logaritmo(50),0);
     }
 
+
+    /**
+     * Metodo SenoEntero para testear la función seno con ingreso de enteros
+     */
+    @Test
+    public void senoEntero() throws Exception {
+        assertEquals(0.86,nCalculadoraModelo.seno(60),0.01);
+    }
+
+
+    /**
+     * Metodo CosenoEntero para testear la función coseno con ingreso de enteros
+     */
+    @Test
+    public void cosenoEntero() throws Exception {
+        assertEquals(-1,nCalculadoraModelo.coseno(180),0.01);
+    }
+
+
+
     /**
      * Metodo mR para testear la función de mMas, mMenos y mR
      */
