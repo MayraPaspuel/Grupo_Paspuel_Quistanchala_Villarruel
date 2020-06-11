@@ -211,11 +211,14 @@ public class Operaciones {
         return resultado;
     }
 
-    public double tangente(double num1){
-        double resultado=0;
-        num1=num1*Math.PI/180;
-        resultado=seno(num1)/coseno(num1);
-        return  resultado;
+    public double tangente(double num1) throws Exception {
+        if(coseno(num1)==0){
+            throw new Exception("Error matemático");
+        }
+        if(seno(num1)==0){
+            return 0;
+        }
+        return seno(num1)/coseno(num1);
     }
     /**
      * Metodo mMas que suma en memoria
