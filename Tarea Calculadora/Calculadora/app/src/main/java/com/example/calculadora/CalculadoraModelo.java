@@ -229,7 +229,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
             try {
                 a = evaluarCadena(pilaPrincipal);
                 b = 0;
-                if (op != Operador.oFactorial||op != Operador.oLog||op != Operador.oRaiz) {
+                if (op != Operador.oFactorial && op != Operador.oLog && op != Operador.oRaiz) {
                     b = evaluarCadena(pilaPrincipal);
                 }
             }catch(Exception ex){
