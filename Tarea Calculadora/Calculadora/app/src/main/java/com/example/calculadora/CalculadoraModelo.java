@@ -189,7 +189,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
 
             if(op== Operador.oRaiz || op== Operador.oLog){
                 System.out.printf(tokAnterior);
-                if((tokenOperador(tokAnterior) == Operador.oInvalido || tokenOperador(tokAnterior)== Operador.oFactorial || tokenOperador(tokAnterior)== Operador.oRaiz || tokenOperador(tokAnterior)== Operador.oLog) && !tokAnterior.equals("")){
+                if((tokenOperador(tokAnterior) == Operador.oInvalido || tokenOperador(tokAnterior)== Operador.oFactorial) && !tokAnterior.equals("")){
                     throw new Exception("Entrada Invalida, revise los datos ingresados");
                 }
             }
