@@ -211,7 +211,12 @@ public class Operaciones {
         return resultado;
     }
 
-
+    public double tangente(double num1){
+        double resultado=0;
+        num1=num1*Math.PI/180;
+        resultado=seno(num1)/coseno(num1);
+        return  resultado;
+    }
     /**
      * Metodo mMas que suma en memoria
      * @param dato es el numero para guardar en memoria

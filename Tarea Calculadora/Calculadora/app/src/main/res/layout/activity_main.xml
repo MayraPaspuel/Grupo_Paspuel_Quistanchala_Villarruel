@@ -297,6 +297,14 @@
             android:text="@string/sen"
             app:layout_column="0"
             app:layout_row="7" />
+
+        <Button
+            android:id="@+id/btnTangente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tan"
+            app:layout_column="2"
+            app:layout_row="7" />
     </androidx.gridlayout.widget.GridLayout>
 
     <TextView
