@@ -47,7 +47,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
      * Operadores que pueden ser utilizados en la calculadora
      */
     private static enum Operador {
-        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido, oMod, oLog, oRaiz
+        oSuma, oResta, oMultiplicacion, oDivision, oPotencia, oFactorial, oParenIz, oParentDer, oInvalido, oMod, oLog, oRaiz, oCoseno
     };
 
     /**
@@ -82,6 +82,8 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                 return 6;
             case oLog:
                 return 6;
+            case oCoseno:
+                return 6;
             default:
                 return 0;
         }
@@ -97,6 +99,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
             case oMod:
             case oRaiz:
             case oLog:
+            case oCoseno:
             case oPotencia:
             case oFactorial:
                 return Asociatividad.asoDerecha;
@@ -187,7 +190,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                 }
             }
 
-            if(op== Operador.oRaiz || op== Operador.oLog){
+            if(op== Operador.oRaiz || op== Operador.oLog || op == Operador.oCoseno){
                 System.out.printf(tokAnterior);
                 if((tokenOperador(tokAnterior) == Operador.oInvalido || tokenOperador(tokAnterior)== Operador.oFactorial) && !tokAnterior.equals("")){
                     throw new Exception("Entrada Invalida, revise los datos ingresados");
@@ -239,7 +242,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
             try {
                 a = evaluarCadena(pilaPrincipal);
                 b = 0;
-                if (op != Operador.oFactorial && op != Operador.oLog && op != Operador.oRaiz) {
+                if (op != Operador.oFactorial && op != Operador.oLog && op != Operador.oRaiz && op != Operador.oCoseno) {
                     b = evaluarCadena(pilaPrincipal);
                 }
                 System.out.println(a+" "+b);
@@ -266,6 +269,8 @@ public class CalculadoraModelo implements Calculadora.Modelo{
                     return operacion.logaritmo(a);
                 case oRaiz:
                     return operacion.raiz(a);
+                case oCoseno:
+                    return operacion.coseno(a);
                 default:
                     throw new Exception("Operador Invalido");
             }
@@ -305,6 +310,9 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         }
         if (tok.contentEquals("sqrt")) {
             return Operador.oRaiz;
+        }
+        if (tok.contentEquals("cos")) {
+            return Operador.oCoseno;
         }
         if (tok.contentEquals("(")) {
             return Operador.oParenIz;

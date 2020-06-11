@@ -268,6 +268,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/log"
+            android:textSize="18sp"
             app:layout_column="3"
             app:layout_row="5" />
 
@@ -276,8 +277,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/raiz"
+            android:textSize="18sp"
             app:layout_column="3"
             app:layout_row="6" />
+
+        <Button
+            android:id="@+id/btnCoseno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stringCoseno"
+            android:textSize="18sp"
+            app:layout_column="0"
+            app:layout_row="7" />
     </androidx.gridlayout.widget.GridLayout>
 
     <TextView

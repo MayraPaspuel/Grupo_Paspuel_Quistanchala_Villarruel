@@ -37,7 +37,8 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             R.id.btnMMas, R.id.btnMMenos, R.id.btnMR,
             R.id.btnPunto, R.id.btnIgual, R.id.btnParenIz, R.id.btnParenDer,
             R.id.btnBorrar, R.id.btnBorrarTodo,
-            R.id.btnExponente, R.id.btnFactorial, R.id.btnMod, R.id.btnLog, R.id.btnRaiz};
+            R.id.btnExponente, R.id.btnFactorial, R.id.btnMod, R.id.btnLog, R.id.btnRaiz,
+            R.id.btnCoseno};
 
     Button miBoton;
     CalculadoraPresentador presentador;
@@ -76,7 +77,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
      */
     @Override
     public void mostrarResultado(double resultado) {
-        DecimalFormat miFormato = new DecimalFormat("#.##");
+        DecimalFormat miFormato = new DecimalFormat("#.####");
         this.resultado.setText(miFormato.format(resultado));
     }
 
@@ -127,6 +128,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             case R.id.btnMod:
             case R.id.btnLog:
             case R.id.btnRaiz:
+            case R.id.btnCoseno:
                 miBoton = (Button) findViewById(v.getId());
                 operacion.setText(operacion.getText().toString() +" "+ miBoton.getText().toString() + " ");
                 break;

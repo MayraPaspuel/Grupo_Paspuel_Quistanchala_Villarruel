@@ -30,4 +30,5 @@
     <string name="stringBorrarTodo">C</string>
     <string name="log">log</string>
     <string name="raiz">sqrt</string>
+    <string name="stringCoseno">cos</string>
 </resources>
