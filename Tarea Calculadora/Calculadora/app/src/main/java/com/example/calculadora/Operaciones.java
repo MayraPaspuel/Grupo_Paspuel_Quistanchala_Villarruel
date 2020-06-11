@@ -212,10 +212,11 @@ public class Operaciones {
     }
 
     public double tangente(double num1) throws Exception {
-        if(coseno(num1)==0){
+        double delta = 1E-12;
+        if(Math.abs(coseno(num1))<=delta){
             throw new Exception("Error matemático");
         }
-        if(seno(num1)==0){
+        if(Math.abs(seno(num1))<=delta){
             return 0;
         }
         return seno(num1)/coseno(num1);
