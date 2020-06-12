@@ -10,7 +10,7 @@
         android:id="@+id/txtResultado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:text="@string/stringResultado"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -295,6 +295,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sen"
+            android:textSize="18sp"
             app:layout_column="0"
             app:layout_row="7" />
 
@@ -303,14 +304,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tan"
+            android:textSize="18sp"
             app:layout_column="2"
             app:layout_row="7" />
     </androidx.gridlayout.widget.GridLayout>
 
     <TextView
+        android:gravity="end"
         android:id="@+id/txtOperacion"
         android:layout_width="353dp"
         android:layout_height="70dp"
+        android:layout_marginTop="20dp"
         android:text="@string/stringValor"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
