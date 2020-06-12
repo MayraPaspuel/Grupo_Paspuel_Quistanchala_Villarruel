@@ -256,8 +256,8 @@
 
         <Button
             android:id="@+id/btnBorrarTodo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
             android:text="@string/stringBorrarTodo"
             android:textSize="18sp"
             app:layout_column="1"
@@ -265,8 +265,8 @@
 
         <Button
             android:id="@+id/btnLog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
             android:text="@string/log"
             android:textSize="18sp"
             app:layout_column="3"
@@ -274,8 +274,8 @@
 
         <Button
             android:id="@+id/btnRaiz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
             android:text="@string/raiz"
             android:textSize="18sp"
             app:layout_column="3"
@@ -283,8 +283,8 @@
 
         <Button
             android:id="@+id/btnCoseno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
             android:text="@string/stringCoseno"
             android:textSize="18sp"
             app:layout_column="1"
@@ -292,8 +292,8 @@
 
         <Button
             android:id="@+id/btnSen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
             android:text="@string/sen"
             android:textSize="18sp"
             app:layout_column="0"
@@ -301,8 +301,8 @@
 
         <Button
             android:id="@+id/btnTangente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
             android:text="@string/tan"
             android:textSize="18sp"
             app:layout_column="2"
