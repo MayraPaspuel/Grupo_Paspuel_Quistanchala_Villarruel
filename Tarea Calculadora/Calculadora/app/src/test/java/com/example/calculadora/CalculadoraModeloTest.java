@@ -2,7 +2,7 @@
  * ESPE - DCC - PROGRAMACIÓN MÓVIL
  * Sistema: Calculadora
  * Creado 30/05/2020
- * Modificado 08/06/2020
+ * Modificado 16/06/2020
  *
  * Los contenidos de este archivo son propiedad privada y estan protegidos por
  * la licencia BSD

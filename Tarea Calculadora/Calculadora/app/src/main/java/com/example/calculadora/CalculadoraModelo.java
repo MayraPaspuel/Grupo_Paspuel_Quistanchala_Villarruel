@@ -2,7 +2,7 @@
  * ESPE - DCC - PROGRAMACIÓN MÓVIL
  * Sistema: Calculadora
  * Creado 30/05/2020
- * Modificado 08/06/2020
+ * Modificado 16/06/2020
  *
  * Los contenidos de este archivo son propiedad privada y estan protegidos por
  * la licencia BSD
@@ -130,7 +130,6 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         Stack pilaPrincipal = new Stack<Object>();
 
         String cadenaOperacion = cadena.getDato();
-        //cadenaOperacion = cadenaOperacion.replaceAll(" ", "");
 
         StringTokenizer strTok = new StringTokenizer(cadenaOperacion, tokensValidos, true);
         String tok="";
@@ -153,12 +152,6 @@ public class CalculadoraModelo implements Calculadora.Modelo{
             } catch (NumberFormatException nfe) {
             }
             Operador op = tokenOperador(tok);
-
-            /*if((pilaOperadores.isEmpty() && pilaPrincipal.isEmpty())|| tokAnterior.equals("(") ){
-                if(op == Operador.oResta){
-                    pilaPrincipal.push(Double.parseDouble("0"));
-                }
-            }*/
 
             miBandera=1;
             if( (tokenOperador(tokAnterior) != Operador.oInvalido && tokenOperador(tokAnterior) != Operador.oFactorial) || tokAnterior.equals("")){
@@ -367,7 +360,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
     }
 
     /**
-     * Metodo binario en el cual se saca el binario de un numero
+     * Metodo binario el cual muestra el binario de un numero
      * @param dato es el dato numerico
      * @return resultado binario
      */
@@ -377,7 +370,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
     }
 
     /**
-     * Metodo octal en el cual se saca el octal de un numero
+     * Metodo octal el cual muestra el octal de un numero
      * @param dato es el dato numerico
      * @return resultado octal
      */
@@ -387,7 +380,7 @@ public class CalculadoraModelo implements Calculadora.Modelo{
     }
 
     /**
-     * Metodo hexadecimal en el cual se hexadecimal el octal de un numero
+     * Metodo hexadecimal el cual muestra el hexadecimal de un numero
      * @param dato es el dato numerico
      * @return resultado hexadecimal
      */

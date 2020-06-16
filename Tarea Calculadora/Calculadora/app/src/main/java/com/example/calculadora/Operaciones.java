@@ -2,7 +2,7 @@
  * ESPE - DCC - PROGRAMACIÓN MÓVIL
  * Sistema: Calculadora
  * Creado 08/06/2020
- * Modificado 08/06/2020
+ * Modificado 16/06/2020
  *
  * Los contenidos de este archivo son propiedad privada y estan protegidos por
  * la licencia BSD
@@ -124,16 +124,13 @@ public class Operaciones {
         int cmantisa=0;
         String mantisa="0.";
 
-        //Caracteristica
         a=num1;
         while(a>=10){
             a=a/10;
             caracteristica++;
         }
-
-        //elevar el ultimo resultado a la decima potencia
         for(int i=0;i<5;i++){
-            a= Math.pow(a, 10); //base del sistema numerico, no base del logaritmo
+            a= Math.pow(a, 10);
             if(a<10){
                 mantisa=mantisa+"0";
             }else if(a>10){
@@ -143,7 +140,6 @@ public class Operaciones {
                     cmantisa++;
                 }
                 mantisa = mantisa+cmantisa;
-                //basea=a;
             }
         }
 
@@ -252,7 +248,7 @@ public class Operaciones {
     }
 
     /**
-     * Metodo binario en el cual se saca el binario de un numero
+     * Metodo binario el cual convierte a binario un numero
      * @param valor es el dato
      * @return resultado binario
      */
@@ -274,7 +270,7 @@ public class Operaciones {
     }
 
     /**
-     * Metodo octal en el cual se saca el octal de un numero
+     * Metodo octal el cual convierte a octal un numero
      * @param valor es el dato
      * @return resultado octal
      */
@@ -288,7 +284,7 @@ public class Operaciones {
     }
 
     /**
-     * Metodo hexadecimal en el cual se hexadecimal el octal de un numero
+     * Metodo hexadecimal el cual convierte a octal un numero
      * @param valor es el dato
      * @return resultado hexadecimal
      */
