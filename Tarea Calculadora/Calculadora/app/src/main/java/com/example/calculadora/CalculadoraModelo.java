@@ -376,4 +376,9 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         presentador.mostrarResultado2(operacion.octal(dato));
     }
 
+    @Override
+    public void hexadecimal(int dato) {
+        presentador.mostrarResultado2(operacion.hexadecimal(dato));
+    }
+
 }

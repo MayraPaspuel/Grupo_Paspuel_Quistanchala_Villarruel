@@ -46,6 +46,7 @@ public interface Calculadora {
         double calcular(Cadena cadena) throws Exception;
         void binario(int dato);
         void octal(int dato);
+        void hexadecimal(int dato);
     }
 
     /**
@@ -58,6 +59,7 @@ public interface Calculadora {
         void mMenos(String dato);
         void binario(String dato);
         void octal(String dato);
+        void hexadecimal(String dato);
         double mR();
         void calcular(Cadena cadena);
         void mostrarResultado2(String resultado);

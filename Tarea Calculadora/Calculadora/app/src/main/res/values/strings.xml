@@ -35,4 +35,5 @@
     <string name="tan">tan</string>
     <string name="stringBin">BIN</string>
     <string name="oct">oct</string>
+    <string name="hex">hex</string>
 </resources>

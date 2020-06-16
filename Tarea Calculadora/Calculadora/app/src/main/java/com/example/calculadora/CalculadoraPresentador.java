@@ -94,6 +94,15 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    @Override
+    public void hexadecimal(String dato) {
+        try{
+            modelo.hexadecimal(Integer.parseInt(dato));
+        }catch (Exception ex){
+            mostrarError("Operación aplicable unicamente a valores enteros");
+        }
+    }
+
     /**
      * Metodo mR el cual muestra el resultado de memoria
      * @return dato que esta en memoria

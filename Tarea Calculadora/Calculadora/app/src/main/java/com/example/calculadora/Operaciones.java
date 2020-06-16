@@ -247,6 +247,40 @@ public class Operaciones {
         }
         return miOctal;
     }
+
+    static String hexadecimal(int valor) {
+        String miHexadecimal = "";
+        while (valor != 0) {
+            String extra = "" + valor % 16;
+            if (Integer.valueOf(extra) > 9) {
+                switch (extra) {
+                    case "10":
+                        extra = "A";
+                        break;
+                    case "11":
+                        extra = "B";
+                        break;
+                    case "12":
+                        extra = "C";
+                        break;
+                    case "13":
+                        extra = "D";
+                        break;
+                    case "14":
+                        extra = "E";
+                        break;
+                    case "15":
+                        extra = "F";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            miHexadecimal = extra+miHexadecimal;
+            valor = valor / 16;
+        }
+        return miHexadecimal;
+    }
     /**
      * Metodo mMas que suma en memoria
      * @param dato es el numero para guardar en memoria
