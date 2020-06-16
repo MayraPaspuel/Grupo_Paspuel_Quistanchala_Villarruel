@@ -39,7 +39,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             R.id.btnBorrar, R.id.btnBorrarTodo,
             R.id.btnExponente, R.id.btnFactorial, R.id.btnMod, R.id.btnLog, R.id.btnRaiz,
             R.id.btnCoseno, R.id.btnSen,R.id.btnTangente,
-            R.id.btnBinario};
+            R.id.btnBinario, R.id.btnOctal};
 
     Button miBoton;
     CalculadoraPresentador presentador;
@@ -108,6 +108,9 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
                 presentador.calcular(cadena);
                 break;
             case R.id.btnBinario:
+                presentador.binario(operacion.getText().toString());
+                break;
+            case R.id.btnOctal:
                 presentador.binario(operacion.getText().toString());
                 break;
             case R.id.btnBorrar:

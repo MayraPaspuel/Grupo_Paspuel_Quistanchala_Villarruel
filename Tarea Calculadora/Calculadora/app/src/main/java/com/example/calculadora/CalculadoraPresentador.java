@@ -85,6 +85,15 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    @Override
+    public void octal(String dato) {
+        try{
+            modelo.octal(Integer.parseInt(dato));
+        }catch (Exception ex){
+            mostrarError("Operación aplicable unicamente a valores enteros");
+        }
+    }
+
     /**
      * Metodo mR el cual muestra el resultado de memoria
      * @return dato que esta en memoria

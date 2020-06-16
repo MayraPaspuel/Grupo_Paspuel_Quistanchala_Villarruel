@@ -239,6 +239,14 @@ public class Operaciones {
         return miBinario;
     }
 
+    static String octal(int valor) {
+        String miOctal = "";
+        while (valor != 0) {
+            miOctal = valor % 8 + miOctal;
+            valor = valor / 8;
+        }
+        return miOctal;
+    }
     /**
      * Metodo mMas que suma en memoria
      * @param dato es el numero para guardar en memoria

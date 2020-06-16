@@ -371,4 +371,9 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         presentador.mostrarResultado2(operacion.binario(dato));
     }
 
+    @Override
+    public void octal(int dato) {
+        presentador.mostrarResultado2(operacion.octal(dato));
+    }
+
 }
