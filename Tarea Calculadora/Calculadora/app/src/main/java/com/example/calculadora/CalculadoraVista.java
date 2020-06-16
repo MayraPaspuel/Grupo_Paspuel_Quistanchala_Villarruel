@@ -82,6 +82,10 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
         this.resultado.setText(miFormato.format(resultado));
     }
 
+    /**
+     * Metodo mostrarResultado2 que visualiza el resultado que presenta el programa
+     * @param resultado es el resultado de las operaciones en un String
+     */
     @Override
     public void mostrarResultado2(String resultado) {
         this.resultado.setText(resultado);

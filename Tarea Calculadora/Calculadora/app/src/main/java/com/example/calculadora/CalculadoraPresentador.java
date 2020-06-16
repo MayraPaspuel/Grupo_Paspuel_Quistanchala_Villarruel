@@ -76,6 +76,11 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    /**
+     * Metodo binario en el cual se saca el binario de un numero
+     * @param dato es el dato numerico
+     * @return resultado binario
+     */
     @Override
     public void binario(String dato) {
         try{
@@ -85,6 +90,11 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    /**
+     * Metodo octal en el cual se saca el octal de un numero
+     * @param dato es el dato numerico
+     * @return resultado octal
+     */
     @Override
     public void octal(String dato) {
         try{
@@ -94,6 +104,11 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    /**
+     * Metodo hexadecimal en el cual se hexadecimal el octal de un numero
+     * @param dato es el dato numerico
+     * @return resultado hexadecimal
+     */
     @Override
     public void hexadecimal(String dato) {
         try{
@@ -125,6 +140,10 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    /**
+     * Metodo mostrarResultado2 el cual envia el resultado a la vista
+     * @param resultado es el dato resultante de la operación
+     */
     @Override
     public void mostrarResultado2(String resultado) {
         vista.mostrarResultado2(resultado);

@@ -366,16 +366,31 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         return operacion.mR();
     }
 
+    /**
+     * Metodo binario en el cual se saca el binario de un numero
+     * @param dato es el dato numerico
+     * @return resultado binario
+     */
     @Override
     public void binario(int dato) {
         presentador.mostrarResultado2(operacion.binario(dato));
     }
 
+    /**
+     * Metodo octal en el cual se saca el octal de un numero
+     * @param dato es el dato numerico
+     * @return resultado octal
+     */
     @Override
     public void octal(int dato) {
         presentador.mostrarResultado2(operacion.octal(dato));
     }
 
+    /**
+     * Metodo hexadecimal en el cual se hexadecimal el octal de un numero
+     * @param dato es el dato numerico
+     * @return resultado hexadecimal
+     */
     @Override
     public void hexadecimal(int dato) {
         presentador.mostrarResultado2(operacion.hexadecimal(dato));

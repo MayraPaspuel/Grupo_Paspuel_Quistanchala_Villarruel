@@ -110,6 +110,11 @@ public class Operaciones {
         }
     }
 
+    /**
+     * Metodo logaritmo en el cual se saca el logaritmo de un numero
+     * @param num1 es el numero para sacar el logaritmo
+     * @return resultado del logaritmo
+     */
     public double logaritmo(double num1) throws Exception{
 
         if(num1<=0){
@@ -147,6 +152,12 @@ public class Operaciones {
     }
 
 
+    /**
+     * Metodo mod en el cual se saca el mod de un numero
+     * @param num1 es el numerador
+     * @param num2 es el denominador
+     * @return resultado del mod
+     */
     public double mod(double num1, double num2){
         if(num1%num2==0){
             return 0;
@@ -163,6 +174,11 @@ public class Operaciones {
         }
     }
 
+    /**
+     * Metodo raiz en el cual se saca el raiz de un numero
+     * @param num1 es el dato
+     * @return resultado de la raiz
+     */
     public double raiz(double num1) throws Exception {
         double i=0;
         double x1,x2=0;
@@ -183,7 +199,11 @@ public class Operaciones {
         return x2;
     }
 
-
+    /**
+     * Metodo seno en el cual se saca el seno de un numero
+     * @param num1 es el dato
+     * @return resultado de la seno
+     */
     public double seno(double num1){
         double resultado=0;
         num1 = num1*Math.PI/180;
@@ -197,7 +217,11 @@ public class Operaciones {
         return resultado;
     }
 
-
+    /**
+     * Metodo coseno en el cual se saca el coseno de un numero
+     * @param num1 es el dato
+     * @return resultado de la coseno
+     */
     public double coseno(double num1){
         double resultado=0;
         num1 = num1*Math.PI/180;
@@ -211,6 +235,11 @@ public class Operaciones {
         return resultado;
     }
 
+    /**
+     * Metodo tangente en el cual se saca el tangente de un numero
+     * @param num1 es el dato
+     * @return resultado de la tangente
+     */
     public double tangente(double num1) throws Exception {
         double delta = 1E-12;
         if(Math.abs(coseno(num1))<=delta){
@@ -222,6 +251,11 @@ public class Operaciones {
         return seno(num1)/coseno(num1);
     }
 
+    /**
+     * Metodo binario en el cual se saca el binario de un numero
+     * @param valor es el dato
+     * @return resultado binario
+     */
     static String binario(int valor) {
         String miBinario = "";
         while (valor != 0) {
@@ -239,6 +273,11 @@ public class Operaciones {
         return miBinario;
     }
 
+    /**
+     * Metodo octal en el cual se saca el octal de un numero
+     * @param valor es el dato
+     * @return resultado octal
+     */
     static String octal(int valor) {
         String miOctal = "";
         while (valor != 0) {
@@ -248,6 +287,11 @@ public class Operaciones {
         return miOctal;
     }
 
+    /**
+     * Metodo hexadecimal en el cual se hexadecimal el octal de un numero
+     * @param valor es el dato
+     * @return resultado hexadecimal
+     */
     static String hexadecimal(int valor) {
         String miHexadecimal = "";
         while (valor != 0) {
