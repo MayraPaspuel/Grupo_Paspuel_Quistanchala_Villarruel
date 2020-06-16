@@ -76,6 +76,15 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }
     }
 
+    @Override
+    public void binario(String dato) {
+        try{
+            modelo.binario(Integer.parseInt(dato));
+        }catch (Exception ex){
+            mostrarError("Operación aplicable unicamente a valores enteros");
+        }
+    }
+
     /**
      * Metodo mR el cual muestra el resultado de memoria
      * @return dato que esta en memoria
@@ -96,5 +105,10 @@ public class CalculadoraPresentador implements Calculadora.Presentador {
         }catch (Exception ex){
             vista.mostrarError(ex.getMessage());
         }
+    }
+
+    @Override
+    public void mostrarResultado2(String resultado) {
+        vista.mostrarResultado2(resultado);
     }
 }

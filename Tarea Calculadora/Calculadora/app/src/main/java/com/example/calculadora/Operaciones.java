@@ -221,6 +221,24 @@ public class Operaciones {
         }
         return seno(num1)/coseno(num1);
     }
+
+    static String binario(int valor) {
+        String miBinario = "";
+        while (valor != 0) {
+            miBinario = valor % 2 + miBinario;
+            valor = valor / 2;
+        }
+
+        if (miBinario.length() % 4 != 0) {
+            int ceros = 4 - miBinario.length() % 4;
+            for (int i = 0; i < ceros; i++) {
+                miBinario = "0" + miBinario;
+            }
+        }
+
+        return miBinario;
+    }
+
     /**
      * Metodo mMas que suma en memoria
      * @param dato es el numero para guardar en memoria

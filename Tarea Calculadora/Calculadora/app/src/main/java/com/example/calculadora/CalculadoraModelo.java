@@ -366,4 +366,9 @@ public class CalculadoraModelo implements Calculadora.Modelo{
         return operacion.mR();
     }
 
+    @Override
+    public void binario(int dato) {
+        presentador.mostrarResultado2(operacion.binario(dato));
+    }
+
 }

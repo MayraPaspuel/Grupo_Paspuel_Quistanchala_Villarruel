@@ -33,4 +33,5 @@
     <string name="stringCoseno">cos</string>
     <string name="sen">sen</string>
     <string name="tan">tan</string>
+    <string name="stringBin">BIN</string>
 </resources>

@@ -38,7 +38,8 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             R.id.btnPunto, R.id.btnIgual, R.id.btnParenIz, R.id.btnParenDer,
             R.id.btnBorrar, R.id.btnBorrarTodo,
             R.id.btnExponente, R.id.btnFactorial, R.id.btnMod, R.id.btnLog, R.id.btnRaiz,
-            R.id.btnCoseno, R.id.btnSen,R.id.btnTangente};
+            R.id.btnCoseno, R.id.btnSen,R.id.btnTangente,
+            R.id.btnBinario};
 
     Button miBoton;
     CalculadoraPresentador presentador;
@@ -81,6 +82,11 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
         this.resultado.setText(miFormato.format(resultado));
     }
 
+    @Override
+    public void mostrarResultado2(String resultado) {
+        this.resultado.setText(resultado);
+    }
+
     /**
      * Metodo onClick en el cual se implementa los metodos de cada boton
      * @param v  es la vista de la aplicación
@@ -100,6 +106,9 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             case R.id.btnIgual:
                 Cadena cadena = new Cadena(operacion.getText().toString());
                 presentador.calcular(cadena);
+                break;
+            case R.id.btnBinario:
+                presentador.binario(operacion.getText().toString());
                 break;
             case R.id.btnBorrar:
                 if(!operacion.getText().toString().equals("")) {

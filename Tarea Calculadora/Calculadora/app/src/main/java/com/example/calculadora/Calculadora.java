@@ -33,6 +33,7 @@ public interface Calculadora {
          * @param resultado es el resultado de la operación realiza por el programa
          */
         void mostrarResultado(double resultado);
+        void mostrarResultado2(String resultado);
     }
 
     /**
@@ -43,6 +44,7 @@ public interface Calculadora {
         void mMenos(double dato);
         double mR();
         double calcular(Cadena cadena) throws Exception;
+        void binario(int dato);
     }
 
     /**
@@ -53,7 +55,9 @@ public interface Calculadora {
         void mostrarError(String mensaje);
         void mMas(String dato);
         void mMenos(String dato);
+        void binario(String dato);
         double mR();
         void calcular(Cadena cadena);
+        void mostrarResultado2(String resultado);
     }
 }
