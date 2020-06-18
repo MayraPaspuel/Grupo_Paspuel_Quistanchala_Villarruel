@@ -233,7 +233,21 @@ public class CalculadoraModeloTest {
         assertEquals(1.69897,nCalculadoraModelo.logaritmo(50),0);
     }
 
+    /**
+     * Metodo modDenominadorNegativo para testear la función mod con denominador negativo
+     */
+    @Test
+    public void modDenominadorNegativo() throws Exception {
+        assertEquals(-1,nCalculadoraModelo.mod(5,-3),0);
+    }
 
+    /**
+     * Metodo modNumeradorNegativo para testear la función mod con denominador negativo
+     */
+    @Test
+    public void modNumeradorNegativo() throws Exception {
+        assertEquals(3,nCalculadoraModelo.mod(-5,8),0);
+    }
     /**
      * Metodo SenoEntero para testear la función seno con ingreso de enteros
      */
@@ -242,7 +256,6 @@ public class CalculadoraModeloTest {
         assertEquals(0.86,nCalculadoraModelo.seno(60),0.01);
     }
 
-
     /**
      * Metodo CosenoEntero para testear la función coseno con ingreso de enteros
      */
@@ -250,9 +263,34 @@ public class CalculadoraModeloTest {
     public void cosenoEntero() throws Exception {
         assertEquals(-1,nCalculadoraModelo.coseno(180),0.01);
     }
-
-
-
+    /**
+     * Metodo Tangente para testear la función tangente con ingreso de enteros
+     */
+    @Test
+    public void tangenteEntero() throws Exception {
+        assertEquals(1,nCalculadoraModelo.tangente(45),0.01);
+    }
+    /**
+     * Metodo Binarios para testear la función binario con ingreso de decimales
+     */
+    @Test
+    public void binarioEntero() throws Exception {
+        assertEquals("0011",nCalculadoraModelo.binario(3));
+    }
+    /**
+     * Metodo Octal para testear la función octal con ingreso de decimales
+     */
+    @Test
+    public void octalEntero() throws Exception {
+        assertEquals("71",nCalculadoraModelo.octal(57));
+    }
+    /**
+     * Metodo Hexadecimal para testear la función octal con ingreso de decimales
+     */
+    @Test
+    public void hexadecimalEntero() throws Exception {
+        assertEquals("3C",nCalculadoraModelo.hexadecimal(60));
+    }
     /**
      * Metodo mR para testear la función de mMas, mMenos y mR
      */
