@@ -49,7 +49,6 @@ public class Grafica extends AppCompatActivity {
             System.out.println(y);
             series.appendData(new DataPoint(x,y),true,7200);
         }
-
         miFuncion.addSeries(series);
     }
 
