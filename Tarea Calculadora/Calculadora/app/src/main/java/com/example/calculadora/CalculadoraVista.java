@@ -13,6 +13,7 @@ package com.example.calculadora;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,7 +40,8 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             R.id.btnBorrar, R.id.btnBorrarTodo,
             R.id.btnExponente, R.id.btnFactorial, R.id.btnMod, R.id.btnLog, R.id.btnRaiz,
             R.id.btnCoseno, R.id.btnSen,R.id.btnTangente,
-            R.id.btnBinario, R.id.btnOctal, R.id.btnHex};
+            R.id.btnBinario, R.id.btnOctal, R.id.btnHex,
+            R.id.btnGraficaSeno};
 
     Button miBoton;
     CalculadoraPresentador presentador;
@@ -98,6 +100,11 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnGraficaSeno:
+                Intent intent = new Intent(this,Grafica.class);
+                intent.putExtra("funcion","seno");
+                startActivity(intent);
+                break;
             case R.id.btnMMas:
                 presentador.mMas(resultado.getText().toString());
                 break;
