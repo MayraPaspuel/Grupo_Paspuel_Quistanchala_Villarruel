@@ -49,13 +49,22 @@ public class Grafica extends AppCompatActivity {
         }
     }
 
-    public void tangente() throws Exception {
+    public void tangente() {
         double x=-360,y=0;
         series = new LineGraphSeries<DataPoint>();
         Operaciones op = new Operaciones();
         for(int i=0;i<7200;i++){
             x+=0.1;
-            y=op.tangente(x);
+            try {
+                y = op.tangente(x);
+                if(y>10 || y<-10){
+                    continue;
+                }
+            }catch (Exception e){
+                miFuncion.addSeries(series);
+                series = new LineGraphSeries<DataPoint>();
+                continue;
+            }
             System.out.println(y);
             series.appendData(new DataPoint(x,y),true,7200);
         }
