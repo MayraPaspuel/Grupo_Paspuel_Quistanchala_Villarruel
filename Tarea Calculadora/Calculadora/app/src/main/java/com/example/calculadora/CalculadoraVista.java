@@ -41,7 +41,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             R.id.btnExponente, R.id.btnFactorial, R.id.btnMod, R.id.btnLog, R.id.btnRaiz,
             R.id.btnCoseno, R.id.btnSen,R.id.btnTangente,
             R.id.btnBinario, R.id.btnOctal, R.id.btnHex,
-            R.id.btnGraficaSeno};
+            R.id.btnGraficaSeno, R.id.btnGraficaCoseno};
 
     Button miBoton;
     CalculadoraPresentador presentador;
@@ -104,6 +104,11 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
                 Intent intent = new Intent(this,Grafica.class);
                 intent.putExtra("funcion","seno");
                 startActivity(intent);
+                break;
+            case R.id.btnGraficaCoseno:
+                Intent intent2 = new Intent(this,Grafica.class);
+                intent2.putExtra("funcion","coseno");
+                startActivity(intent2);
                 break;
             case R.id.btnMMas:
                 presentador.mMas(resultado.getText().toString());

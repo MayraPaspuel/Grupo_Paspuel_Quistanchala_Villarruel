@@ -34,6 +34,9 @@ public class Grafica extends AppCompatActivity {
             case "seno":
                 seno();
                 break;
+            case "coseno":
+                coseno();
+                break;
             default:
                 break;
         }
@@ -46,6 +49,19 @@ public class Grafica extends AppCompatActivity {
         for(int i=0;i<7200;i++){
             x+=0.1;
             y=op.seno(x);
+            System.out.println(y);
+            series.appendData(new DataPoint(x,y),true,7200);
+        }
+        miFuncion.addSeries(series);
+    }
+
+    public void coseno(){
+        double x=-360,y=0;
+        series = new LineGraphSeries<DataPoint>();
+        Operaciones op = new Operaciones();
+        for(int i=0;i<7200;i++){
+            x+=0.1;
+            y=op.coseno(x);
             System.out.println(y);
             series.appendData(new DataPoint(x,y),true,7200);
         }

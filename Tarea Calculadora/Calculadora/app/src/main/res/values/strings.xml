@@ -37,4 +37,5 @@
     <string name="oct">oct</string>
     <string name="hex">hex</string>
     <string name="stringGraficaSeno">Gráfica Seno</string>
+    <string name="gr_fica_coseno">Gráfica Coseno</string>
 </resources>
