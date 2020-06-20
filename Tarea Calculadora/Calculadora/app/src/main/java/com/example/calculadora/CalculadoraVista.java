@@ -41,7 +41,7 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
             R.id.btnExponente, R.id.btnFactorial, R.id.btnMod, R.id.btnLog, R.id.btnRaiz,
             R.id.btnCoseno, R.id.btnSen,R.id.btnTangente,
             R.id.btnBinario, R.id.btnOctal, R.id.btnHex,
-            R.id.btnGraficaSeno, R.id.btnGraficaCoseno};
+            R.id.btnGraficaSeno, R.id.btnGraficaCoseno,R.id.btnGraficaTangente};
 
     Button miBoton;
     CalculadoraPresentador presentador;
@@ -100,6 +100,11 @@ public class CalculadoraVista extends AppCompatActivity implements Calculadora.V
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnGraficaTangente:
+                Intent intent3 = new Intent(this,Grafica.class);
+                intent3.putExtra("funcion","tangente");
+                startActivity(intent3);
+                break;
             case R.id.btnGraficaSeno:
                 Intent intent = new Intent(this,Grafica.class);
                 intent.putExtra("funcion","seno");

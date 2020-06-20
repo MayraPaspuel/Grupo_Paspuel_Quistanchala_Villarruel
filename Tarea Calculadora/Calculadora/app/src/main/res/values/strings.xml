@@ -38,4 +38,5 @@
     <string name="hex">hex</string>
     <string name="stringGraficaSeno">Gráfica Seno</string>
     <string name="gr_fica_coseno">Gráfica Coseno</string>
+    <string name="gr_fica_tangente">Gráfica Tangente</string>
 </resources>

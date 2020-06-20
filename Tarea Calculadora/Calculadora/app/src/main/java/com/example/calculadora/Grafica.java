@@ -37,9 +37,29 @@ public class Grafica extends AppCompatActivity {
             case "coseno":
                 coseno();
                 break;
+            case "tangente":
+                try {
+                    tangente();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
             default:
                 break;
         }
+    }
+
+    public void tangente() throws Exception {
+        double x=-360,y=0;
+        series = new LineGraphSeries<DataPoint>();
+        Operaciones op = new Operaciones();
+        for(int i=0;i<7200;i++){
+            x+=0.1;
+            y=op.tangente(x);
+            System.out.println(y);
+            series.appendData(new DataPoint(x,y),true,7200);
+        }
+        miFuncion.addSeries(series);
     }
 
     public void seno(){
