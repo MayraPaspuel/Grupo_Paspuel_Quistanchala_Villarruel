@@ -1,3 +1,14 @@
+/*
+ * ESPE - DCC - PROGRAMACIÓN MÓVIL
+ * Sistema: Calculadora
+ * Creado 22/05/2020
+ * Modificado 22/06/2020
+ *
+ * Los contenidos de este archivo son propiedad privada y estan protegidos por
+ * la licencia BSD
+ *
+ * Se puede utilizar, reproducir o copiar el contenido de este archivo.
+ */
 package com.example.calculadora;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,13 +18,21 @@ import android.os.Bundle;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
+/**
+ * Clase que implementa la graficadora
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class Grafica extends AppCompatActivity {
 
     private LineGraphSeries<DataPoint> series;
     private GraphView miFuncion;
-
-
+    /**
+     * Metodo onCrate que crea la actividad
+     * @param savedInstanceState es un objeto Bundle que contiene el estado ya guardado de la actividad
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +68,9 @@ public class Grafica extends AppCompatActivity {
         }
     }
 
+    /**
+     * Metodo tangente que grafica la función tangente
+     */
     public void tangente() {
         double x=-360,y=0;
         series = new LineGraphSeries<DataPoint>();
@@ -70,7 +92,9 @@ public class Grafica extends AppCompatActivity {
         }
         miFuncion.addSeries(series);
     }
-
+    /**
+     * Metodo seno que grafica la función seno
+     */
     public void seno(){
         double x=-360,y=0;
         series = new LineGraphSeries<DataPoint>();
@@ -84,6 +108,9 @@ public class Grafica extends AppCompatActivity {
         miFuncion.addSeries(series);
     }
 
+    /**
+     * Metodo coseno que grafica la función coseno
+     */
     public void coseno(){
         double x=-360,y=0;
         series = new LineGraphSeries<DataPoint>();
