@@ -36,7 +36,7 @@
     <string name="stringBin">BIN</string>
     <string name="oct">oct</string>
     <string name="hex">hex</string>
-    <string name="stringGraficaSeno">Gráfica Seno</string>
-    <string name="gr_fica_coseno">Gráfica Coseno</string>
-    <string name="gr_fica_tangente">Gráfica Tangente</string>
+    <string name="stringGraficaSeno">Gráfica Sen</string>
+    <string name="gr_fica_coseno">Gráfica Cos</string>
+    <string name="gr_fica_tangente">Gráfica Tan</string>
 </resources>
