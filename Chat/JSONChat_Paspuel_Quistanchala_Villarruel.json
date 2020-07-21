@@ -1,0 +1,34 @@
+{
+  "ListaChats" : {
+    "-MCnBIzixPz_4tJhi4mQ" : {
+		"uJVAHXD4i7QVkLnXqemrcEJEUGp2" : {
+		  "Contenido" : "Hola",
+		  "Hora de Envio" : "20:45:12",
+		  "Estado" : "Recibido"
+		}
+	},
+    "-MCnBPJzkbdzLircYNTU" : {
+		"v6Wsrq38bvcEFYu7lJT7wUINoT32" : {
+		  "Contenido" : "Hola",
+		  "Hora de Envio" : "20:15:12",
+		  "Estado" : "Recibido"
+	  }
+    }
+  },
+  "Usuarios" : {
+    "uJVAHXD4i7QVkLnXqemrcEJEUGp2" : {
+      "id" : "uJVAHXD4i7QVkLnXqemrcEJEUGp2",
+      "Nombre de Usuario" : "jpegas",
+      "Correo" : "jpegas@gmail.com",
+      "Contraseña" : "XD4i7QVkLnXqemrc",
+	  "Foto": "default"
+    },
+    "ufLAHXD4i8QVkLnXlemrcEJEUGp2" : {
+      "id" : "uPLAHXD4i7QVkLnlpBmrcEJEUGp2",
+      "Nombre de Usuario" : "lpvega",
+      "Correo" : "lpvega@gmail.com",
+      "Contraseña" : "XD4ifelLqereGrc",
+	  "Foto": "default"
+    }
+  }
+}
