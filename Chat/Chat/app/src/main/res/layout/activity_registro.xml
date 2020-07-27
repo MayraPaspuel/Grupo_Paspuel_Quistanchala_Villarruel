@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".RegistroActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -18,31 +18,39 @@
         android:layout_height="wrap_content">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/txtCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/txtNombreUsuario"
             android:layout_marginTop="10dp"
-            android:hint="@string/stringCorreo"
-            android:inputType="textEmailAddress"
-            app:met_floatingLabel="normal" />
+            app:met_floatingLabel="normal"
+            android:hint="@string/stringUsuario"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/txtContrasenia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/txtCorreo"
+            android:inputType="textEmailAddress"
             android:layout_marginTop="10dp"
-            android:hint="@string/stringContrasenia"
-            android:inputType="textPassword"
-            app:met_floatingLabel="normal" />
+            app:met_floatingLabel="normal"
+            android:hint="@string/stringCorreo"/>
 
-        <Button
-            android:id="@+id/btnIngresar"
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/txtContrasenia"
+            android:inputType="textPassword"
             android:layout_marginTop="10dp"
+            app:met_floatingLabel="normal"
+            android:hint="@string/stringContrasenia"/>
+        
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/stringRegistrarse"
+            android:id="@+id/btnRegistrarse"
             android:background="@color/colorPrimaryDark"
-            android:text="@string/stringIngresar"
-            android:textColor="#fff" />
+            android:layout_marginTop="10dp"
+             android:textColor="#fff" />
     </LinearLayout>
 
 </RelativeLayout>

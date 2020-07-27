@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Chat</string>
+    <string name="stringRegistrarse">Registrarse</string>
+    <string name="stringUsuario">Usuario</string>
+    <string name="stringContrasenia">Contraseña</string>
+    <string name="stringCrearCuenta">Crear Cuenta</string>
+    <string name="stringCorreo">Correo</string>
+    <string name="stringIngreso">Ingreso</string>
+    <string name="stringIngresar">Ingresar</string>
+    <string name="stringChat">Mi Chat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stringEscribaUnMensaje">Escriba un mensaje ...</string>
+    <string name="stringEnviar">Enviar</string>
+    <string name="stringMensaje">Mi Mensaje</string>
 </resources>
