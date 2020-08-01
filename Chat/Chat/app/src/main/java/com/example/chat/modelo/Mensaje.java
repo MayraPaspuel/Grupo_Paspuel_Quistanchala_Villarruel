@@ -1,20 +1,22 @@
 package com.example.chat.modelo;
 
-public class Chat {
+public class Mensaje {
 
     private String emisor;
     private String receptor;
-    private String mensaje;
+    private String contenido;
     private String hora;
+    private String tipo;
 
-    public Chat() {
+    public Mensaje() {
     }
 
-    public Chat(String emisor, String receptor, String mensaje, String hora) {
+    public Mensaje(String emisor, String receptor, String contenido, String hora, String tipo) {
         this.emisor = emisor;
         this.receptor = receptor;
-        this.mensaje = mensaje;
+        this.contenido = contenido;
         this.hora = hora;
+        this.tipo = tipo;
     }
 
     public String getEmisor() {
@@ -33,12 +35,12 @@ public class Chat {
         this.receptor = receptor;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public String getContenido() {
+        return contenido;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
 
     public String getHora() {
@@ -47,5 +49,13 @@ public class Chat {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

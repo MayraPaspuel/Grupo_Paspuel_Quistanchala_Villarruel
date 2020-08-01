@@ -23,11 +23,21 @@
             android:padding="8dp"
             android:layout_alignParentRight="true" />
 
+        <ImageView
+            android:id="@+id/imagenMensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtMensaje"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/stringMensaje" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtHora"
-            android:layout_below="@id/txtMensaje"
+            android:paddingLeft="8dp"
+            android:layout_below="@id/imagenMensaje"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 

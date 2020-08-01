@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".vista.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -28,10 +28,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtNombreUsuario"
+                android:textSize="18sp"
                 android:layout_marginLeft="25dp"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:layout_marginStart="25dp" />
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center"/>
 
         </androidx.appcompat.widget.Toolbar>
 

@@ -8,8 +8,6 @@
     <string name="stringIngreso">Ingreso</string>
     <string name="stringIngresar">Ingresar</string>
     <string name="stringChat">Mi Chat</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="stringEscribaUnMensaje">Escriba un mensaje ...</string>
     <string name="stringEnviar">Enviar</string>
     <string name="stringMensaje">Mi Mensaje</string>

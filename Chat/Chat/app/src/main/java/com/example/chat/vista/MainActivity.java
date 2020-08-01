@@ -1,4 +1,4 @@
-package com.example.chat;
+package com.example.chat.vista;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,18 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.chat.fragmentos.ChatsFragment;
-import com.example.chat.fragmentos.UsuariosFragment;
-import com.example.chat.modelo.Usuario;
+import com.example.chat.R;
+import com.example.chat.vista.fragments.PerfilFragment;
+import com.example.chat.vista.fragments.UsuariosFragment;
+import com.example.chat.modelo.Modelo;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -36,14 +30,16 @@ public class MainActivity extends AppCompatActivity {
 
     CircleImageView foto;
     TextView nombreUsuario;
-
-    FirebaseUser firebaseUser;
-    DatabaseReference reference;
+    ViewPager viewPager;
+    TabLayout tabLayout;
+    Modelo modelo = new Modelo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        modelo.leer(MainActivity.this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,37 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
         foto = findViewById(R.id.imgFoto);
         nombreUsuario = findViewById(R.id.txtNombreUsuario);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Usuarios").child(firebaseUser.getUid());
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                nombreUsuario.setText(usuario.getNombreUsuario());
-                if (usuario.getFoto().equals("default")){
-                    foto.setImageResource(R.mipmap.ic_launcher);
-                } else {
-                    Glide.with(getApplicationContext()).load(usuario.getFoto()).into(foto);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        modelo.cargarImagenUsuario(MainActivity.this, nombreUsuario, foto);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        //viewPagerAdapter.addFragment(new ChatsFragment(),"Chats");
-        viewPagerAdapter.addFragment(new UsuariosFragment(),"Usuarios");
+        viewPagerAdapter.addFragment(new UsuariosFragment(), "Usuarios");
+        viewPagerAdapter.addFragment(new PerfilFragment(), "Perfil");
 
         viewPager.setAdapter(viewPagerAdapter);
-
         tabLayout.setupWithViewPager(viewPager);
 
     }
@@ -94,11 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-
-            case  R.id.btnSalir:
-                FirebaseAuth.getInstance().signOut();
-                // change this code beacuse your app will crash
+        switch (item.getItemId()) {
+            case R.id.btnSalir:
+                modelo.salir();
                 startActivity(new Intent(MainActivity.this, StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;
         }
@@ -111,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         private ArrayList<Fragment> fragmentos;
         private ArrayList<String> titulos;
 
-        ViewPagerAdapter(FragmentManager fm){
+        ViewPagerAdapter(FragmentManager fm) {
             super(fm);
             this.fragmentos = new ArrayList<>();
             this.titulos = new ArrayList<>();
@@ -128,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             return fragmentos.size();
         }
 
-        public void addFragment(Fragment fragmento, String titulo){
+        public void addFragment(Fragment fragmento, String titulo) {
             fragmentos.add(fragmento);
             titulos.add(titulo);
         }

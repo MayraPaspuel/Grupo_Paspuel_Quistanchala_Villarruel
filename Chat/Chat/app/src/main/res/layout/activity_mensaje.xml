@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MensajeActivity">
+    tools:context=".vista.MensajeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_layout"
@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtNombreUsuario"
+                android:textSize="18sp"
                 android:layout_marginLeft="25dp"
                 android:textColor="#fff"
                 android:textStyle="bold"
@@ -52,16 +53,27 @@
             android:layout_alignParentBottom="true"
             android:layout_height="wrap_content">
 
+            <ImageButton
+                android:id="@+id/btnEnviarImagen"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ic_action_enviar_imagen"
+                android:contentDescription="@string/stringEnviar" />
+
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtEnviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/btnEnviar"
+                android:layout_toLeftOf="@id/btnEnviar"
+                android:layout_toEndOf="@+id/btnEnviarImagen"
+                android:layout_toRightOf="@+id/btnEnviarImagen"
+                android:autofillHints=""
                 android:background="@android:color/transparent"
                 android:hint="@string/stringEscribaUnMensaje"
-                android:layout_toLeftOf="@id/btnEnviar"
-                android:layout_centerVertical="true"
-                android:autofillHints=""
-                android:layout_toStartOf="@id/btnEnviar"
                 android:inputType="text" />
 
             <ImageButton
