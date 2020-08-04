@@ -87,6 +87,7 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
     }
     /**
      * Metodo getItemCount que devuelve el número de elementos en el adaptador vinculado al RecyclerView padre.
+     * @return numero de mensajes
      */
     @Override
     public int getItemCount() {
@@ -110,6 +111,8 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
     }
     /**
      * Metodo getItemViewType obtiene la información para ser mostrada
+     * @param position
+     * @return mensajes
      */
     @Override
     public int getItemViewType(int position) {
