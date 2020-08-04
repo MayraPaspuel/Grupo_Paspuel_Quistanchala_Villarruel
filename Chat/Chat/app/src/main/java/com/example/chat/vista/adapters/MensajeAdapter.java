@@ -1,3 +1,14 @@
+/*
+ * ESPE - DCC - PROGRAMACIÓN MÓVIL
+ * Sistema: Chat
+ * Creado 23/07/2020
+ * Modificado 02/08/2020
+ *
+ * Los contenidos de este archivo son propiedad privada y estan protegidos por
+ * la licencia BSD
+ *
+ * Se puede utilizar, reproducir o copiar el contenido de este archivo.
+ */
 package com.example.chat.vista.adapters;
 
 import android.content.Context;
@@ -17,22 +28,34 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
-
+/**
+ * Clase que adapta el mensaje
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHolder> {
 
     public static final int MSG_IZ = 0;
     public static final int MSG_DER = 1;
-
     private Context contexto;
     private List<Mensaje> mensajes;
-
     FirebaseUser fuser;
-
+    /**
+     * Constructor con parametros
+     * @param chats
+     * @param contexto
+     */
     public MensajeAdapter(Context contexto, List<Mensaje> chats){
         this.mensajes = chats;
         this.contexto = contexto;
     }
-
+    /**
+     * Metodo onCreateViewHolder que crea un marcador de vista para cada elemento
+     * @param parent
+     * @param viewType
+     */
     @NonNull
     @Override
     public MensajeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +67,11 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
             return new MensajeAdapter.ViewHolder(view);
         }
     }
-
+    /**
+     * Metodo onBindViewHolder obtiene nuevos titulares de vista
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull MensajeAdapter.ViewHolder holder, int position) {
 
@@ -58,12 +85,16 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
         }
         holder.hora.setText(chat.getHora());
     }
-
+    /**
+     * Metodo getItemCount que devuelve el número de elementos en el adaptador vinculado al RecyclerView padre.
+     */
     @Override
     public int getItemCount() {
         return mensajes.size();
     }
-
+    /**
+     * Metodo ViewHolder muestra de manera interactiva la ventana de chat
+     */
     public  class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView mostrarMensaje;
@@ -77,7 +108,9 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
             imagenMensaje=itemView.findViewById(R.id.imagenMensaje);
         }
     }
-
+    /**
+     * Metodo getItemViewType obtiene la información para ser mostrada
+     */
     @Override
     public int getItemViewType(int position) {
         fuser = FirebaseAuth.getInstance().getCurrentUser();
