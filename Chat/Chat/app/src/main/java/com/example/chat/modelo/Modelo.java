@@ -1,3 +1,14 @@
+/*
+ * ESPE - DCC - PROGRAMACIÓN MÓVIL
+ * Sistema: Chat
+ * Creado 23/07/2020
+ * Modificado 02/08/2020
+ *
+ * Los contenidos de este archivo son propiedad privada y estan protegidos por
+ * la licencia BSD
+ *
+ * Se puede utilizar, reproducir o copiar el contenido de este archivo.
+ */
 package com.example.chat.modelo;
 
 import android.app.NotificationManager;
@@ -41,11 +52,23 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
-
+/**
+ * Clase que contiene los metodos entre la base de datos y la aplicacion
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class Modelo {
 
     Conexion conexion = Conexion.getInstancia();
 
+    /**
+     * Metodo login que realiza el inicio de sesion
+     * @param context
+     * @param txtContrasenia
+     * @param txtEmail
+     */
     public void login(final Context context, String txtEmail, String txtContrasenia) {
         conexion.getAutenticacion().signInWithEmailAndPassword(txtEmail, txtContrasenia).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -60,7 +83,9 @@ public class Modelo {
             }
         });
     }
-
+    /**
+     * Metodo salir que finaliza la sesion abierta
+     */
     public void salir() {
         conexion.getAutenticacion().signOut();
     }
@@ -72,7 +97,10 @@ public class Modelo {
             return false;
         }
     }
-
+    /**
+     * Metodo enviarMensaje que se encarga de realizar el envio de mensajes
+     * @param mensaje
+     */
     public void enviarMensaje(Mensaje mensaje) {
 
         Calendar calendario = Calendar.getInstance();
@@ -95,7 +123,13 @@ public class Modelo {
         conexion.getBaseDeDatos().child("Mensajes").push().setValue(hashMap);
 
     }
-
+    /**
+     * Metodo registrar que registra un nuevo usuario
+     * @param context
+     * @param contrasenia
+     * @param email
+     * @param usuario
+     */
     public void registrar(final Context context, final String usuario, String email, String contrasenia) {
         conexion.getAutenticacion().createUserWithEmailAndPassword(email, contrasenia).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -126,7 +160,12 @@ public class Modelo {
             }
         });
     }
-
+    /**
+     * Metodo leerMensaje en el cual muestra los mensajes que se le han enviado al usuario
+     * @param context
+     * @param recyclerView
+     * @param usuarioId
+     */
     public void leerMensajes(final RecyclerView recyclerView, final Context context, final String usuarioId) {
         final ArrayList<Mensaje> mensajes = new ArrayList<>();
         final String miId = conexion.getAutenticacion().getUid();
@@ -150,7 +189,14 @@ public class Modelo {
             }
         });
     }
-
+    /**
+     * Metodo cargarImagenEmisor que muestra la imagen al emisor
+     * @param recyclerView
+     * @param context
+     * @param foto
+     * @param nombreUsuario
+     * @param userid
+     */
     public void cargarImagenEmisor(final Context context, final String userid, final RecyclerView recyclerView, final TextView nombreUsuario, final CircleImageView foto) {
 
         conexion.getBaseDeDatos().child("Usuarios").child(userid).addValueEventListener(new ValueEventListener() {
@@ -173,7 +219,12 @@ public class Modelo {
         });
 
     }
-
+    /**
+     * Metodo cargarImagenUsuario que muestra la imagen al usuario
+     * @param nombreUsuario
+     * @param foto
+     * @param context
+     */
     public void cargarImagenUsuario(final Context context, final TextView nombreUsuario, final CircleImageView foto) {
 
         conexion.getBaseDeDatos().child("Usuarios").child(conexion.getUsuarioActual().getUid()).addValueEventListener(new ValueEventListener() {
@@ -195,7 +246,12 @@ public class Modelo {
         });
 
     }
-
+    /**
+     * Metodo leerUsuarios muestra la lista de usuarios registrados
+     * @param recyclerView
+     * @param usuarioAdapter
+     * @param usuarios
+     */
     public void leerUsuarios(final List<Usuario> usuarios, final UsuarioAdapter usuarioAdapter, final RecyclerView recyclerView) {
 
         conexion.getBaseDeDatos().child("Usuarios").addValueEventListener(new ValueEventListener() {
@@ -219,13 +275,22 @@ public class Modelo {
         });
 
     }
-
+    /**
+     * Metodo getExtensionArchivo obtiene la imagen que ha enviado
+     * @param context
+     * @param uri
+     * @return uri
+     */
     public String getExtensionArchivo(Uri uri, Context context) {
         ContentResolver contentResolver = context.getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
-
+    /**
+     * Metodo subirImagen que guarda en la base de datos la imagen enviada
+     * @param context
+     * @param imagenUri
+     */
     public void subirImagen(Uri imagenUri, final Context context) {
         StorageTask storageTask;
         final StorageReference fileReference;
@@ -273,11 +338,19 @@ public class Modelo {
             Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
         }
     }
-
+    /**
+     * Metodo idUsuarioActual que ubica el usuario que esta ingresando
+     * @return usuarioId
+     */
     public String idUsuarioActual() {
         return conexion.getUsuarioActual().getUid();
     }
-
+    /**
+     * Metodo enviarImagen que envia una imagen mediante el chat
+     * @param context
+     * @param imagenUri
+     * @param receptor
+     */
     public void enviarImagen(Uri imagenUri, final Context context, final String receptor) {
         StorageTask storageTask;
         final StorageReference fileReference;
@@ -329,13 +402,11 @@ public class Modelo {
             Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
     int ban=0;
-
-
-
+    /**
+     * Metodo leer que muestra el char completo entre dos personas
+     * @param context
+     */
     public void leer(final Context context) {
 
         final ArrayList<Mensaje> mensajes = new ArrayList<>();
@@ -368,7 +439,11 @@ public class Modelo {
         });
     }
 
-
+    /**
+     * Metodo notificacion que muestra una alerta cuando se recibe un mensaje
+     * @param context
+     * @param mensaje
+     */
     public void notificacion(Context context, Mensaje mensaje) {
         NotificationCompat.Builder mBuilder;
         NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
