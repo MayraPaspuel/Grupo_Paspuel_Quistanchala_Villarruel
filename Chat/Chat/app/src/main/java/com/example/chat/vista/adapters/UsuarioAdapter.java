@@ -44,7 +44,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
     }
 
     /**
-     * Metodo setContext que
+     * Metodo setContext que que crea las vistas y adaptadores
      * @param context
      */
     public void setContext(Context context) {
@@ -52,7 +52,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
     }
 
     /**
-     * Metodo getUsuarios que
+     * Metodo gestUsuarios que recupera los usuarios registrados
      * @return lista de usuarios
      */
     public List<Usuario> getUsuarios() {
@@ -61,7 +61,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
 
     /**
      * Metodo setUsuarios que
-     * @param usuarios
+     * @param usuarios publica los usuarios registrados
      */
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
