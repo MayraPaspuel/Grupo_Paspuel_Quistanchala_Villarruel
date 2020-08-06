@@ -23,6 +23,9 @@ public class StartActivity extends AppCompatActivity {
         Button ingresar, registrarse;
         Modelo modelo = new Modelo();
 
+    /**
+     * Metodo onStart que permite que el inicio de la aplicación sea visible para el usuario
+     */
         @Override
         protected void onStart() {
             super.onStart();
@@ -33,6 +36,11 @@ public class StartActivity extends AppCompatActivity {
             }
         }
 
+
+    /**
+     * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz de inicio
+     * @param savedInstanceState
+     */
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

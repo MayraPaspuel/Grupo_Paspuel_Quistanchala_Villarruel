@@ -117,6 +117,9 @@ public class MensajeActivity extends AppCompatActivity {
 
     /**
      * Metodo onActivityResult que permite volver a una actividad del chat luego de abrir una imagen desde la galeria o la cámara
+     * @param requestCode
+     * @param  resultCode
+     * @param data
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
