@@ -24,6 +24,10 @@ public class RegistroActivity extends AppCompatActivity {
     Button registrarse;
     Modelo modelo = new Modelo();
 
+    /**
+     * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz de registro de actividad
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

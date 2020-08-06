@@ -42,6 +42,10 @@ public class MensajeActivity extends AppCompatActivity {
     Modelo modelo = new Modelo();
     String userid;
 
+    /**
+     * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz del mensaje
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +105,9 @@ public class MensajeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo abrirImagenes que permite abrir imagenes en la recepción de un mensaje
+     */
     private void abrirImagenes() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -108,6 +115,9 @@ public class MensajeActivity extends AppCompatActivity {
         startActivityForResult(intent, IMAGE_REQUEST);
     }
 
+    /**
+     * Metodo onActivityResult que permite volver a una actividad del chat luego de abrir una imagen desde la galeria o la cámara
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
