@@ -70,7 +70,7 @@ public class Presentador {
      */
     public boolean estaLogeado() {
         try {
-            return estaLogeado();
+            return modelo.estaLogeado();
         } catch (Exception ex) {
             return false;
         }
