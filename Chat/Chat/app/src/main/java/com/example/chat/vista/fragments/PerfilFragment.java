@@ -27,6 +27,12 @@ public class PerfilFragment extends Fragment {
     private static final int IMAGE_REQUEST = 1;
     private Uri imagenUri;
 
+    /**
+     * Metodo onCreateView que crea y devuelve la jerarquía de vistas asociadas con los elementos
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
@@ -44,6 +50,9 @@ public class PerfilFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Metodo abrirImagenes que permite abrir imagenes para el envio de contenido
+     */
     private void abrirImagenes() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -51,6 +60,12 @@ public class PerfilFragment extends Fragment {
         startActivityForResult(intent, IMAGE_REQUEST);
     }
 
+    /**
+     * Metodo onActivityResult que proporciona componentes para registrar, iniciar y controlar el resultado
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
