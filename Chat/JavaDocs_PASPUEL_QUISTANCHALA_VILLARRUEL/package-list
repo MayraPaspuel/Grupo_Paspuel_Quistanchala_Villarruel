@@ -1,0 +1,6 @@
+com.example.chat
+com.example.chat.modelo
+com.example.chat.presentador
+com.example.chat.vista
+com.example.chat.vista.adapters
+com.example.chat.vista.fragments
