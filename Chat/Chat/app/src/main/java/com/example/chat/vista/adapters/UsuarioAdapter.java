@@ -24,27 +24,55 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
     private Context context;
     private List<Usuario> usuarios;
 
+
+    /**
+     * Constructor con parametros
+     * @param contexto
+     * @param usuarios
+     */
     public UsuarioAdapter(Context contexto, List<Usuario> usuarios){
         this.usuarios = usuarios;
         this.context = contexto;
     }
 
+    /**
+     * Metodo getContext que devuelve el contexto del adapter vinculado
+     * @return contexto tipo Context
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Metodo setContext que
+     * @param context
+     */
     public void setContext(Context context) {
         this.context = context;
     }
 
+    /**
+     * Metodo getUsuarios que
+     * @return lista de usuarios
+     */
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
+    /**
+     * Metodo setUsuarios que
+     * @param usuarios
+     */
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 
+
+    /**
+     * Metodo onCreateViewHolder que crea un marcador de vista para cada usuario
+     * @param parent
+     * @param viewType
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,6 +80,11 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
         return new UsuarioAdapter.ViewHolder(view);
     }
 
+    /**
+     * Metodo onBindViewHolder obtiene usuarios con la actividad registrada
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Usuario usuario = usuarios.get(position);
@@ -74,11 +107,19 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
 
     }
 
+    /**
+     * Metodo getItemCount que devuelve el número de usuarios en el adaptador vinculado al RecyclerView padre.
+     * @return numero de usuarios
+     */
     @Override
     public int getItemCount() {
         return usuarios.size();
     }
 
+
+    /**
+     * Metodo ViewHolder muestra de manera interactiva los datos del usuario
+     */
     public  class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView nombreUsuario;
