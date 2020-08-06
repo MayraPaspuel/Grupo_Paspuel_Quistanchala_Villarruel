@@ -17,7 +17,13 @@ import com.example.chat.modelo.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase que maneja los fragmentos de los usuarios
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class UsuariosFragment extends Fragment {
 
     private RecyclerView recyclerView;

@@ -21,6 +21,10 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth auth;
     Modelo modelo = new Modelo();
 
+    /**
+     * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

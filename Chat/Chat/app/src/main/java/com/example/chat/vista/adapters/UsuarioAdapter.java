@@ -19,6 +19,13 @@ import com.example.chat.modelo.Usuario;
 
 import java.util.List;
 
+/**
+ * Clase que se encarga de manejar los adaptadores del usuario
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHolder> {
 
     private Context context;

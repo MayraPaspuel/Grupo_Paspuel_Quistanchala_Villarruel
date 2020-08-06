@@ -17,7 +17,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
 
-
+/**
+ * Clase que maneja los fragmentos de los perfiles
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class PerfilFragment extends Fragment {
 
     CircleImageView foto;
