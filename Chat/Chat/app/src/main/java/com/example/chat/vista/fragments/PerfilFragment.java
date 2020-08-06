@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.chat.R;
-import com.example.chat.modelo.Modelo;
+import com.example.chat.presentador.Presentador;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -28,7 +28,7 @@ public class PerfilFragment extends Fragment {
 
     CircleImageView foto;
     TextView nombreUsuario;
-    Modelo modelo = new Modelo();
+    Presentador presentador = new Presentador();
 
     private static final int IMAGE_REQUEST = 1;
     private Uri imagenUri;
@@ -45,7 +45,7 @@ public class PerfilFragment extends Fragment {
 
         foto = view.findViewById(R.id.imgFoto);
         nombreUsuario = view.findViewById(R.id.txtNombreUsuario);
-        modelo.cargarImagenUsuario(getContext(),nombreUsuario,foto);
+        presentador.cargarImagenUsuario(getContext(),nombreUsuario,foto);
         foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +77,7 @@ public class PerfilFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imagenUri = data.getData();
-            modelo.subirImagen(imagenUri, getContext());
+            presentador.subirImagen(imagenUri, getContext());
         }
     }
 }

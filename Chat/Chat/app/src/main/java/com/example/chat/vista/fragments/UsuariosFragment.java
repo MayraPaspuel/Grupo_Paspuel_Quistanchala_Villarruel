@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.chat.presentador.Presentador;
 import com.example.chat.vista.adapters.UsuarioAdapter;
-import com.example.chat.modelo.Modelo;
 import com.example.chat.R;
 import com.example.chat.modelo.Usuario;
 
@@ -29,7 +29,7 @@ public class UsuariosFragment extends Fragment {
     private RecyclerView recyclerView;
     private UsuarioAdapter usuarioAdapter;
     private List<Usuario> usuarios;
-    private Modelo modelo = new Modelo();
+    private Presentador presentador = new Presentador();
 
     /**
      * Metodo onCreateView que crea y devuelve la jerarquía de vistas asociadas con los elementos de usuario
@@ -49,7 +49,7 @@ public class UsuariosFragment extends Fragment {
         usuarios = new ArrayList<>();
         usuarioAdapter = new UsuarioAdapter(getContext(),usuarios);
 
-        modelo.leerUsuarios(usuarios, usuarioAdapter, recyclerView);
+        presentador.leerUsuarios(usuarios, usuarioAdapter, recyclerView);
         return view;
 
     }

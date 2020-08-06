@@ -83,6 +83,7 @@ public class Modelo {
             }
         });
     }
+
     /**
      * Metodo salir que finaliza la sesion abierta
      */
@@ -90,6 +91,9 @@ public class Modelo {
         conexion.getAutenticacion().signOut();
     }
 
+    /**
+     * Metodo estaLogeado que verifica que se ha iniciado sesion
+     */
     public boolean estaLogeado() {
         if (conexion.getUsuarioActual() != null) {
             return true;

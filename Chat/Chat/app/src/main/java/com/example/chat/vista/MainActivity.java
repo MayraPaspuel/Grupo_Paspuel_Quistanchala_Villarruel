@@ -16,11 +16,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.chat.R;
+import com.example.chat.presentador.Presentador;
 import com.example.chat.vista.fragments.PerfilFragment;
 import com.example.chat.vista.fragments.UsuariosFragment;
-import com.example.chat.modelo.Modelo;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     TextView nombreUsuario;
     ViewPager viewPager;
     TabLayout tabLayout;
-    Modelo modelo = new Modelo();
+    Presentador presentador = new Presentador();
 
     /**
      * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz principal
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        modelo.leer(MainActivity.this);
+        presentador.leer(MainActivity.this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
-        modelo.cargarImagenUsuario(MainActivity.this, nombreUsuario, foto);
+        presentador.cargarImagenUsuario(MainActivity.this, nombreUsuario, foto);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new UsuariosFragment(), "Usuarios");
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.btnSalir:
-                modelo.salir();
+                presentador.salir();
                 startActivity(new Intent(MainActivity.this, StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;
         }

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.chat.R;
-import com.example.chat.modelo.Modelo;
+import com.example.chat.presentador.Presentador;
 import com.google.firebase.auth.FirebaseAuth;
 import com.rengwuxian.materialedittext.MaterialEditText;
 /**
@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnIngresar;
 
     FirebaseAuth auth;
-    Modelo modelo = new Modelo();
+    Presentador presentador = new Presentador();
 
     /**
      * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (txtEmail.isEmpty() || txtContrasenia.isEmpty()){
                     Toast.makeText(LoginActivity.this, "Todos los campos deben ser llenados correctamente", Toast.LENGTH_SHORT).show();
                 } else {
-                    modelo.login(LoginActivity.this,txtEmail,txtContrasenia);
+                    presentador.login(LoginActivity.this,txtEmail,txtContrasenia);
                 }
             }
         });

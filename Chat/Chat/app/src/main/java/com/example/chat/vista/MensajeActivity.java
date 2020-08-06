@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.chat.R;
 import com.example.chat.modelo.Mensaje;
-import com.example.chat.modelo.Modelo;
+import com.example.chat.presentador.Presentador;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,7 +39,7 @@ public class MensajeActivity extends AppCompatActivity {
     EditText txtEnviar;
 
     RecyclerView recyclerView;
-    Modelo modelo = new Modelo();
+    Presentador presentador = new Presentador();
     String userid;
 
     /**
@@ -77,18 +77,18 @@ public class MensajeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userid = intent.getStringExtra("id");
 
-        modelo.cargarImagenEmisor(MensajeActivity.this, userid, recyclerView, nombreUsuario, foto);
+        presentador.cargarImagenEmisor(MensajeActivity.this, userid, recyclerView, nombreUsuario, foto);
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Mensaje mensaje = new Mensaje();
-                mensaje.setEmisor(modelo.idUsuarioActual());
+                mensaje.setEmisor(presentador.idUsuarioActual());
                 mensaje.setReceptor(userid);
                 mensaje.setContenido(txtEnviar.getText().toString());
                 mensaje.setTipo("txt");
                 if (!txtEnviar.getText().toString().equals("")) {
-                    modelo.enviarMensaje(mensaje);
+                    presentador.enviarMensaje(mensaje);
                 } else {
                     Toast.makeText(MensajeActivity.this, "No se puede enviar un mensaje vacío", Toast.LENGTH_SHORT).show();
                 }
@@ -126,7 +126,7 @@ public class MensajeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imagenUri = data.getData();
-            modelo.enviarImagen(imagenUri, MensajeActivity.this, userid);
+            presentador.enviarImagen(imagenUri, MensajeActivity.this, userid);
         }
     }
 }

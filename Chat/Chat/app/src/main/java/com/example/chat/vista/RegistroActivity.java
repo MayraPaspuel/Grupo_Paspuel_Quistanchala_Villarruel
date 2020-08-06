@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.chat.R;
-import com.example.chat.modelo.Modelo;
+import com.example.chat.presentador.Presentador;
 import com.rengwuxian.materialedittext.MaterialEditText;
 /**
  * Clase que contiene las propiedades de la vista de registro de actividad
@@ -22,7 +22,7 @@ public class RegistroActivity extends AppCompatActivity {
 
     MaterialEditText usuario, correo, contrasenia;
     Button registrarse;
-    Modelo modelo = new Modelo();
+    Presentador presentador = new Presentador();
 
     /**
      * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz de registro de actividad
@@ -55,7 +55,7 @@ public class RegistroActivity extends AppCompatActivity {
                 }else if(txtContrasenia.length() < 8){
                     Toast.makeText(RegistroActivity.this, "La contraseña debe tener almenos 8 caracteres", Toast.LENGTH_SHORT).show();
                 }else {
-                    modelo.registrar(RegistroActivity.this,txtUsuario,txtEmail,txtContrasenia);
+                    presentador.registrar(RegistroActivity.this,txtUsuario,txtEmail,txtContrasenia);
                 }
             }
         });
