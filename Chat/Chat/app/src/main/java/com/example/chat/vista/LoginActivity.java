@@ -12,7 +12,13 @@ import com.example.chat.R;
 import com.example.chat.modelo.Modelo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.rengwuxian.materialedittext.MaterialEditText;
-
+/**
+ * Clase que contiene las propiedades de la vista de Login
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class LoginActivity extends AppCompatActivity {
 
     MaterialEditText correo, contrasenia;

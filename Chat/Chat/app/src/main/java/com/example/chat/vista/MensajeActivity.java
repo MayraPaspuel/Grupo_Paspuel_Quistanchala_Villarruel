@@ -20,6 +20,13 @@ import com.example.chat.modelo.Modelo;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Clase que contiene las propiedades de la vista del mensaje
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class MensajeActivity extends AppCompatActivity {
 
     CircleImageView foto;

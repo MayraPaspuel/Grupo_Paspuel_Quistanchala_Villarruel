@@ -11,6 +11,13 @@ import com.example.chat.R;
 import com.example.chat.modelo.Modelo;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Clase que contiene las propiedades de la vista de inicio
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class StartActivity extends AppCompatActivity {
 
         Button ingresar, registrarse;

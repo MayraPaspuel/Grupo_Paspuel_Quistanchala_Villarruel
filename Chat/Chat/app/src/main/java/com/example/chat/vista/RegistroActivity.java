@@ -11,7 +11,13 @@ import android.widget.Toast;
 import com.example.chat.R;
 import com.example.chat.modelo.Modelo;
 import com.rengwuxian.materialedittext.MaterialEditText;
-
+/**
+ * Clase que contiene las propiedades de la vista de registro de actividad
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class RegistroActivity extends AppCompatActivity {
 
     MaterialEditText usuario, correo, contrasenia;
