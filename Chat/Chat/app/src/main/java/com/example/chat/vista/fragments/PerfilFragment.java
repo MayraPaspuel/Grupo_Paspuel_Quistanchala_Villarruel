@@ -28,7 +28,7 @@ public class PerfilFragment extends Fragment {
     private Uri imagenUri;
 
     /**
-     * Metodo onCreateView que crea y devuelve la jerarquía de vistas asociadas con los elementos
+     * Metodo onCreateView que crea y devuelve la jerarquía de vistas asociadas con los elementos del perfil de usuario
      * @param inflater
      * @param container
      * @param savedInstanceState

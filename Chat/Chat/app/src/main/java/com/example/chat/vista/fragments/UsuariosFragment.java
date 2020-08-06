@@ -25,6 +25,12 @@ public class UsuariosFragment extends Fragment {
     private List<Usuario> usuarios;
     private Modelo modelo = new Modelo();
 
+    /**
+     * Metodo onCreateView que crea y devuelve la jerarquía de vistas asociadas con los elementos de usuario
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
