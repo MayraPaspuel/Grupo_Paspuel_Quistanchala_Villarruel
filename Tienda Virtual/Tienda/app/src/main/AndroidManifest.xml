@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".vista.ProductoActivity"></activity>
+        <activity android:name=".vista.VenderActivity"></activity>
+        <activity android:name=".vista.ProductoActivity" />
         <activity android:name=".vista.MensajeActivity" />
         <activity
             android:name=".vista.LoginActivity"

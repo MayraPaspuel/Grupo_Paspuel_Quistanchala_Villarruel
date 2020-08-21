@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.tienda.R;
 import com.example.tienda.presentador.Presentador;
+import com.example.tienda.vista.VenderActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +31,7 @@ public class PerfilFragment extends Fragment {
     CircleImageView foto;
     TextView nombreUsuario;
     Presentador presentador = new Presentador();
+    Button vender;
 
     private static final int IMAGE_REQUEST = 1;
     private Uri imagenUri;
@@ -46,10 +49,22 @@ public class PerfilFragment extends Fragment {
         foto = view.findViewById(R.id.imgFoto);
         nombreUsuario = view.findViewById(R.id.txtNombreUsuario);
         presentador.cargarImagenUsuario(getContext(),nombreUsuario,foto);
+        vender = view.findViewById(R.id.btnVender);
+
+
         foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 abrirImagenes();
+            }
+        });
+
+
+        vender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), VenderActivity.class);
+                startActivity(intent);
             }
         });
 
