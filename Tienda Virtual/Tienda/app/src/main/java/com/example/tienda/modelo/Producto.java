@@ -7,19 +7,19 @@ public class Producto {
     private String precio;
     private String descripcion;
     private String imagen;
-    private String propietario;
+    private String vendedor;
     private String categoria;
 
     public Producto() {
     }
 
-    public Producto(String id, String nombre, String precio, String descripcion, String imagen, String propietario, String categoria) {
+    public Producto(String id, String nombre, String precio, String descripcion, String imagen, String vendedor, String categoria) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
         this.imagen = imagen;
-        this.propietario = propietario;
+        this.vendedor = vendedor;
         this.categoria = categoria;
     }
 
@@ -63,12 +63,12 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    public String getPropietario() {
-        return propietario;
+    public String getVendedor() {
+        return vendedor;
     }
 
-    public void setPropietario(String propietario) {
-        this.propietario = propietario;
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
     }
 
     public String getCategoria() {

@@ -18,7 +18,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.Html;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +69,7 @@ public class Modelo {
 
     /**
      * Metodo login que realiza el inicio de sesion
+     *
      * @param context
      * @param txtContrasenia
      * @param txtEmail
@@ -103,8 +106,10 @@ public class Modelo {
             return false;
         }
     }
+
     /**
      * Metodo enviarMensaje que se encarga de realizar el envio de mensajes
+     *
      * @param mensaje
      */
     public void enviarMensaje(Mensaje mensaje) {
@@ -129,8 +134,10 @@ public class Modelo {
         conexion.getBaseDeDatos().child("Mensajes").push().setValue(hashMap);
 
     }
+
     /**
      * Metodo registrar que registra un nuevo usuario
+     *
      * @param context
      * @param contrasenia
      * @param email
@@ -166,8 +173,10 @@ public class Modelo {
             }
         });
     }
+
     /**
      * Metodo leerMensaje en el cual muestra los mensajes que se le han enviado al usuario
+     *
      * @param context
      * @param recyclerView
      * @param usuarioId
@@ -195,8 +204,10 @@ public class Modelo {
             }
         });
     }
+
     /**
      * Metodo cargarImagenEmisor que muestra la imagen al emisor
+     *
      * @param recyclerView
      * @param context
      * @param foto
@@ -225,8 +236,10 @@ public class Modelo {
         });
 
     }
+
     /**
      * Metodo cargarImagenUsuario que muestra la imagen al usuario
+     *
      * @param nombreUsuario
      * @param foto
      * @param context
@@ -252,8 +265,10 @@ public class Modelo {
         });
 
     }
+
     /**
      * Metodo leerUsuarios muestra la lista de usuarios registrados
+     *
      * @param recyclerView
      * @param usuarioAdapter
      * @param usuarios
@@ -281,8 +296,10 @@ public class Modelo {
         });
 
     }
+
     /**
      * Metodo getExtensionArchivo obtiene la imagen que ha enviado
+     *
      * @param context
      * @param uri
      * @return uri
@@ -292,8 +309,10 @@ public class Modelo {
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
+
     /**
      * Metodo subirImagen que guarda en la base de datos la imagen enviada
+     *
      * @param context
      * @param imagenUri
      */
@@ -344,15 +363,19 @@ public class Modelo {
             Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
         }
     }
+
     /**
      * Metodo idUsuarioActual que ubica el usuario que esta ingresando
+     *
      * @return usuarioId
      */
     public String idUsuarioActual() {
         return conexion.getUsuarioActual().getUid();
     }
+
     /**
      * Metodo enviarImagen que envia una imagen mediante el chat
+     *
      * @param context
      * @param imagenUri
      * @param receptor
@@ -408,9 +431,12 @@ public class Modelo {
             Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
         }
     }
-    int ban=0;
+
+    int ban = 0;
+
     /**
      * Metodo leer que muestra el char completo entre dos personas
+     *
      * @param context
      */
     public void leer(final Context context) {
@@ -425,7 +451,7 @@ public class Modelo {
                     Mensaje objMensaje = snapshot.getValue(Mensaje.class);
                     mensajes.add(objMensaje);
                 }
-                if(ban!=0) {
+                if (ban != 0) {
                     Mensaje miMensaje = null;
                     try {
                         miMensaje = mensajes.get(mensajes.size() - 1);
@@ -435,7 +461,7 @@ public class Modelo {
                     } catch (Exception ex) {
                     }
                 }
-                ban=1;
+                ban = 1;
             }
 
             @Override
@@ -447,6 +473,7 @@ public class Modelo {
 
     /**
      * Metodo notificacion que muestra una alerta cuando se recibe un mensaje
+     *
      * @param context
      * @param mensaje
      */
@@ -473,15 +500,15 @@ public class Modelo {
 
 
     /*
-    *
-    *
-    * TIENDA
-    *
-    *
-    *
-    * */
+     *
+     *
+     * TIENDA
+     *
+     *
+     *
+     * */
 
-        public void leerProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView) {
+    public void leerProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView) {
 
         conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
             @Override
@@ -490,11 +517,32 @@ public class Modelo {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Producto producto = snapshot.getValue(Producto.class);
                     //if (!producto.getId().equals(conexion.getUsuarioActual().getUid())) {
-                        productos.add(producto);
+                    productos.add(producto);
                     //}
                 }
                 productoAdapter.setProductos(productos);
                 recyclerView.setAdapter(productoAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void buscarProducto(final Context context, String idProducto, final ImageView imagen, final TextView nombreProducto, final TextView descripcion, final TextView precio, final TextView vendedor) {
+
+        conexion.getBaseDeDatos().child("Productos").child(idProducto).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Producto producto = dataSnapshot.getValue(Producto.class);
+                nombreProducto.setText(producto.getNombre());
+                descripcion.setText(Html.fromHtml("<b>" + "Descripción" + "</b>" + "<br/>" + producto.getDescripcion()));
+                precio.setText(producto.getPrecio());
+                vendedor.setText(Html.fromHtml("<b>" + "Vendedor" + "</b>" + "<br/>" + producto.getVendedor()));
+                Glide.with(context.getApplicationContext()).load(producto.getImagen()).into(imagen);
             }
 
             @Override
