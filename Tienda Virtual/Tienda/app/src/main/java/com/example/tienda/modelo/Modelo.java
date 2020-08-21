@@ -541,7 +541,7 @@ public class Modelo {
                 nombreProducto.setText(producto.getNombre());
                 descripcion.setText(Html.fromHtml("<b>" + "Descripción" + "</b>" + "<br/>" + producto.getDescripcion()));
                 precio.setText(producto.getPrecio());
-                vendedor.setText(Html.fromHtml("<b>" + "Vendedor" + "</b>" + "<br/>" + producto.getVendedor()));
+                setNombreVendedor(vendedor, producto.getVendedor());
                 Glide.with(context.getApplicationContext()).load(producto.getImagen()).into(imagen);
             }
 
@@ -552,6 +552,24 @@ public class Modelo {
         });
 
     }
+
+    public void setNombreVendedor(final TextView vendedor, String idUsuario) {
+
+        conexion.getBaseDeDatos().child("Usuarios").child(idUsuario).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                vendedor.setText(Html.fromHtml("<b>" + "Vendedor" + "</b>" + "<br/>" + usuario.getNombreUsuario()));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
 
 
 }
