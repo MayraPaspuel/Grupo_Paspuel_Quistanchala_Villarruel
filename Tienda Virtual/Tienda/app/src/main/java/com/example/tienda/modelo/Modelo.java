@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.text.Html;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -126,14 +127,9 @@ public class Modelo {
             minutos = "0" + minutos;
         }
 
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("emisor", mensaje.getEmisor());
-        hashMap.put("receptor", mensaje.getReceptor());
-        hashMap.put("contenido", mensaje.getContenido());
-        hashMap.put("hora", hora + ":" + minutos);
-        hashMap.put("tipo", mensaje.getTipo());
+        mensaje.setHora(hora + ":" + minutos);
 
-        conexion.getBaseDeDatos().child("Mensajes").push().setValue(hashMap);
+        conexion.getBaseDeDatos().child("Mensajes").push().setValue(mensaje);
 
     }
 
@@ -518,9 +514,13 @@ public class Modelo {
                 productos.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Producto producto = snapshot.getValue(Producto.class);
+                    producto.setId(snapshot.getKey());
                     //if (!producto.getId().equals(conexion.getUsuarioActual().getUid())) {
                     productos.add(producto);
                     //}
+                    /*HashMap<String, Object> miId = new HashMap<>();
+                    miId.put("id", producto.getId());
+                    conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miId);*/
                 }
                 productoAdapter.setProductos(productos);
                 recyclerView.setAdapter(productoAdapter);
@@ -542,7 +542,7 @@ public class Modelo {
                 Producto producto = dataSnapshot.getValue(Producto.class);
                 nombreProducto.setText(producto.getNombre());
                 descripcion.setText(Html.fromHtml("<b>" + "Descripción" + "</b>" + "<br/>" + producto.getDescripcion()));
-                precio.setText(producto.getPrecio());
+                precio.setText("$"+producto.getPrecio());
                 setNombreVendedor(vendedor, producto.getVendedor());
                 Glide.with(context.getApplicationContext()).load(producto.getImagen()).into(imagen);
             }
@@ -596,5 +596,53 @@ public class Modelo {
 
     }
 
+    public void publicarProducto(final Context context, final Producto producto) {
+        StorageTask storageTask;
+        final StorageReference fileReference;
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+
+        progressDialog.setMessage("Cargando...");
+        progressDialog.show();
+
+        if (producto.getImagen() != null) {
+
+            fileReference = conexion.getAlmacenamiento().child("Archivos").child(conexion.getUsuarioActual().getUid() + "." + getExtensionArchivo(Uri.parse(producto.getImagen()), context));
+            storageTask = fileReference.putFile(Uri.parse(producto.getImagen()));
+
+            storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        String uriBD = downloadUri.toString();
+                        producto.setImagen(uriBD);
+
+                        conexion.getBaseDeDatos().child("Productos").push().setValue(producto);
+
+                    } else {
+                        Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
+                    }
+                    progressDialog.dismiss();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            });
+        } else {
+            Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }
