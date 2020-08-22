@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.text.Html;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -509,22 +510,25 @@ public class Modelo {
      *
      * */
 
-    public void leerProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView) {
+    public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView, final EditText buscarProducto) {
 
         conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productos.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Producto producto = snapshot.getValue(Producto.class);
-                    producto.setId(snapshot.getKey());
-                    //if (!producto.getId().equals(conexion.getUsuarioActual().getUid())) {
-                    productos.add(producto);
-                    //}
-                    /*HashMap<String, Object> miId = new HashMap<>();
-                    miId.put("id", producto.getId());
-                    conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miId);*/
-                }
+                //if(!buscarProducto.getText().toString().equals("")) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Producto producto = snapshot.getValue(Producto.class);
+                        producto.setId(snapshot.getKey());
+                        if (producto.getNombre().toLowerCase().contains(buscarProducto.getText().toString().toLowerCase())) {
+                            productos.add(producto);
+                        }
+
+                        /*HashMap<String, Object> miId = new HashMap<>();
+                        miId.put("id", producto.getId());
+                        conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miId);*/
+                    }
+                //}
                 productoAdapter.setProductos(productos);
                 recyclerView.setAdapter(productoAdapter);
             }
@@ -574,14 +578,14 @@ public class Modelo {
 
     }
 
-    public void buscarCategorias(final Context context, final Spinner categorias) {
+    public void listarCategorias(final Context context, final Spinner categorias) {
 
         conexion.getBaseDeDatos().child("Categoria").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 ArrayList<String> misCategorias = new ArrayList<String>();
-
+                misCategorias.add("");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Categoria categoria = snapshot.getValue(Categoria.class);
                     misCategorias.add(categoria.getNombre());

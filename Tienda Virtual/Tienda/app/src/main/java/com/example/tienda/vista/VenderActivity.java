@@ -54,9 +54,7 @@ public class VenderActivity extends AppCompatActivity {
         decripcion = findViewById(R.id.txtDescripcion);
 
         categorias = findViewById(R.id.spnCategoría);
-
-
-        modelo.buscarCategorias(VenderActivity.this,categorias);
+        modelo.listarCategorias(VenderActivity.this,categorias);
 
         publicar.setOnClickListener(new View.OnClickListener() {
             @Override
