@@ -9,9 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
-
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,10 +21,15 @@
                 android:id="@+id/toolbar"
                 layout="@layout/bar_layout" />
 
-            <ImageView
-                android:layout_width="200dp"
+            <ImageButton
+                android:id="@+id/btnEnviarImagen"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@android:color/white" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:background="@android:color/white"
+                android:contentDescription="@string/stringEnviar"
+                android:src="@drawable/ic_action_enviar_imagen" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/txtNombreProducto"
@@ -56,22 +59,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/txtCategoria"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:hint="Categoría"
-                    app:met_floatingLabel="normal"
-                    android:editable="false"/>
+                    android:editable="false"
+                    android:text="Categoría"
+                    app:met_floatingLabel="normal" />
 
                 <Spinner
+                    android:id="@+id/spnCategoría"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spnCategoría"/>
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
@@ -83,7 +86,7 @@
                 android:background="@color/colorPrimaryDark"
                 android:text="Publicar"
                 android:textColor="#fff" />
-            
+
         </LinearLayout>
 
     </ScrollView>
