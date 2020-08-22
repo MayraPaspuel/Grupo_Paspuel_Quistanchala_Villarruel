@@ -28,7 +28,7 @@ android:padding="2dp">
             android:layout_marginLeft="15dp"
             android:layout_toEndOf="@id/imgImagen"
             android:layout_toRightOf="@id/imgImagen"
-            android:text="Usuario"
+            android:text="Nombre Producto"
             android:textColor="@android:color/black"
             android:textSize="17sp" />
 
@@ -42,7 +42,7 @@ android:padding="2dp">
             android:layout_marginTop="65dp"
             android:layout_toEndOf="@+id/imgImagen"
             android:layout_toRightOf="@+id/imgImagen"
-            android:text="Usuario"
+            android:text="Precio"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="22sp" />
