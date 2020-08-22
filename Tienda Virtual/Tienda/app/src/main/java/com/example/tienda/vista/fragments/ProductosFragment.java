@@ -11,8 +11,10 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.tienda.R;
 import com.example.tienda.modelo.Modelo;
@@ -55,7 +57,7 @@ public class ProductosFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto);
+                modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias);
             }
 
             @Override
@@ -64,13 +66,24 @@ public class ProductosFragment extends Fragment {
             }
         });
 
+        categorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!buscarProducto.getText().toString().equals("")) {
+                    modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias);
+                    //Toast.makeText(getContext(),"HOla",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // sometimes you need nothing here
+            }
+        });
+
         modelo.listarCategorias(getContext(),categorias);
-        //modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto);
         return view;
     }
-
-
-
 
 
 }

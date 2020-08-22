@@ -510,17 +510,17 @@ public class Modelo {
      *
      * */
 
-    public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView, final EditText buscarProducto) {
+    public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView, final EditText buscarProducto, final Spinner categorias) {
 
         conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productos.clear();
-                //if(!buscarProducto.getText().toString().equals("")) {
+                if(!buscarProducto.getText().toString().equals("")) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Producto producto = snapshot.getValue(Producto.class);
                         producto.setId(snapshot.getKey());
-                        if (producto.getNombre().toLowerCase().contains(buscarProducto.getText().toString().toLowerCase())) {
+                        if (producto.getNombre().toLowerCase().contains(buscarProducto.getText().toString().toLowerCase())&&producto.getCategoria().contains(categorias.getSelectedItem().toString())) {
                             productos.add(producto);
                         }
 
@@ -528,7 +528,7 @@ public class Modelo {
                         miId.put("id", producto.getId());
                         conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miId);*/
                     }
-                //}
+                }
                 productoAdapter.setProductos(productos);
                 recyclerView.setAdapter(productoAdapter);
             }
