@@ -20,7 +20,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.Html;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -569,7 +571,30 @@ public class Modelo {
 
     }
 
+    public void buscarCategorias(final Context context, final Spinner categorias) {
 
+        conexion.getBaseDeDatos().child("Categoria").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                ArrayList<String> misCategorias = new ArrayList<String>();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Categoria categoria = snapshot.getValue(Categoria.class);
+                    misCategorias.add(categoria.getNombre());
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,misCategorias);
+                categorias.setAdapter(arrayAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 
 }
