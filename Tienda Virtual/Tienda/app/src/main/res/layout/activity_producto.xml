@@ -27,12 +27,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp">
 
-            <ImageView
-                android:id="@+id/imgImagen"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_margin="2dp"
-                android:padding="8dp" />
+                <ImageView
+                    android:id="@+id/imgImagen"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_margin="2dp"
+                    android:padding="8dp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -74,15 +74,31 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp">
 
-                <TextView
-                    android:id="@+id/txtVendedor"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:background="@android:color/white"
-                    android:padding="8dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:text="Vendedor"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtVendedor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -91,15 +107,31 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp">
 
-                <TextView
-                    android:id="@+id/txtDescripcion"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:background="@android:color/white"
-                    android:padding="8dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:text="Descripción"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtDescripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 

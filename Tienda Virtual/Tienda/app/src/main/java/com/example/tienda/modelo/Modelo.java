@@ -35,9 +35,12 @@ import com.bumptech.glide.Glide;
 import com.example.tienda.R;
 import com.example.tienda.vista.MainActivity;
 import com.example.tienda.vista.MensajeActivity;
+import com.example.tienda.vista.ProductoActivity;
+import com.example.tienda.vista.StartActivity;
 import com.example.tienda.vista.adapters.MensajeAdapter;
 import com.example.tienda.vista.adapters.ProductoAdapter;
 import com.example.tienda.vista.adapters.UsuarioAdapter;
+import com.example.tienda.vista.fragments.ProductosFragment;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -541,7 +544,7 @@ public class Modelo {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
                 nombreProducto.setText(producto.getNombre());
-                descripcion.setText(Html.fromHtml("<b>" + "Descripción" + "</b>" + "<br/>" + producto.getDescripcion()));
+                descripcion.setText(producto.getDescripcion());
                 precio.setText("$"+producto.getPrecio());
                 setNombreVendedor(vendedor, producto.getVendedor());
                 Glide.with(context.getApplicationContext()).load(producto.getImagen()).into(imagen);
@@ -561,7 +564,7 @@ public class Modelo {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                vendedor.setText(Html.fromHtml("<b>" + "Vendedor" + "</b>" + "<br/>" + usuario.getNombreUsuario()));
+                vendedor.setText(usuario.getNombreUsuario());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -606,7 +609,7 @@ public class Modelo {
 
         if (producto.getImagen() != null) {
 
-            fileReference = conexion.getAlmacenamiento().child("Archivos").child(conexion.getUsuarioActual().getUid() + "." + getExtensionArchivo(Uri.parse(producto.getImagen()), context));
+            fileReference = conexion.getAlmacenamiento().child("Archivos").child(System.currentTimeMillis() + "." + getExtensionArchivo(Uri.parse(producto.getImagen()), context));
             storageTask = fileReference.putFile(Uri.parse(producto.getImagen()));
 
             storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -626,6 +629,9 @@ public class Modelo {
                         producto.setImagen(uriBD);
 
                         conexion.getBaseDeDatos().child("Productos").push().setValue(producto);
+
+                        Intent intent = new Intent(context, StartActivity.class);
+                        context.startActivity(intent);
 
                     } else {
                         Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();

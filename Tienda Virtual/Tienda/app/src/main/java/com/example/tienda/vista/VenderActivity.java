@@ -61,15 +61,29 @@ public class VenderActivity extends AppCompatActivity {
         publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 miProducto.setVendedor(modelo.idUsuarioActual());
-                miProducto.setCategoria(categorias.getSelectedItem().toString());
-                miProducto.setDescripcion(decripcion.getText().toString());
+                if(imagenUri!=null) {
+                    miProducto.setImagen(imagenUri.toString());
+                }else{
+                    miProducto.setImagen("");
+                }
                 miProducto.setNombre(nombreProducto.getText().toString());
                 miProducto.setPrecio(precio.getText().toString());
-                miProducto.setImagen(imagenUri.toString());
-                Toast.makeText(VenderActivity.this,imagenUri.toString(), Toast.LENGTH_LONG).show();
+                miProducto.setDescripcion(decripcion.getText().toString());
+                miProducto.setCategoria(categorias.getSelectedItem().toString());
 
-                modelo.publicarProducto(VenderActivity.this,miProducto);
+                if(!miProducto.getImagen().equals("")
+                        &&!miProducto.getNombre().equals("")
+                        &&!miProducto.getPrecio().equals("")
+                        &&!miProducto.getDescripcion().equals("")
+                        &&!miProducto.getCategoria().equals("")&&!miProducto.getVendedor().equals("")){
+                    modelo.publicarProducto(VenderActivity.this,miProducto);
+                }else {
+                    Toast.makeText(VenderActivity.this,"Todos los campos deben ser llenados correctamente", Toast.LENGTH_LONG).show();
+                }
+
+
 
             }
         });

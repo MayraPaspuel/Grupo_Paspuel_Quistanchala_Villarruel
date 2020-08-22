@@ -58,7 +58,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     public void onBindViewHolder(@NonNull ProductoAdapter.ViewHolder holder, int position) {
         final Producto producto = productos.get(position);
         holder.nombre.setText(producto.getNombre());
-        holder.precio.setText(producto.getPrecio());
+        holder.precio.setText("$"+producto.getPrecio());
         Glide.with(context).load(producto.getImagen()).into(holder.imagen);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
