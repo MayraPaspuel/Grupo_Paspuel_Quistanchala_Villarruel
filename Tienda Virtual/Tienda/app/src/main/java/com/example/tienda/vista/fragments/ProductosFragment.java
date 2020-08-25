@@ -69,10 +69,10 @@ public class ProductosFragment extends Fragment {
         categorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(!buscarProducto.getText().toString().equals("")) {
+                //if(!buscarProducto.getText().toString().equals("")) {
                     modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias);
                     //Toast.makeText(getContext(),"HOla",Toast.LENGTH_SHORT).show();
-                }
+                //}
             }
 
             @Override
@@ -82,6 +82,7 @@ public class ProductosFragment extends Fragment {
         });
 
         modelo.listarCategorias(getContext(),categorias);
+        modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias);
         return view;
     }
 

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tienda.R;
 import com.example.tienda.presentador.Presentador;
+import com.example.tienda.vista.ProductoUsuarioActivity;
 import com.example.tienda.vista.VenderActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -31,7 +32,7 @@ public class PerfilFragment extends Fragment {
     CircleImageView foto;
     TextView nombreUsuario;
     Presentador presentador = new Presentador();
-    Button vender;
+    Button vender, misProductos;
 
     private static final int IMAGE_REQUEST = 1;
     private Uri imagenUri;
@@ -50,6 +51,7 @@ public class PerfilFragment extends Fragment {
         nombreUsuario = view.findViewById(R.id.txtNombreUsuario);
         presentador.cargarImagenUsuario(getContext(),nombreUsuario,foto);
         vender = view.findViewById(R.id.btnVender);
+        misProductos = view.findViewById(R.id.btnMisProductos);
 
 
         foto.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +66,14 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), VenderActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        misProductos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ProductoUsuarioActivity.class);
                 startActivity(intent);
             }
         });

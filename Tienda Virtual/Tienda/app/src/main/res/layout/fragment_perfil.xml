@@ -54,4 +54,15 @@
         android:text="Vender"
         android:textColor="@android:color/white" />
 
+    <Button
+        android:id="@+id/btnMisProductos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnVender"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Mis Productos"
+        android:textColor="@android:color/white" />
+
 </RelativeLayout>

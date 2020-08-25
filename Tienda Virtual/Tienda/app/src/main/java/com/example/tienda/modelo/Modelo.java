@@ -516,19 +516,19 @@ public class Modelo {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productos.clear();
-                if(!buscarProducto.getText().toString().equals("")) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Producto producto = snapshot.getValue(Producto.class);
-                        producto.setId(snapshot.getKey());
-                        if (producto.getNombre().toLowerCase().contains(buscarProducto.getText().toString().toLowerCase())&&producto.getCategoria().contains(categorias.getSelectedItem().toString())) {
-                            productos.add(producto);
-                        }
+                //if(!buscarProducto.getText().toString().equals("")) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Producto producto = snapshot.getValue(Producto.class);
+                    producto.setId(snapshot.getKey());
+                    if (producto.getNombre().toLowerCase().contains(buscarProducto.getText().toString().toLowerCase()) && producto.getCategoria().contains(categorias.getSelectedItem().toString())) {
+                        productos.add(producto);
+                    }
 
                         /*HashMap<String, Object> miId = new HashMap<>();
                         miId.put("id", producto.getId());
                         conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miId);*/
-                    }
                 }
+                //}
                 productoAdapter.setProductos(productos);
                 recyclerView.setAdapter(productoAdapter);
             }
@@ -549,7 +549,7 @@ public class Modelo {
                 Producto producto = dataSnapshot.getValue(Producto.class);
                 nombreProducto.setText(producto.getNombre());
                 descripcion.setText(producto.getDescripcion());
-                precio.setText("$"+producto.getPrecio());
+                precio.setText("$" + producto.getPrecio());
                 setNombreVendedor(vendedor, producto.getVendedor());
                 Glide.with(context.getApplicationContext()).load(producto.getImagen()).into(imagen);
             }
@@ -570,6 +570,7 @@ public class Modelo {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
                 vendedor.setText(usuario.getNombreUsuario());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -591,7 +592,7 @@ public class Modelo {
                     misCategorias.add(categoria.getNombre());
                 }
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,misCategorias);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, misCategorias);
                 categorias.setAdapter(arrayAdapter);
             }
 
@@ -653,6 +654,66 @@ public class Modelo {
         } else {
             Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void getVendedorId(final Context context, final String productoId) {
+        //idVendedor.clear();
+        conexion.getBaseDeDatos().child("Productos").child(productoId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Producto producto = dataSnapshot.getValue(Producto.class);
+                Intent intent = new Intent(context,MensajeActivity.class);
+                intent.putExtra("id",producto.getVendedor());
+
+                Mensaje mensaje = new Mensaje();
+                mensaje.setContenido("¿Sigue disponible el producto?\n"+producto.getNombre());
+                mensaje.setTipo("txt");
+                mensaje.setEmisor(idUsuarioActual());
+                mensaje.setReceptor(producto.getVendedor());
+                enviarMensaje(mensaje);
+                mensaje.setTipo("img");
+                mensaje.setContenido(producto.getImagen());
+                enviarMensaje(mensaje);
+
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void listarMisProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView) {
+
+        conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productos.clear();
+                //if(!buscarProducto.getText().toString().equals("")) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Producto producto = snapshot.getValue(Producto.class);
+                    producto.setId(snapshot.getKey());
+                    if (producto.getVendedor().equals(idUsuarioActual())) {
+                        productos.add(producto);
+                    }
+
+                        /*HashMap<String, Object> miId = new HashMap<>();
+                        miId.put("id", producto.getId());
+                        conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miId);*/
+                }
+                //}
+                productoAdapter.setProductos(productos);
+                recyclerView.setAdapter(productoAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 }
