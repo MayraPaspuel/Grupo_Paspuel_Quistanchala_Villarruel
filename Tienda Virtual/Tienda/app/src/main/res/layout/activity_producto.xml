@@ -142,6 +142,15 @@
                 android:text="Comprar"
                 android:textColor="#fff" />
 
+            <Button
+                android:id="@+id/btnEliminar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Eliminar"
+                android:textColor="#fff" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -11,6 +11,7 @@
  */
 package com.example.tienda.modelo;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -19,8 +20,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.Html;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,11 +40,14 @@ import com.example.tienda.R;
 import com.example.tienda.vista.MainActivity;
 import com.example.tienda.vista.MensajeActivity;
 import com.example.tienda.vista.ProductoActivity;
+import com.example.tienda.vista.ProductoUsuarioActivity;
 import com.example.tienda.vista.StartActivity;
 import com.example.tienda.vista.adapters.MensajeAdapter;
 import com.example.tienda.vista.adapters.ProductoAdapter;
 import com.example.tienda.vista.adapters.UsuarioAdapter;
+import com.example.tienda.vista.fragments.PerfilFragment;
 import com.example.tienda.vista.fragments.ProductosFragment;
+import com.example.tienda.vista.fragments.UsuariosFragment;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,6 +55,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -547,11 +554,13 @@ public class Modelo {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
-                nombreProducto.setText(producto.getNombre());
-                descripcion.setText(producto.getDescripcion());
-                precio.setText("$" + producto.getPrecio());
-                setNombreVendedor(vendedor, producto.getVendedor());
-                Glide.with(context.getApplicationContext()).load(producto.getImagen()).into(imagen);
+                if(producto!=null) {
+                    nombreProducto.setText(producto.getNombre());
+                    descripcion.setText(producto.getDescripcion());
+                    precio.setText("$" + producto.getPrecio());
+                    setNombreVendedor(vendedor, producto.getVendedor());
+                    Glide.with(context.getApplicationContext()).load(producto.getImagen()).into(imagen);
+                }
             }
 
             @Override
@@ -635,8 +644,9 @@ public class Modelo {
 
                         conexion.getBaseDeDatos().child("Productos").push().setValue(producto);
 
-                        Intent intent = new Intent(context, StartActivity.class);
+                        Intent intent = new Intent(context, ProductoUsuarioActivity.class);
                         context.startActivity(intent);
+                        ((Activity)context).finish();
 
                     } else {
                         Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
@@ -656,9 +666,32 @@ public class Modelo {
         }
     }
 
-    public void getVendedorId(final Context context, final String productoId) {
+    public void botones(final Button comprar, final Button eliminar, String productoId){
+
+        conexion.getBaseDeDatos().child("Productos").child(productoId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Producto producto = dataSnapshot.getValue(Producto.class);
+                if(producto.getVendedor().equals(idUsuarioActual())){
+                    comprar.setHeight(0);
+                    comprar.setEnabled(false);
+                }else{
+                    eliminar.setHeight(0);
+                    eliminar.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void chatComprar(final Context context, final String productoId) {
         //idVendedor.clear();
-        conexion.getBaseDeDatos().child("Productos").child(productoId).addValueEventListener(new ValueEventListener() {
+        conexion.getBaseDeDatos().child("Productos").child(productoId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
@@ -714,6 +747,12 @@ public class Modelo {
             }
         });
 
+    }
+
+    public void eliminar(Context context, String productoId){
+        conexion.getBaseDeDatos().child("Productos").child(productoId).removeValue();
+        ((Activity)context).onBackPressed();
+        ((Activity)context).finish();
     }
 
 }

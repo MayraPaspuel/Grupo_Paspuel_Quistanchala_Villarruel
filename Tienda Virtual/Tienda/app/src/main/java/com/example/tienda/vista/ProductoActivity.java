@@ -7,21 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tienda.R;
 import com.example.tienda.modelo.Modelo;
-import com.example.tienda.modelo.Producto;
-
-import java.util.ArrayList;
 
 public class ProductoActivity extends AppCompatActivity {
 
     ImageView imagen;
     TextView nombreProducto, descripcion, precio, vendedor;
-    Button comprar;
+    Button comprar, eliminar;
     Modelo modelo = new Modelo();
 
     @Override
@@ -40,7 +36,7 @@ public class ProductoActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final String productoId = intent.getStringExtra("id");
 
         imagen = findViewById(R.id.imgImagen);
@@ -50,15 +46,23 @@ public class ProductoActivity extends AppCompatActivity {
         vendedor = findViewById(R.id.txtVendedor);
 
         comprar = findViewById(R.id.btnComprar);
+        eliminar = findViewById(R.id.btnEliminar);
+
+        modelo.botones(comprar,eliminar, productoId);
 
         comprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modelo.getVendedorId(ProductoActivity.this, productoId);
+                modelo.chatComprar(ProductoActivity.this, productoId);
             }
         });
 
-
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modelo.eliminar(ProductoActivity.this,productoId);
+            }
+        });
 
         modelo.buscarProducto(ProductoActivity.this, productoId, imagen, nombreProducto, descripcion,precio,vendedor);
 

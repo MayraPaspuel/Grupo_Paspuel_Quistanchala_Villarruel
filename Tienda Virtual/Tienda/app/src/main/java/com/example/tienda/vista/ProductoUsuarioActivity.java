@@ -1,9 +1,11 @@
 package com.example.tienda.vista;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -38,4 +40,5 @@ public class ProductoUsuarioActivity extends AppCompatActivity {
 
         modelo.listarMisProductos(productos, productoAdapter, recyclerView);
     }
+
 }
