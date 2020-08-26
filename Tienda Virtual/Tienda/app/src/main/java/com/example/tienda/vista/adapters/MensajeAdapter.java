@@ -79,7 +79,7 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
         Mensaje chat = mensajes.get(position);
         if (chat.getTipo().equals("img")){
             //holder.mostrarMensaje.setText("");
-            holder.mostrarMensaje.setHeight(0);
+            holder.mostrarMensaje.setVisibility(View.GONE);
             Glide.with(contexto).load(chat.getContenido()).into(holder.imagenMensaje);
             holder.imagenMensaje.setAdjustViewBounds(true);
         }else {

@@ -18,6 +18,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.text.Html;
 import android.view.View;
@@ -199,8 +200,10 @@ public class Modelo {
                 mensajes.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Mensaje mensaje = snapshot.getValue(Mensaje.class);
-                    if (mensaje.getReceptor().equals(miId) && mensaje.getEmisor().equals(usuarioId) || mensaje.getReceptor().equals(usuarioId) && mensaje.getEmisor().equals(miId)) {
-                        mensajes.add(mensaje);
+                    if(mensaje!=null) {
+                        if (mensaje.getReceptor().equals(miId) && mensaje.getEmisor().equals(usuarioId) || mensaje.getReceptor().equals(usuarioId) && mensaje.getEmisor().equals(miId)) {
+                            mensajes.add(mensaje);
+                        }
                     }
                     MensajeAdapter messageAdapter = new MensajeAdapter(context, mensajes);
                     recyclerView.setAdapter(messageAdapter);
@@ -673,10 +676,10 @@ public class Modelo {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
                 if(producto.getVendedor().equals(idUsuarioActual())){
-                    comprar.setHeight(0);
+                    comprar.setVisibility(View.GONE);
                     comprar.setEnabled(false);
                 }else{
-                    eliminar.setHeight(0);
+                    eliminar.setVisibility(View.GONE);
                     eliminar.setEnabled(false);
                 }
             }
@@ -699,11 +702,13 @@ public class Modelo {
                 intent.putExtra("id",producto.getVendedor());
 
                 Mensaje mensaje = new Mensaje();
+
                 mensaje.setContenido("¿Sigue disponible el producto?\n"+producto.getNombre());
                 mensaje.setTipo("txt");
                 mensaje.setEmisor(idUsuarioActual());
                 mensaje.setReceptor(producto.getVendedor());
                 enviarMensaje(mensaje);
+
                 mensaje.setTipo("img");
                 mensaje.setContenido(producto.getImagen());
                 enviarMensaje(mensaje);
