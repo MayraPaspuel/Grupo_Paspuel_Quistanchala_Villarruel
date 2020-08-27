@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tienda.R;
+import com.example.tienda.modelo.Modelo;
 import com.example.tienda.modelo.Usuario;
 import com.example.tienda.vista.MensajeActivity;
 
@@ -29,6 +30,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
 
     private Context context;
     private List<Usuario> usuarios;
+    Modelo modelo = new Modelo();
 
 
     /**
@@ -111,6 +113,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
             }
         });
 
+        modelo.leerUltimoMensaje(holder.ultimoMensaje, usuario.getId());
     }
 
     /**
@@ -128,7 +131,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
      */
     public  class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView nombreUsuario;
+        public TextView nombreUsuario,ultimoMensaje;
         public ImageView foto;
 
         public ViewHolder(View itemView) {
@@ -136,6 +139,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
 
             nombreUsuario = itemView.findViewById(R.id.txtNombreUsuario);
             foto = itemView.findViewById(R.id.imgFoto);
+            ultimoMensaje = itemView.findViewById(R.id.txtUltimoMensaje);
         }
     }
 

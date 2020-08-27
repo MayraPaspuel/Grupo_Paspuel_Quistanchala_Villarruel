@@ -62,6 +62,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -81,6 +82,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 public class Modelo {
 
     Conexion conexion = Conexion.getInstancia();
+    ArrayList<String> idUsuarios = new ArrayList<String>();
 
     /**
      * Metodo login que realiza el inicio de sesion
@@ -200,7 +202,7 @@ public class Modelo {
                 mensajes.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Mensaje mensaje = snapshot.getValue(Mensaje.class);
-                    if(mensaje!=null) {
+                    if (mensaje != null) {
                         if (mensaje.getReceptor().equals(miId) && mensaje.getEmisor().equals(usuarioId) || mensaje.getReceptor().equals(usuarioId) && mensaje.getEmisor().equals(miId)) {
                             mensajes.add(mensaje);
                         }
@@ -279,13 +281,13 @@ public class Modelo {
     }
 
     /**
-     * Metodo leerUsuarios muestra la lista de usuarios registrados
+     * Metodo usuariosChat muestra la lista de usuarios que tienen un chat activo
      *
      * @param recyclerView
      * @param usuarioAdapter
      * @param usuarios
      */
-    public void leerUsuarios(final List<Usuario> usuarios, final UsuarioAdapter usuarioAdapter, final RecyclerView recyclerView) {
+    public void usuariosChat(final List<Usuario> usuarios, final UsuarioAdapter usuarioAdapter, final RecyclerView recyclerView) {
 
         conexion.getBaseDeDatos().child("Usuarios").addValueEventListener(new ValueEventListener() {
             @Override
@@ -293,7 +295,7 @@ public class Modelo {
                 usuarios.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Usuario user = snapshot.getValue(Usuario.class);
-                    if (!user.getId().equals(conexion.getUsuarioActual().getUid())) {
+                    if (!user.getId().equals(conexion.getUsuarioActual().getUid()) && idUsuarios.contains(snapshot.getKey())) {
                         usuarios.add(user);
                     }
                 }
@@ -447,11 +449,11 @@ public class Modelo {
     int ban = 0;
 
     /**
-     * Metodo leer que muestra el char completo entre dos personas
+     * Metodo leerParaNotificar que muestra el chat completo entre dos personas
      *
      * @param context
      */
-    public void leer(final Context context) {
+    public void leerParaNotificar(final Context context) {
 
         final ArrayList<Mensaje> mensajes = new ArrayList<>();
 
@@ -526,19 +528,17 @@ public class Modelo {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productos.clear();
-                //if(!buscarProducto.getText().toString().equals("")) {
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Producto producto = snapshot.getValue(Producto.class);
                     producto.setId(snapshot.getKey());
-                    if (producto.getNombre().toLowerCase().contains(buscarProducto.getText().toString().toLowerCase()) && producto.getCategoria().contains(categorias.getSelectedItem().toString())) {
-                        productos.add(producto);
+                    if (!producto.getVendedor().equals(idUsuarioActual())) {
+                        if (producto.getNombre().toLowerCase().contains(buscarProducto.getText().toString().toLowerCase()) && producto.getCategoria().contains(categorias.getSelectedItem().toString())) {
+                            productos.add(producto);
+                        }
                     }
-
-                        /*HashMap<String, Object> miId = new HashMap<>();
-                        miId.put("id", producto.getId());
-                        conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miId);*/
                 }
-                //}
+
                 productoAdapter.setProductos(productos);
                 recyclerView.setAdapter(productoAdapter);
             }
@@ -557,7 +557,7 @@ public class Modelo {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
-                if(producto!=null) {
+                if (producto != null) {
                     nombreProducto.setText(producto.getNombre());
                     descripcion.setText(producto.getDescripcion());
                     precio.setText("$" + producto.getPrecio());
@@ -649,7 +649,7 @@ public class Modelo {
 
                         Intent intent = new Intent(context, ProductoUsuarioActivity.class);
                         context.startActivity(intent);
-                        ((Activity)context).finish();
+                        ((Activity) context).finish();
 
                     } else {
                         Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
@@ -669,16 +669,16 @@ public class Modelo {
         }
     }
 
-    public void botones(final Button comprar, final Button eliminar, String productoId){
+    public void botones(final Button comprar, final Button eliminar, String productoId) {
 
         conexion.getBaseDeDatos().child("Productos").child(productoId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
-                if(producto.getVendedor().equals(idUsuarioActual())){
+                if (producto.getVendedor().equals(idUsuarioActual())) {
                     comprar.setVisibility(View.GONE);
                     comprar.setEnabled(false);
-                }else{
+                } else {
                     eliminar.setVisibility(View.GONE);
                     eliminar.setEnabled(false);
                 }
@@ -693,17 +693,17 @@ public class Modelo {
     }
 
     public void chatComprar(final Context context, final String productoId) {
-        //idVendedor.clear();
+
         conexion.getBaseDeDatos().child("Productos").child(productoId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
-                Intent intent = new Intent(context,MensajeActivity.class);
-                intent.putExtra("id",producto.getVendedor());
+                Intent intent = new Intent(context, MensajeActivity.class);
+                intent.putExtra("id", producto.getVendedor());
 
                 Mensaje mensaje = new Mensaje();
 
-                mensaje.setContenido("¿Sigue disponible el producto?\n"+producto.getNombre());
+                mensaje.setContenido("¿Sigue disponible el producto?\n" + producto.getNombre());
                 mensaje.setTipo("txt");
                 mensaje.setEmisor(idUsuarioActual());
                 mensaje.setReceptor(producto.getVendedor());
@@ -729,19 +729,15 @@ public class Modelo {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productos.clear();
-                //if(!buscarProducto.getText().toString().equals("")) {
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Producto producto = snapshot.getValue(Producto.class);
                     producto.setId(snapshot.getKey());
                     if (producto.getVendedor().equals(idUsuarioActual())) {
                         productos.add(producto);
                     }
-
-                        /*HashMap<String, Object> miId = new HashMap<>();
-                        miId.put("id", producto.getId());
-                        conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miId);*/
                 }
-                //}
+
                 productoAdapter.setProductos(productos);
                 recyclerView.setAdapter(productoAdapter);
             }
@@ -754,10 +750,69 @@ public class Modelo {
 
     }
 
-    public void eliminar(Context context, String productoId){
+    public void eliminar(Context context, String productoId) {
         conexion.getBaseDeDatos().child("Productos").child(productoId).removeValue();
-        ((Activity)context).onBackPressed();
-        ((Activity)context).finish();
+        ((Activity) context).onBackPressed();
+        ((Activity) context).finish();
+    }
+
+    public void leerUsuarios(final List<Usuario> usuarios, final UsuarioAdapter usuarioAdapter, final RecyclerView recyclerView) {
+
+        conexion.getBaseDeDatos().child("Mensajes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                idUsuarios.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Mensaje mensaje = snapshot.getValue(Mensaje.class);
+                    if (mensaje.getEmisor().equals(idUsuarioActual())) {
+                        idUsuarios.add(mensaje.getReceptor());
+                    } else if (mensaje.getReceptor().equals(idUsuarioActual())) {
+                        idUsuarios.add(mensaje.getEmisor());
+                    }
+                }
+                usuariosChat(usuarios, usuarioAdapter, recyclerView);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void leerUltimoMensaje(final TextView textView, final String usuarioId) {
+        final ArrayList<Mensaje> mensajes = new ArrayList<>();
+        final String miId = conexion.getAutenticacion().getUid();
+        conexion.getBaseDeDatos().child("Mensajes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mensajes.clear();
+                Mensaje ultimoMensaje = null;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Mensaje mensaje = snapshot.getValue(Mensaje.class);
+                    if (mensaje != null) {
+                        if (mensaje.getReceptor().equals(miId) && mensaje.getEmisor().equals(usuarioId) || mensaje.getReceptor().equals(usuarioId) && mensaje.getEmisor().equals(miId)) {
+                            ultimoMensaje = mensaje;
+                        }
+                    }
+                }
+
+                if (ultimoMensaje != null) {
+                    if (ultimoMensaje.getContenido().length() > 32) {
+                        textView.setText(ultimoMensaje.getContenido().substring(0, 32) + "...");
+                    } else {
+                        textView.setText(ultimoMensaje.getContenido());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

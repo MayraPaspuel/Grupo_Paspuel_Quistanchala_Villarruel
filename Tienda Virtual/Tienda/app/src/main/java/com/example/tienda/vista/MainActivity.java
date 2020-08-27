@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        presentador.leer(MainActivity.this);
+        presentador.leerParaNotificar(MainActivity.this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         presentador.cargarImagenUsuario(MainActivity.this, nombreUsuario, foto);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new ProductosFragment(), "Productos");
         viewPagerAdapter.addFragment(new PerfilFragment(), "Perfil");
+        viewPagerAdapter.addFragment(new ProductosFragment(), "Productos");
         viewPagerAdapter.addFragment(new UsuariosFragment(), "Usuarios");
 
 

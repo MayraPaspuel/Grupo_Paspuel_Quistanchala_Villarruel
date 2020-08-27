@@ -225,9 +225,9 @@ public class Presentador {
      *
      * @param context
      */
-    public boolean leer(Context context) {
+    public boolean leerParaNotificar(Context context) {
         try {
-            modelo.leer(context);
+            modelo.leerParaNotificar(context);
             return true;
         } catch (Exception ex) {
             return false;
