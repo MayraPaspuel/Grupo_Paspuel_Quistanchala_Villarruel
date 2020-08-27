@@ -7,7 +7,7 @@
     <string name="stringCorreo">Correo</string>
     <string name="stringIngreso">Ingreso</string>
     <string name="stringIngresar">Ingresar</string>
-    <string name="stringTienda">Mi Tienda</string>
+    <string name="stringTienda">Mi\nTienda</string>
     <string name="stringEscribaUnMensaje">Escriba un mensaje ...</string>
     <string name="stringEnviar">Enviar</string>
     <string name="stringMensaje">Mi Mensaje</string>
