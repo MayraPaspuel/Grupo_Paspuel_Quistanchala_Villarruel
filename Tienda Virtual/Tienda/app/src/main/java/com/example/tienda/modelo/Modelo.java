@@ -694,13 +694,16 @@ public class Modelo {
 
                         if(bandera) {
                             conexion.getBaseDeDatos().child("Productos").push().setValue(producto);
+                            Intent intent = new Intent(context, ProductoUsuarioActivity.class);
+                            context.startActivity(intent);
+                            ((Activity) context).finish();
                         }else{
                             actualizar(producto);
+                            ((Activity) context).onBackPressed();
+                            ((Activity) context).finish();
                         }
 
-                        Intent intent = new Intent(context, ProductoUsuarioActivity.class);
-                        context.startActivity(intent);
-                        ((Activity) context).finish();
+
 
                     } else {
                         Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
@@ -871,7 +874,7 @@ public class Modelo {
 
     public void llenarVista(final Context context, String idProducto, final ImageButton imageButton, final EditText nombreProducto, final EditText precio, final EditText descripcion, final Spinner categorias){
 
-        conexion.getBaseDeDatos().child("Productos").child(idProducto).addValueEventListener(new ValueEventListener() {
+        conexion.getBaseDeDatos().child("Productos").child(idProducto).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
@@ -879,16 +882,15 @@ public class Modelo {
                     nombreProducto.setText(producto.getNombre());
                     descripcion.setText(producto.getDescripcion());
                     precio.setText(producto.getPrecio());
-                    
+
                     for(int i = 0;i<categorias.getAdapter().getCount();i++){
                         if(categorias.getItemAtPosition(i).equals(producto.getCategoria())){
                             categorias.setSelection(i);
-                            Toast.makeText(context, i+"", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }
-
                     Glide.with(context).load(producto.getImagen()).into(imageButton);
+                    imageButton.setAdjustViewBounds(true);
                 }
             }
 
@@ -903,9 +905,9 @@ public class Modelo {
     public void actualizar(Producto producto){
         HashMap<String, Object> miProducto = new HashMap<String, Object>();
         miProducto.put("nombre",producto.getNombre());
-        miProducto.put("precio",producto.getNombre());
-        miProducto.put("categoria",producto.getNombre());
-        miProducto.put("descripcion",producto.getNombre());
+        miProducto.put("precio",producto.getPrecio());
+        miProducto.put("categoria",producto.getCategoria());
+        miProducto.put("descripcion",producto.getDescripcion());
         miProducto.put("vendedor",producto.getVendedor());
         miProducto.put("imagen", producto.getImagen());
         conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miProducto);
