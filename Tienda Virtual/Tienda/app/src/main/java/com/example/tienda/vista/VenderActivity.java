@@ -69,14 +69,19 @@ public class VenderActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 miProducto.setVendedor(modelo.idUsuarioActual());
+                
                 if (idProducto!=null) {
+                    if (imagenUri != null) {
+                        miProducto.setImagen(imagenUri.toString());
+                    } else {
+                        miProducto.setImagen(getIntent().getStringExtra("uri"));
+                    }
+                }else{
                     if (imagenUri != null) {
                         miProducto.setImagen(imagenUri.toString());
                     } else {
                         miProducto.setImagen("");
                     }
-                }else{
-                    miProducto.setImagen("imageButton");
                 }
                 miProducto.setNombre(nombreProducto.getText().toString());
                 miProducto.setPrecio(precio.getText().toString());

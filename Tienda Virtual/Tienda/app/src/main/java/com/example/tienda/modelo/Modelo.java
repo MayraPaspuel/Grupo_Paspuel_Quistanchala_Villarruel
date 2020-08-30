@@ -582,13 +582,13 @@ public class Modelo {
         } else if (min == null && max != null) {
             if (precio > max) {
                 return false;
-            }else {
+            } else {
                 return true;
             }
         } else if (max == null && min != null) {
             if (precio < min) {
                 return false;
-            }else {
+            } else {
                 return true;
             }
         } else if (precio >= min && precio <= max) {
@@ -671,7 +671,7 @@ public class Modelo {
         progressDialog.setMessage("Cargando...");
         progressDialog.show();
 
-        if (producto.getImagen() != null) {
+        if (producto.getImagen() != null && producto.getImagen().contains("content://")) {
 
             fileReference = conexion.getAlmacenamiento().child("Archivos").child(System.currentTimeMillis() + "." + getExtensionArchivo(Uri.parse(producto.getImagen()), context));
             storageTask = fileReference.putFile(Uri.parse(producto.getImagen()));
@@ -692,17 +692,16 @@ public class Modelo {
                         String uriBD = downloadUri.toString();
                         producto.setImagen(uriBD);
 
-                        if(bandera) {
+                        if (bandera) {
                             conexion.getBaseDeDatos().child("Productos").push().setValue(producto);
                             Intent intent = new Intent(context, ProductoUsuarioActivity.class);
                             context.startActivity(intent);
                             ((Activity) context).finish();
-                        }else{
+                        } else {
                             actualizar(producto);
                             ((Activity) context).onBackPressed();
                             ((Activity) context).finish();
                         }
-
 
 
                     } else {
@@ -718,6 +717,10 @@ public class Modelo {
                     progressDialog.dismiss();
                 }
             });
+        } else if (producto.getImagen()!=null) {
+            actualizar(producto);
+            ((Activity) context).onBackPressed();
+            ((Activity) context).finish();
         } else {
             Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
         }
@@ -872,7 +875,7 @@ public class Modelo {
     }
 
 
-    public void llenarVista(final Context context, String idProducto, final ImageButton imageButton, final EditText nombreProducto, final EditText precio, final EditText descripcion, final Spinner categorias){
+    public void llenarVista(final Context context, String idProducto, final ImageButton imageButton, final EditText nombreProducto, final EditText precio, final EditText descripcion, final Spinner categorias) {
 
         conexion.getBaseDeDatos().child("Productos").child(idProducto).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -883,14 +886,18 @@ public class Modelo {
                     descripcion.setText(producto.getDescripcion());
                     precio.setText(producto.getPrecio());
 
-                    for(int i = 0;i<categorias.getAdapter().getCount();i++){
-                        if(categorias.getItemAtPosition(i).equals(producto.getCategoria())){
+                    for (int i = 0; i < categorias.getAdapter().getCount(); i++) {
+                        if (categorias.getItemAtPosition(i).equals(producto.getCategoria())) {
                             categorias.setSelection(i);
                             break;
                         }
                     }
                     Glide.with(context).load(producto.getImagen()).into(imageButton);
                     imageButton.setAdjustViewBounds(true);
+
+                    Intent intent = new Intent();
+                    intent.putExtra("uri", producto.getImagen());
+                    ((Activity) context).setIntent(intent);
                 }
             }
 
@@ -902,13 +909,13 @@ public class Modelo {
 
     }
 
-    public void actualizar(Producto producto){
+    public void actualizar(Producto producto) {
         HashMap<String, Object> miProducto = new HashMap<String, Object>();
-        miProducto.put("nombre",producto.getNombre());
-        miProducto.put("precio",producto.getPrecio());
-        miProducto.put("categoria",producto.getCategoria());
-        miProducto.put("descripcion",producto.getDescripcion());
-        miProducto.put("vendedor",producto.getVendedor());
+        miProducto.put("nombre", producto.getNombre());
+        miProducto.put("precio", producto.getPrecio());
+        miProducto.put("categoria", producto.getCategoria());
+        miProducto.put("descripcion", producto.getDescripcion());
+        miProducto.put("vendedor", producto.getVendedor());
         miProducto.put("imagen", producto.getImagen());
         conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miProducto);
     }
