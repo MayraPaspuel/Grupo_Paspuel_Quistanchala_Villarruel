@@ -43,6 +43,7 @@ import com.example.tienda.vista.MensajeActivity;
 import com.example.tienda.vista.ProductoActivity;
 import com.example.tienda.vista.ProductoUsuarioActivity;
 import com.example.tienda.vista.StartActivity;
+import com.example.tienda.vista.VenderActivity;
 import com.example.tienda.vista.adapters.MensajeAdapter;
 import com.example.tienda.vista.adapters.ProductoAdapter;
 import com.example.tienda.vista.adapters.UsuarioAdapter;
@@ -522,7 +523,7 @@ public class Modelo {
      *
      * */
 
-    public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView, final EditText buscarProducto, final Spinner categorias) {
+    public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView, final EditText buscarProducto, final Spinner categorias, final EditText minimo, final EditText maximo) {
 
         conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
             @Override
@@ -533,8 +534,12 @@ public class Modelo {
                     Producto producto = snapshot.getValue(Producto.class);
                     producto.setId(snapshot.getKey());
                     if (!producto.getVendedor().equals(idUsuarioActual())) {
+
                         if (producto.getNombre().toLowerCase().contains(buscarProducto.getText().toString().toLowerCase()) && producto.getCategoria().contains(categorias.getSelectedItem().toString())) {
-                            productos.add(producto);
+
+                            if (filtrarPrecio(minimo, maximo, producto)) {
+                                productos.add(producto);
+                            }
                         }
                     }
                 }
@@ -551,6 +556,48 @@ public class Modelo {
 
     }
 
+    public boolean filtrarPrecio(EditText minimo, EditText maximo, Producto producto) {
+
+        Double precio, min, max;
+        try {
+            precio = Double.parseDouble(producto.getPrecio());
+        } catch (Exception ex) {
+            precio = null;
+        }
+
+        try {
+            min = Double.parseDouble(minimo.getText().toString());
+        } catch (Exception ex) {
+            min = null;
+        }
+
+        try {
+            max = Double.parseDouble(maximo.getText().toString());
+        } catch (Exception ex) {
+            max = null;
+        }
+
+        if (min == null && max == null) {
+            return true;
+        } else if (min == null && max != null) {
+            if (precio > max) {
+                return false;
+            }else {
+                return true;
+            }
+        } else if (max == null && min != null) {
+            if (precio < min) {
+                return false;
+            }else {
+                return true;
+            }
+        } else if (precio >= min && precio <= max) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void buscarProducto(final Context context, String idProducto, final ImageView imagen, final TextView nombreProducto, final TextView descripcion, final TextView precio, final TextView vendedor) {
 
         conexion.getBaseDeDatos().child("Productos").child(idProducto).addValueEventListener(new ValueEventListener() {
@@ -562,7 +609,7 @@ public class Modelo {
                     descripcion.setText(producto.getDescripcion());
                     precio.setText("$" + producto.getPrecio());
                     setNombreVendedor(vendedor, producto.getVendedor());
-                    Glide.with(context.getApplicationContext()).load(producto.getImagen()).into(imagen);
+                    Glide.with(context).load(producto.getImagen()).into(imagen);
                 }
             }
 
@@ -616,7 +663,7 @@ public class Modelo {
 
     }
 
-    public void publicarProducto(final Context context, final Producto producto) {
+    public void publicarProducto(final Context context, final Producto producto, final Boolean bandera) {
         StorageTask storageTask;
         final StorageReference fileReference;
         final ProgressDialog progressDialog = new ProgressDialog(context);
@@ -645,7 +692,11 @@ public class Modelo {
                         String uriBD = downloadUri.toString();
                         producto.setImagen(uriBD);
 
-                        conexion.getBaseDeDatos().child("Productos").push().setValue(producto);
+                        if(bandera) {
+                            conexion.getBaseDeDatos().child("Productos").push().setValue(producto);
+                        }else{
+                            actualizar(producto);
+                        }
 
                         Intent intent = new Intent(context, ProductoUsuarioActivity.class);
                         context.startActivity(intent);
@@ -669,7 +720,7 @@ public class Modelo {
         }
     }
 
-    public void botones(final Button comprar, final Button eliminar, String productoId) {
+    public void botones(final Button comprar, final Button eliminar, final Button actualizar, String productoId) {
 
         conexion.getBaseDeDatos().child("Productos").child(productoId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -681,6 +732,8 @@ public class Modelo {
                 } else {
                     eliminar.setVisibility(View.GONE);
                     eliminar.setEnabled(false);
+                    actualizar.setVisibility(View.GONE);
+                    actualizar.setEnabled(false);
                 }
             }
 
@@ -813,6 +866,49 @@ public class Modelo {
 
             }
         });
+    }
+
+
+    public void llenarVista(final Context context, String idProducto, final ImageButton imageButton, final EditText nombreProducto, final EditText precio, final EditText descripcion, final Spinner categorias){
+
+        conexion.getBaseDeDatos().child("Productos").child(idProducto).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Producto producto = dataSnapshot.getValue(Producto.class);
+                if (producto != null) {
+                    nombreProducto.setText(producto.getNombre());
+                    descripcion.setText(producto.getDescripcion());
+                    precio.setText(producto.getPrecio());
+                    
+                    for(int i = 0;i<categorias.getAdapter().getCount();i++){
+                        if(categorias.getItemAtPosition(i).equals(producto.getCategoria())){
+                            categorias.setSelection(i);
+                            Toast.makeText(context, i+"", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+
+                    Glide.with(context).load(producto.getImagen()).into(imageButton);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void actualizar(Producto producto){
+        HashMap<String, Object> miProducto = new HashMap<String, Object>();
+        miProducto.put("nombre",producto.getNombre());
+        miProducto.put("precio",producto.getNombre());
+        miProducto.put("categoria",producto.getNombre());
+        miProducto.put("descripcion",producto.getNombre());
+        miProducto.put("vendedor",producto.getVendedor());
+        miProducto.put("imagen", producto.getImagen());
+        conexion.getBaseDeDatos().child("Productos").child(producto.getId()).updateChildren(miProducto);
     }
 
 }

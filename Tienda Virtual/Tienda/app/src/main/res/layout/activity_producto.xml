@@ -143,11 +143,20 @@
                 android:textColor="#fff" />
 
             <Button
-                android:id="@+id/btnEliminar"
+                android:id="@+id/btnActualizar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
+                android:text="Actualizar"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/btnEliminar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@android:color/holo_red_light"
                 android:text="Eliminar"
                 android:textColor="#fff" />
 

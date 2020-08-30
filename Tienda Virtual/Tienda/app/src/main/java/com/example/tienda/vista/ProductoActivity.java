@@ -17,11 +17,11 @@ public class ProductoActivity extends AppCompatActivity {
 
     ImageView imagen;
     TextView nombreProducto, descripcion, precio, vendedor;
-    Button comprar, eliminar;
+    Button comprar, eliminar, actualizar;
     Modelo modelo = new Modelo();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_producto);
 
@@ -47,8 +47,9 @@ public class ProductoActivity extends AppCompatActivity {
 
         comprar = findViewById(R.id.btnComprar);
         eliminar = findViewById(R.id.btnEliminar);
+        actualizar = findViewById(R.id.btnActualizar);
 
-        modelo.botones(comprar,eliminar, productoId);
+        modelo.botones(comprar,eliminar, actualizar, productoId);
 
         comprar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,15 @@ public class ProductoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 modelo.eliminar(ProductoActivity.this,productoId);
+            }
+        });
+
+        actualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductoActivity.this, VenderActivity.class);
+                intent.putExtra("id",productoId);
+                startActivity(intent);
             }
         });
 

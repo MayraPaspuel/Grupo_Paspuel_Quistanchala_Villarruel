@@ -31,7 +31,7 @@ public class ProductosFragment extends Fragment {
     private ProductoAdapter productoAdapter;
     private List<Producto> productos;
     private Presentador presentador = new Presentador();
-    private EditText buscarProducto;
+    private EditText buscarProducto, minimo, maximo;
     private Spinner categorias;
     Modelo modelo = new Modelo();
 
@@ -49,28 +49,18 @@ public class ProductosFragment extends Fragment {
         categorias = view.findViewById(R.id.spnCategoría);
         buscarProducto = view.findViewById(R.id.txtBuscarProducto);
 
-        buscarProducto.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        minimo = view.findViewById(R.id.txtMin);
+        maximo = view.findViewById(R.id.txtMax);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        minimo.addTextChangedListener(textWatcher);
+        maximo.addTextChangedListener(textWatcher);
+        buscarProducto.addTextChangedListener(textWatcher);
 
         categorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //if(!buscarProducto.getText().toString().equals("")) {
-                    modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias);
+                    modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias, minimo, maximo);
                     //Toast.makeText(getContext(),"HOla",Toast.LENGTH_SHORT).show();
                 //}
             }
@@ -82,9 +72,25 @@ public class ProductosFragment extends Fragment {
         });
 
         modelo.listarCategorias(getContext(),categorias);
-        modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias);
+        modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias, minimo, maximo);
         return view;
     }
 
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias, minimo, maximo);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
 }

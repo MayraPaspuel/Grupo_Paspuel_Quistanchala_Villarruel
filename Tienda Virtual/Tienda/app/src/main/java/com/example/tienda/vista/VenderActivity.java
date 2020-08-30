@@ -24,7 +24,7 @@ public class VenderActivity extends AppCompatActivity {
     ImageButton imageButton;
     Button publicar;
     Modelo modelo = new Modelo();
-    EditText nombreProducto, precio, decripcion;
+    EditText nombreProducto, precio, descripcion;
     private static final int IMAGE_REQUEST = 1;
     private Uri imagenUri;
     final Producto miProducto = new Producto();
@@ -51,36 +51,49 @@ public class VenderActivity extends AppCompatActivity {
 
         nombreProducto = findViewById(R.id.txtNombreProducto);
         precio = findViewById(R.id.txtPrecio);
-        decripcion = findViewById(R.id.txtDescripcion);
+        descripcion = findViewById(R.id.txtDescripcion);
 
         categorias = findViewById(R.id.spnCategoría);
-        modelo.listarCategorias(VenderActivity.this,categorias);
+        modelo.listarCategorias(VenderActivity.this, categorias);
+
+
+        final String idProducto = getIntent().getStringExtra("id");
+
+        if (idProducto!=null) {
+            publicar.setText("Publicar Cambios");
+            modelo.llenarVista(VenderActivity.this,idProducto,imageButton, nombreProducto, precio, descripcion, categorias);
+        }
 
         publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 miProducto.setVendedor(modelo.idUsuarioActual());
-                if(imagenUri!=null) {
+                if (imagenUri != null) {
                     miProducto.setImagen(imagenUri.toString());
-                }else{
+                } else {
                     miProducto.setImagen("");
                 }
                 miProducto.setNombre(nombreProducto.getText().toString());
                 miProducto.setPrecio(precio.getText().toString());
-                miProducto.setDescripcion(decripcion.getText().toString());
+                miProducto.setDescripcion(descripcion.getText().toString());
                 miProducto.setCategoria(categorias.getSelectedItem().toString());
 
-                if(!miProducto.getImagen().equals("")
-                        &&!miProducto.getNombre().equals("")
-                        &&!miProducto.getPrecio().equals("")
-                        &&!miProducto.getDescripcion().equals("")
-                        &&!miProducto.getCategoria().equals("")&&!miProducto.getVendedor().equals("")){
-                    modelo.publicarProducto(VenderActivity.this,miProducto);
-                }else {
-                    Toast.makeText(VenderActivity.this,"Todos los campos deben ser llenados correctamente", Toast.LENGTH_LONG).show();
-                }
+                if (!miProducto.getImagen().equals("")
+                        && !miProducto.getNombre().equals("")
+                        && !miProducto.getPrecio().equals("")
+                        && !miProducto.getDescripcion().equals("")
+                        && !miProducto.getCategoria().equals("") && !miProducto.getVendedor().equals("")) {
+                    if (idProducto!=null) {
+                        miProducto.setId(idProducto);
+                        modelo.publicarProducto(VenderActivity.this, miProducto, false);
+                    }else {
+                        modelo.publicarProducto(VenderActivity.this, miProducto, true);
+                    }
+                } else {
 
+                    Toast.makeText(VenderActivity.this, "Todos los campos deben ser llenados correctamente", Toast.LENGTH_LONG).show();
+                }
 
 
             }
@@ -93,10 +106,6 @@ public class VenderActivity extends AppCompatActivity {
                 //Toast.makeText(VenderActivity.this,producto.getImagen(),Toast.LENGTH_LONG).show();
             }
         });
-
-
-
-
 
     }
 
@@ -112,8 +121,9 @@ public class VenderActivity extends AppCompatActivity {
 
     /**
      * Metodo onActivityResult que permite volver a una actividad del chat luego de abrir una imagen desde la galeria o la cámara
+     *
      * @param requestCode
-     * @param  resultCode
+     * @param resultCode
      * @param data
      */
     @Override

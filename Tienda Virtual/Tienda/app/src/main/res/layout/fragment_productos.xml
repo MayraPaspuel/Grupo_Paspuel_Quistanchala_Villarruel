@@ -47,7 +47,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Filtrar"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -63,6 +64,40 @@
                             android:id="@+id/spnCategoría"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Precio:" />
+
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/txtMin"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Min"
+                            app:met_floatingLabel="normal"
+                            android:inputType="numberDecimal"/>
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"/>
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/txtMax"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Max"
+                            app:met_floatingLabel="normal"
+                            android:inputType="numberDecimal"/>
+
+
                     </LinearLayout>
 
                 </LinearLayout>
