@@ -721,8 +721,10 @@ public class Modelo {
             actualizar(producto);
             ((Activity) context).onBackPressed();
             ((Activity) context).finish();
+            progressDialog.dismiss();
         } else {
             Toast.makeText(context, "No se ha seleccionado ninguna imagen", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
     }
 
