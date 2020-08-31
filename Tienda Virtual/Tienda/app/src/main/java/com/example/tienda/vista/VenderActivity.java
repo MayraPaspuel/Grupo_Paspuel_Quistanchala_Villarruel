@@ -59,9 +59,9 @@ public class VenderActivity extends AppCompatActivity {
 
         final String idProducto = getIntent().getStringExtra("id");
 
-        if (idProducto!=null) {
+        if (idProducto != null) {
             publicar.setText("Publicar Cambios");
-            modelo.llenarVista(VenderActivity.this,idProducto,imageButton, nombreProducto, precio, descripcion, categorias);
+            modelo.llenarVista(VenderActivity.this, idProducto, imageButton, nombreProducto, precio, descripcion, categorias);
         }
 
         publicar.setOnClickListener(new View.OnClickListener() {
@@ -69,20 +69,16 @@ public class VenderActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 miProducto.setVendedor(modelo.idUsuarioActual());
-                
-                if (idProducto!=null) {
-                    if (imagenUri != null) {
-                        miProducto.setImagen(imagenUri.toString());
-                    } else {
-                        miProducto.setImagen(getIntent().getStringExtra("uri"));
-                    }
-                }else{
-                    if (imagenUri != null) {
-                        miProducto.setImagen(imagenUri.toString());
-                    } else {
-                        miProducto.setImagen("");
-                    }
+
+
+                if (imagenUri != null) {
+                    miProducto.setImagen(imagenUri.toString());
+                } else if (idProducto != null) {
+                    miProducto.setImagen(getIntent().getStringExtra("uri"));
+                } else {
+                    miProducto.setImagen("");
                 }
+
                 miProducto.setNombre(nombreProducto.getText().toString());
                 miProducto.setPrecio(precio.getText().toString());
                 miProducto.setDescripcion(descripcion.getText().toString());
@@ -93,10 +89,10 @@ public class VenderActivity extends AppCompatActivity {
                         && !miProducto.getPrecio().equals("")
                         && !miProducto.getDescripcion().equals("")
                         && !miProducto.getCategoria().equals("") && !miProducto.getVendedor().equals("")) {
-                    if (idProducto!=null) {
+                    if (idProducto != null) {
                         miProducto.setId(idProducto);
                         modelo.publicarProducto(VenderActivity.this, miProducto, false);
-                    }else {
+                    } else {
                         modelo.publicarProducto(VenderActivity.this, miProducto, true);
                     }
                 } else {

@@ -35,8 +35,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class MainActivity extends AppCompatActivity {
 
-    CircleImageView foto;
-    TextView nombreUsuario;
     ViewPager viewPager;
     TabLayout tabLayout;
     Presentador presentador = new Presentador();
@@ -56,22 +54,22 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
-        foto = findViewById(R.id.imgFoto);
-        nombreUsuario = findViewById(R.id.txtNombreUsuario);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
-        presentador.cargarImagenUsuario(MainActivity.this, nombreUsuario, foto);
-
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new PerfilFragment(), "Perfil");
-        viewPagerAdapter.addFragment(new ProductosFragment(), "Productos");
-        viewPagerAdapter.addFragment(new UsuariosFragment(), "Chat");
+        viewPagerAdapter.addFragment(new ProductosFragment(), "");
+        viewPagerAdapter.addFragment(new PerfilFragment(), "");
+        viewPagerAdapter.addFragment(new UsuariosFragment(), "");
 
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_action_productos);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_action_perfil);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_action_chat);
     }
 
     /**
