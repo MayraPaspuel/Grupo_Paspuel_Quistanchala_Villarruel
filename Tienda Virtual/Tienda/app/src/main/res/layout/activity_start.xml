@@ -12,11 +12,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/stringTienda"
         android:textColor="#fff"
-        android:textSize="50sp"
+        android:textSize="80sp"
         android:textStyle="bold"
-        android:gravity="center"/>
+        app:fontFamily="cursive" />
 
     <ImageView
         android:layout_width="300dp"

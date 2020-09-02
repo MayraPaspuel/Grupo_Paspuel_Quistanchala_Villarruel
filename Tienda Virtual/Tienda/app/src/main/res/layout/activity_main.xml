@@ -19,16 +19,28 @@
             android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/MenuStyle">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
-                app:tabSelectedTextColor="#fff"
-                app:tabIndicatorColor="#fff"
-                app:tabTextColor="#fff"/>
+                android:gravity="center"
+                android:text="Mi Tienda"
+                android:textColor="@android:color/white"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:fontFamily="cursive" />
 
         </androidx.appcompat.widget.Toolbar>
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            app:tabIndicatorColor="#fff"
+            app:tabSelectedTextColor="#fff"
+            app:tabTextColor="#fff" />
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
