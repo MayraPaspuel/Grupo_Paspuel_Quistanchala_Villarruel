@@ -105,7 +105,7 @@ public class ProductosFragment extends Fragment {
         });
 
         modelo.listarCategorias(getContext(),categorias);
-        modelo.listarProductos(productos, productoAdapter, recyclerView, buscarProducto, categorias, minimo, maximo);
+        modelo.listarProductos(productos, productoAdapter, recyclerView);
         return view;
     }
 

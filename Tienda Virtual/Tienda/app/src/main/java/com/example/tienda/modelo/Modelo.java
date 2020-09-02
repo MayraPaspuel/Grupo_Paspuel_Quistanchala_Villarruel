@@ -523,6 +523,34 @@ public class Modelo {
      *
      * */
 
+
+    public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView) {
+
+        conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productos.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Producto producto = snapshot.getValue(Producto.class);
+                    producto.setId(snapshot.getKey());
+                    if (!producto.getVendedor().equals(idUsuarioActual())) {
+                        productos.add(producto);
+                    }
+                }
+
+                productoAdapter.setProductos(productos);
+                recyclerView.setAdapter(productoAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
     public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView, final EditText buscarProducto, final Spinner categorias, final EditText minimo, final EditText maximo) {
 
         conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
