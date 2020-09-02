@@ -22,20 +22,45 @@
                 android:layout_margin="2dp"
                 android:background="@android:color/white">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/txtBuscarProducto"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:hint="Buscar"
-                    app:met_floatingLabel="normal" />
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/txtBuscarProducto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@id/btnFiltrar"
+                        android:layout_toStartOf="@id/btnFiltrar"
+                        android:layout_margin="8dp"
+                        android:hint="Buscar"/>
+
+                        <ImageButton
+                            android:id="@+id/btnFiltrar"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_action_filtro"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"/>
+
+                </RelativeLayout>
+
+
+
+
 
             </androidx.cardview.widget.CardView>
+
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
+                android:id="@+id/miCardView"
                 android:background="@android:color/white">
 
                 <LinearLayout
@@ -43,13 +68,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Filtrar"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="10dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="Comprar"
+                android:text="Contactar al Vendedor"
                 android:textColor="#fff" />
 
             <Button

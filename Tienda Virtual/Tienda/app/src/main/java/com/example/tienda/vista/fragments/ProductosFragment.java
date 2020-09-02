@@ -1,18 +1,23 @@
 package com.example.tienda.vista.fragments;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -33,7 +38,10 @@ public class ProductosFragment extends Fragment {
     private Presentador presentador = new Presentador();
     private EditText buscarProducto, minimo, maximo;
     private Spinner categorias;
-    Modelo modelo = new Modelo();
+    private CardView cardView;
+    private ImageButton filtrar;
+    private boolean bandera=true;
+    private Modelo modelo = new Modelo();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,12 +57,37 @@ public class ProductosFragment extends Fragment {
         categorias = view.findViewById(R.id.spnCategoría);
         buscarProducto = view.findViewById(R.id.txtBuscarProducto);
 
+        filtrar = view.findViewById(R.id.btnFiltrar);
+        cardView = view.findViewById(R.id.miCardView);
+
+
+        cardView.setVisibility(View.GONE);
+
+        filtrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bandera) {
+                    cardView.setVisibility(View.VISIBLE);
+                    bandera=false;
+                }else{
+                    cardView.setVisibility(View.GONE);
+                    categorias.setSelection(0);
+                    minimo.setText("");
+                    maximo.setText("");
+                    bandera=true;
+                }
+            }
+        });
+
+
         minimo = view.findViewById(R.id.txtMin);
         maximo = view.findViewById(R.id.txtMax);
 
         minimo.addTextChangedListener(textWatcher);
         maximo.addTextChangedListener(textWatcher);
         buscarProducto.addTextChangedListener(textWatcher);
+
+
 
         categorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
