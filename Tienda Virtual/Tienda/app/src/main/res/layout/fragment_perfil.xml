@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".vista.fragments.PerfilFragment">
 
-    <androidx.cardview.widget.CardView
+
+    <RelativeLayout
+        android:id="@+id/perfil"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_margin="10dp"
-        android:id="@+id/miCardView">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgFoto"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@mipmap/ic_launcher"
+            android:translationZ="3dp"
+            app:civ_border_width="5dp"
+            app:civ_border_color="@android:color/white"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/miCardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white">
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+            app:cardCornerRadius="15dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgFoto"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:src="@mipmap/ic_launcher" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:id="@+id/txtNombreUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imgFoto"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
-                android:text="Nombre de Usuario"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtNombreUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="cursive"
+                    android:gravity="center_horizontal"
+                    android:text="Nombre de Usuario"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
 
-        </RelativeLayout>
+            </RelativeLayout>
 
+        </androidx.cardview.widget.CardView>
 
-
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnVender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/miCardView"
+        android:layout_below="@+id/perfil"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/colorPrimaryDark"
