@@ -126,13 +126,21 @@ public class MensajeActivity extends AppCompatActivity {
                 } else {
                     Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    mensaje.setContenido(location.getLatitude() + "/" + location.getLongitude());
-                    mensaje.setTipo("gps");
+                    if (location == null) {
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    }
 
-                    if (!mensaje.getContenido().equals("")) {
-                        presentador.enviarMensaje(mensaje);
+                    if (location != null) {
+                        mensaje.setContenido(location.getLatitude() + "/" + location.getLongitude());
+                        mensaje.setTipo("gps");
+
+                        if (!mensaje.getContenido().equals("")) {
+                            presentador.enviarMensaje(mensaje);
+                        } else {
+                            Toast.makeText(MensajeActivity.this, "No se puede enviar la ubicación", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(MensajeActivity.this, "No se puede enviar un mensaje vacío", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MensajeActivity.this, "Es necesario activar la ubicación del dispositivo", Toast.LENGTH_SHORT).show();
                     }
                 }
 
