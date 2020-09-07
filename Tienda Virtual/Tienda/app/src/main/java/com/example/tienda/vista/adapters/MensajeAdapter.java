@@ -96,6 +96,8 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
                 }
             });
 
+            holder.hora.setPadding(8,120,0,0);
+
         }else if (chat.getTipo().equals("img")){
             holder.mostrarMensaje.setVisibility(View.GONE);
             holder.ubicacion.setVisibility(View.GONE);

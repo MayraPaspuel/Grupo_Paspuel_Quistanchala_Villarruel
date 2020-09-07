@@ -68,7 +68,7 @@
                 android:layout_height="40dp"
                 android:layout_toEndOf="@+id/btnEnviarImagen"
                 android:layout_toRightOf="@+id/btnEnviarImagen"
-                android:background="@drawable/ic_action_ubicacion"
+                android:background="@drawable/ic_action_ubicacion_color"
                 android:contentDescription="@string/stringEnviar" />
 
             <EditText
