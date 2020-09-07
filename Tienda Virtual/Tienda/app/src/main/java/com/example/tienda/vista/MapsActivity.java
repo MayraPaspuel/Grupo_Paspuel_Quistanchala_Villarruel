@@ -1,6 +1,7 @@
 package com.example.tienda.vista;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
@@ -22,6 +23,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     LatLng ubicacionActual = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +53,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+            onBackPressed();
+            finish();
+        } else {
+            mMap.setMyLocationEnabled(true);
+            mMap.addMarker(new MarkerOptions().position(ubicacionActual).title("Ubicación"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(ubicacionActual));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
         }
-        mMap.setMyLocationEnabled(true);
-
-
-
-        mMap.addMarker(new MarkerOptions().position(ubicacionActual).title("Ubicación"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(ubicacionActual));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
     }
 }

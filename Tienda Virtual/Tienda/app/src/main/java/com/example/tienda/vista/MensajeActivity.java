@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -120,19 +121,21 @@ public class MensajeActivity extends AppCompatActivity {
                 mensaje.setReceptor(userid);
 
                 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (ActivityCompat.checkSelfPermission(MensajeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MensajeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                mensaje.setContenido(location.getLatitude() + "/" + location.getLongitude());
-                mensaje.setTipo("gps");
-
-                if (!mensaje.getContenido().equals("")) {
-                    presentador.enviarMensaje(mensaje);
+                if (ActivityCompat.checkSelfPermission(MensajeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(MensajeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
                 } else {
-                    Toast.makeText(MensajeActivity.this, "No se puede enviar un mensaje vacío", Toast.LENGTH_SHORT).show();
+                    Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                    mensaje.setContenido(location.getLatitude() + "/" + location.getLongitude());
+                    mensaje.setTipo("gps");
+
+                    if (!mensaje.getContenido().equals("")) {
+                        presentador.enviarMensaje(mensaje);
+                    } else {
+                        Toast.makeText(MensajeActivity.this, "No se puede enviar un mensaje vacío", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
 
