@@ -12,6 +12,7 @@
 package com.example.tienda.vista.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +20,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tienda.R;
 import com.example.tienda.modelo.Mensaje;
+import com.example.tienda.vista.MapsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,13 +80,29 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull MensajeAdapter.ViewHolder holder, int position) {
 
-        Mensaje chat = mensajes.get(position);
-        if (chat.getTipo().equals("img")){
-            //holder.mostrarMensaje.setText("");
+        final Mensaje chat = mensajes.get(position);
+        if (chat.getTipo().equals("gps")){
+
             holder.mostrarMensaje.setVisibility(View.GONE);
+
+            holder.ubicacion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(contexto, MapsActivity.class);
+                    String[] coordenadas = chat.getContenido().split("/");
+                    intent.putExtra("lat",coordenadas[0]);
+                    intent.putExtra("lon",coordenadas[1]);
+                    contexto.startActivity(intent);
+                }
+            });
+
+        }else if (chat.getTipo().equals("img")){
+            holder.mostrarMensaje.setVisibility(View.GONE);
+            holder.ubicacion.setVisibility(View.GONE);
             Glide.with(contexto).load(chat.getContenido()).into(holder.imagenMensaje);
             holder.imagenMensaje.setAdjustViewBounds(true);
         }else {
+            holder.ubicacion.setVisibility(View.GONE);
             holder.mostrarMensaje.setText(chat.getContenido());
         }
         holder.hora.setText(chat.getHora());
@@ -103,12 +123,14 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ViewHold
         public TextView mostrarMensaje;
         public TextView hora;
         public ImageView imagenMensaje;
+        public CardView ubicacion;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mostrarMensaje = itemView.findViewById(R.id.txtMensaje);
             hora = itemView.findViewById(R.id.txtHora);
             imagenMensaje=itemView.findViewById(R.id.imagenMensaje);
+            ubicacion = itemView.findViewById(R.id.btnUbicacion);
         }
     }
     /**

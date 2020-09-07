@@ -888,7 +888,11 @@ public class Modelo {
                 }
 
                 if (ultimoMensaje != null) {
-                    if (ultimoMensaje.getContenido().length() > 32) {
+                    if(ultimoMensaje.getTipo().equals("gps")){
+                        textView.setText("Ubicación");
+                    }else if(ultimoMensaje.getTipo().equals("img")){
+                        textView.setText("Imagen");
+                    }else if (ultimoMensaje.getContenido().length() > 32) {
                         textView.setText(ultimoMensaje.getContenido().substring(0, 32) + "...");
                     } else {
                         textView.setText(ultimoMensaje.getContenido());

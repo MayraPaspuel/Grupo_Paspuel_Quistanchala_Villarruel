@@ -62,6 +62,15 @@
                 android:background="@drawable/ic_action_enviar_imagen"
                 android:contentDescription="@string/stringEnviar" />
 
+            <ImageButton
+                android:id="@+id/btnEnviarUbicacion"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_toEndOf="@+id/btnEnviarImagen"
+                android:layout_toRightOf="@+id/btnEnviarImagen"
+                android:background="@drawable/ic_action_ubicacion"
+                android:contentDescription="@string/stringEnviar" />
+
             <EditText
                 android:id="@+id/txtEnviar"
                 android:layout_width="wrap_content"
@@ -69,8 +78,8 @@
                 android:layout_centerVertical="true"
                 android:layout_toStartOf="@id/btnEnviar"
                 android:layout_toLeftOf="@id/btnEnviar"
-                android:layout_toEndOf="@+id/btnEnviarImagen"
-                android:layout_toRightOf="@+id/btnEnviarImagen"
+                android:layout_toEndOf="@+id/btnEnviarUbicacion"
+                android:layout_toRightOf="@+id/btnEnviarUbicacion"
                 android:autofillHints=""
                 android:background="@android:color/transparent"
                 android:hint="@string/stringEscribaUnMensaje"
