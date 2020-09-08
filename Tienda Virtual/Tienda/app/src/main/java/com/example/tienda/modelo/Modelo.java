@@ -676,7 +676,9 @@ public class Modelo {
                 misCategorias.add("");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Categoria categoria = snapshot.getValue(Categoria.class);
-                    misCategorias.add(categoria.getNombre());
+                    if(categorias!=null) {
+                        misCategorias.add(categoria.getNombre());
+                    }
                 }
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, misCategorias);
