@@ -30,6 +30,13 @@ import com.example.tienda.vista.adapters.ProductoAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que maneja los fragmentos de los productos
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class ProductosFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -43,6 +50,12 @@ public class ProductosFragment extends Fragment {
     private boolean bandera=true;
     private Modelo modelo = new Modelo();
 
+    /**
+     * Metodo onCreateView que crea y devuelve la jerarquía de vistas asociadas con los elementos del producto
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_productos,container,false);
@@ -109,6 +122,9 @@ public class ProductosFragment extends Fragment {
         return view;
     }
 
+    /**
+     * La interfaz TextWatcher contiene una serie de métodos que permite ejecutar texto antes, durante o después de realizar un cambio a través de EditText
+     */
     TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

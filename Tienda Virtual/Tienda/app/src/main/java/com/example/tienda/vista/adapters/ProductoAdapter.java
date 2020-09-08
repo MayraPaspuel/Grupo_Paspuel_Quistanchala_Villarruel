@@ -18,6 +18,13 @@ import com.example.tienda.vista.ProductoActivity;
 
 import java.util.List;
 
+/**
+ * Clase que se encarga de manejar los adaptadores del producto
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHolder> {
 
     private Context context;

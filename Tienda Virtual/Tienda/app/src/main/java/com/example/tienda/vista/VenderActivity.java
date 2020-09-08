@@ -18,6 +18,13 @@ import com.example.tienda.R;
 import com.example.tienda.modelo.Modelo;
 import com.example.tienda.modelo.Producto;
 
+/**
+ * Clase que contiene las propiedades de la vista de los vendedores
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class VenderActivity extends AppCompatActivity {
 
     Spinner categorias;
@@ -29,6 +36,10 @@ public class VenderActivity extends AppCompatActivity {
     private Uri imagenUri;
     final Producto miProducto = new Producto();
 
+    /**
+     * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz de productos
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

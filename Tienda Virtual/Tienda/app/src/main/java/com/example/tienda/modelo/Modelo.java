@@ -531,6 +531,13 @@ public class Modelo {
      * */
 
 
+    /**
+     * Metodo listarProductos muestra la lista de productos registrados en la base
+     *
+     * @param productos
+     * @param productoAdapter
+     * @param recyclerView
+     */
     public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView) {
 
         conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
@@ -558,6 +565,17 @@ public class Modelo {
 
     }
 
+    /**
+     * Metodo listarProductos muestra la lista de productos registrados en la base
+     *
+     * @param productos
+     * @param productoAdapter
+     * @param recyclerView
+     * @param buscarProducto
+     * @param categorias
+     * @param minimo
+     * @param maximo
+     */
     public void listarProductos(final List<Producto> productos, final ProductoAdapter productoAdapter, final RecyclerView recyclerView, final EditText buscarProducto, final Spinner categorias, final EditText minimo, final EditText maximo) {
 
         conexion.getBaseDeDatos().child("Productos").addValueEventListener(new ValueEventListener() {
@@ -591,6 +609,13 @@ public class Modelo {
 
     }
 
+    /**
+     * Metodo filtrarPrecio que permite filtrar un producto por su precio
+     *
+     * @param producto
+     * @param minimo
+     * @param maximo
+     */
     public boolean filtrarPrecio(EditText minimo, EditText maximo, Producto producto) {
 
         Double precio, min, max;
@@ -633,6 +658,17 @@ public class Modelo {
         }
     }
 
+    /**
+     * Metodo buscarProducto que busca un produco en especifico
+     *
+     * @param context
+     * @param idProducto
+     * @param imagen
+     * @param nombreProducto
+     * @param descripcion
+     * @param precio
+     * @param vendedor
+     */
     public void buscarProducto(final Context context, String idProducto, final ImageView imagen, final TextView nombreProducto, final TextView descripcion, final TextView precio, final TextView vendedor) {
 
         conexion.getBaseDeDatos().child("Productos").child(idProducto).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -656,6 +692,12 @@ public class Modelo {
 
     }
 
+    /**
+     * Metodo setNombreVendedor que setea el nombre del vendedor a un producto
+     *
+     * @param vendedor
+     * @param idUsuario
+     */
     public void setNombreVendedor(final TextView vendedor, String idUsuario) {
 
         conexion.getBaseDeDatos().child("Usuarios").child(idUsuario).addValueEventListener(new ValueEventListener() {
@@ -673,6 +715,12 @@ public class Modelo {
 
     }
 
+    /**
+     * Metodo listarCategorias muestra la lista de categorias registradas en la base
+     *
+     * @param context
+     * @param categorias
+     */
     public void listarCategorias(final Context context, final Spinner categorias) {
 
         conexion.getBaseDeDatos().child("Categoria").addValueEventListener(new ValueEventListener() {
@@ -700,6 +748,13 @@ public class Modelo {
 
     }
 
+    /**
+     * Metodo publicarProducto que registra un nuevo producto
+     *
+     * @param context
+     * @param producto
+     * @param bandera
+     */
     public void publicarProducto(final Context context, final Producto producto, final Boolean bandera) {
         StorageTask storageTask;
         final StorageReference fileReference;

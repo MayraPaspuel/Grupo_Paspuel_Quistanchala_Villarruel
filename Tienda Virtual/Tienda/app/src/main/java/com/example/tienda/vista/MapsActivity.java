@@ -19,11 +19,22 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/**
+ * Clase que contiene las propiedades de la sección de mapas
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     LatLng ubicacionActual = null;
 
+    /**
+     * Metodo onCreate que realiza una llamada a la creación inicial de la sección de mapas de ubicación
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

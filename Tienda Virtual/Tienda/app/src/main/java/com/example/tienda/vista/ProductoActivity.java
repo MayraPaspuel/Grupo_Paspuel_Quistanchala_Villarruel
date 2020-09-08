@@ -13,6 +13,13 @@ import android.widget.TextView;
 import com.example.tienda.R;
 import com.example.tienda.modelo.Modelo;
 
+/**
+ * Clase que contiene las propiedades de la vista de productos
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class ProductoActivity extends AppCompatActivity {
 
     ImageView imagen;
@@ -21,6 +28,10 @@ public class ProductoActivity extends AppCompatActivity {
     Modelo modelo = new Modelo();
     String productoId;
 
+    /**
+     * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz de productos
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +90,9 @@ public class ProductoActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo onResume que permite reanudar las actividades y componentes en donde fueron detenidos o pausados
+     */
     @Override
     public void onResume() {
         super.onResume();

@@ -21,6 +21,13 @@ import com.example.tienda.vista.adapters.ProductoAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que contiene las propiedades de la vista de productos por usuario
+ *
+ * @author Paspuel Mayra
+ * @author Quistanchala Karla
+ * @author Villarruel Michael
+ */
 public class ProductoUsuarioActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -28,6 +35,10 @@ public class ProductoUsuarioActivity extends AppCompatActivity {
     private ProductoAdapter productoAdapter;
     Modelo modelo = new Modelo();
 
+    /**
+     * Metodo onCreate que realiza una llamada a la creación inicial de la interfaz de productos por Usuario
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
