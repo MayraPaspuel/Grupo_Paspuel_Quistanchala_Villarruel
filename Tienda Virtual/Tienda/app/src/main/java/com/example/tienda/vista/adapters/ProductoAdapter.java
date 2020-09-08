@@ -1,3 +1,14 @@
+/*
+ * ESPE - DCC - PROGRAMACIÓN MÓVIL
+ * Sistema: TiendaVirtual
+ * Creado 23/07/2020
+ * Modificado 02/08/2020
+ *
+ * Los contenidos de este archivo son propiedad privada y estan protegidos por
+ * la licencia BSD
+ *
+ * Se puede utilizar, reproducir o copiar el contenido de este archivo.
+ */
 package com.example.tienda.vista.adapters;
 
 import android.content.Context;
@@ -29,31 +40,57 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
     private Context context;
     private List<Producto> productos;
-
+    /**
+     * Constructor vacio
+     */
     public ProductoAdapter() {
     }
 
+    /**
+     * Constructor
+     * @param context
+     * @param productos
+     */
     public ProductoAdapter(Context context, List<Producto> productos) {
         this.context = context;
         this.productos = productos;
     }
-
+    /**
+     * Método getContexto que devuelve el contexto del producto
+     * @return context
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Método setContexto que setea el contexto del producto
+     * @param context
+     */
     public void setContext(Context context) {
         this.context = context;
     }
 
+    /**
+     * Método getProductos que devuelve la lista de productos
+     * @return productos
+     */
     public List<Producto> getProductos() {
         return productos;
     }
 
+    /**
+     * Método setProductos que setea la lista de productos
+     * @param productos
+     */
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
-
+    /**
+     * Metodo onCreateViewHolder que crea un marcador de vista para cada elemento
+     * @param parent
+     * @param viewType
+     */
     @NonNull
     @Override
     public ProductoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,6 +98,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         return new ProductoAdapter.ViewHolder(view);
     }
 
+    /**
+     * Metodo onBindViewHolder obtiene nuevos titulares de vista
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull ProductoAdapter.ViewHolder holder, int position) {
         final Producto producto = productos.get(position);
@@ -77,7 +119,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             }
         });
     }
-
+    /**
+     * Metodo getItemCount que devuelve el número de elementos en el adaptador vinculado al RecyclerView padre.
+     * @return numero de mensajes
+     */
     @Override
     public int getItemCount() {
         return productos.size();
