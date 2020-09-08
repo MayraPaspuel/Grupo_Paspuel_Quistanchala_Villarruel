@@ -19,6 +19,7 @@ public class ProductoActivity extends AppCompatActivity {
     TextView nombreProducto, descripcion, precio, vendedor;
     Button comprar, eliminar, actualizar;
     Modelo modelo = new Modelo();
+    String productoId;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class ProductoActivity extends AppCompatActivity {
         });
 
         final Intent intent = getIntent();
-        final String productoId = intent.getStringExtra("id");
+        productoId  = intent.getStringExtra("id");
 
         imagen = findViewById(R.id.imgImagen);
         nombreProducto = findViewById(R.id.txtNombreProducto);
@@ -76,5 +77,11 @@ public class ProductoActivity extends AppCompatActivity {
 
         modelo.buscarProducto(ProductoActivity.this, productoId, imagen, nombreProducto, descripcion,precio,vendedor);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        modelo.buscarProducto(ProductoActivity.this, productoId, imagen, nombreProducto, descripcion, precio, vendedor);
     }
 }

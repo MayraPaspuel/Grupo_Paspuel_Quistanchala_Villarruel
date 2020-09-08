@@ -628,7 +628,7 @@ public class Modelo {
 
     public void buscarProducto(final Context context, String idProducto, final ImageView imagen, final TextView nombreProducto, final TextView descripcion, final TextView precio, final TextView vendedor) {
 
-        conexion.getBaseDeDatos().child("Productos").child(idProducto).addValueEventListener(new ValueEventListener() {
+        conexion.getBaseDeDatos().child("Productos").child(idProducto).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
