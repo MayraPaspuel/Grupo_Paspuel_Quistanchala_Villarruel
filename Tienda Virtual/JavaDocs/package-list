@@ -1,0 +1,6 @@
+com.example.tienda
+com.example.tienda.modelo
+com.example.tienda.presentador
+com.example.tienda.vista
+com.example.tienda.vista.adapters
+com.example.tienda.vista.fragments

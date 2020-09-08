@@ -1,6 +1,6 @@
 /*
  * ESPE - DCC - PROGRAMACIÓN MÓVIL
- * Sistema: Chat
+ * Sistema: TiendaVirtual
  * Creado 23/07/2020
  * Modificado 02/08/2020
  *
