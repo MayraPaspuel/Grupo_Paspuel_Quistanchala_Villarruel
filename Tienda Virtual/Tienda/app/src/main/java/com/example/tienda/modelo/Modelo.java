@@ -502,11 +502,18 @@ public class Modelo {
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        String contenido = mensaje.getContenido();
+        if(mensaje.getTipo().equals("img")){
+            contenido = "Imagen";
+        }else if(mensaje.getTipo().equals("gps")){
+            contenido = "ubicacion";
+        }
+
         mBuilder = new NotificationCompat.Builder(context)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(icono)
                 .setContentTitle("Nuevo Mensaje")
-                .setContentText(mensaje.getContenido())
+                .setContentText(contenido)
                 .setVibrate(new long[]{100, 250, 100, 500})
                 .setAutoCancel(true);
         mNotifyMgr.notify(1, mBuilder.build());
